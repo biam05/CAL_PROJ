@@ -1,0 +1,164 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[article, a4paper, 12pt, oneside]{memoir}
+
+% Margins
+\usepackage[top=3cm,left=2cm,right=2cm,bottom=3cm]{geometry}
+
+% Encondings
+\usepackage[utf8]{inputenc}
+
+% Language
+\usepackage[portuguese]{babel}
+
+% Graphics and images
+\usepackage{graphicx}
+	\graphicspath{{images/}}
+
+% Tables
+\usepackage{tabularx}
+
+% Paragraph Spacing
+\usepackage{parskip}
+\usepackage{indentfirst}
+\setlength{\parskip}{0.5cm}
+
+% Hyperreferences
+\usepackage{hyperref}
+
+% Repeated commands
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
+
+% Header and Footer Things
+\usepackage{wallpaper}
+\usepackage{fancyhdr}
+
+% Following code to edit the pagestyle
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{WasteApp}
+\lhead{\leftmark}
+\rfoot{Página \thepage}
+
+% Commands
+\usepackage{xargs}
+
+%% Linked Email
+\newcommand{\email}[1]{
+{\textup{\href{mailto:#1}{#1}} }
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+% Title
+\title{\Huge \textup{WasteApp: recolha seletiva de lixo (Parte 1)} }
+% Authors
+\author{
+\LARGE \textbf{Turma 1 - Grupo 1}\\\\
+\begin{tabular}{l r}
+	\email{up201806551@fe.up.pt} & Beatriz Costa Silva Mendes				\\
+	\email{up201806524@fe.up.pt} & Daniel Garcia Lima Sarmento da Silva		\\
+	\email{up201806538@fe.up.pt} & Henrique Manuel Ruivo Pereira			\\
+	\Repeat{4}{\linebreak}
+\end{tabular}
+}
+
+%\institute{Faculdade de Engenharia da Universidade do Porto \\ Concepção e Análise de Algoritmos - Turma 1, grupo 1}
+
+% Date for the report
+\date{24 de abril de 2020}
+
+% Table of Contents
+\addto\captionsportuguese{\renewcommand*\contentsname{Índice}}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	Front Page
+%----------------------------------------------------------------------------------------
+% Title Author and Date
+\maketitle
+
+% More information for front page
+\begin{center}
+\textbf{Projeto CAL - 2019/20 - MIEIC}
+\Repeat{2}{\linebreak}
+\begin{tabular}{l r}
+	\textbf{Professora das Aulas Laboratoriais}: & Liliana da Silva Ferreira
+\end{tabular}
+\Repeat{12}{\linebreak}
+% FEUP Logo
+\includegraphics[scale=0.3]{FEUPlogo.jpg}
+
+\end{center}
+
+\newpage
+% Header Image
+\CenterWallPaper{0.1}{FEUPlogo.jpg}
+\addtolength{\wpXoffset}{-7.5cm}
+\addtolength{\wpYoffset}{13.8cm}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+\tableofcontents*
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1 - DESCRIÇÃO DO TEMA A SER IMPLEMENTADO
+%----------------------------------------------------------------------------------------
+\chapter[Descrição][Descrição]{Descrição} \label{\thechapter}
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2 - IDENTIFICAÇÃO E FORMALIZAÇÃO DO PROBLEMA
+%----------------------------------------------------------------------------------------
+\chapter[Identificação e formalização do problema][Identificação e formalização do problema]{Identificação e formalização do problema} \label{\thechapter}
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3 - PERSPETIVA DE SOLUÇÃO
+%----------------------------------------------------------------------------------------
+\chapter[Perspetiva de Solução][Perspetiva de Solução]{Perspetiva de Solução} \label{\thechapter}
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CHAPTER 4 - CASOS DE UTILIZAÇÃO
+%----------------------------------------------------------------------------------------
+\chapter[Casos de Utilização][Casos de Utilização]{Casos de Utilização} \label{\thechapter}
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CHAPTER 5 - CONCLUSÃO
+%----------------------------------------------------------------------------------------
+\chapter[Conclusão][Conclusão]{Conclusão} \label{\thechapter}
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CHAPTER 6 - REFERÊNCIAS BIBLIOGRÁFICAS
+%----------------------------------------------------------------------------------------
+\chapter[Referências Bibliográficas][Referências Bibliográficas]{Referências Bibliográficas} \label{\thechapter}
+
+
+
+\newpage
+\end{document}
