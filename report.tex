@@ -118,6 +118,39 @@
 %----------------------------------------------------------------------------------------
 \chapter[Descrição][Descrição]{Descrição} \label{\thechapter}
 
+Neste trabalho pretende-se criar uma aplicação para gestão e localização dos pontos de recolha seletiva de resíduos, denominada \textit{WasteApp}. Esta \textit{app} deverá permitir aos seus utilizadores localizar os pontos de recolha seletiva mais próximos e os tipos de resíduos que lá se podem depositar, bem como realizar a gestão da sua capacidade.
+
+Para além disso, a \textit{app} tem ainda por objetivo dar origem a um modelo de negócio que tem por base a recolha ao domicílio de determinados tipos de resíduos para exploração financeira (otimizando o itinerário percorrido).
+
+A aplicação deve ser capaz de determinar a acessibilidade aos pontos de depósito/recolha.[1]
+
+\begin{itemize}
+	\item \textbf{1ª Abordagem: Ponto de Recolha Mais Próximo}
+	
+	Numa fase inicial, despreza-se a capacidade do ponto de recolha e os tipos de resíduos que poderão ser depositados neste. Deste modo, o único objetivo acaba por ser apenas determinar qual o ponto de recolha mais próximo do utilizador, calculando a rota mais curta até um qualquer ponto de recolha (partindo-se do princípio de que este se encontra acessível).
+\end{itemize}
+ 
+\begin{itemize}
+	\item \textbf{2ª Abordagem: Ponto de Recolha de um Determinado Resíduo Mais Próximo}
+	
+	Neste segundo passo, acrescenta-se ao problema o facto de que determinados pontos de recolha se limitam a aceitar certos tipos de resíduos. Assim, cada utilizador terá de ter pelo menos 5 pontos de recolha mais próximos, um para cada tipo de resíduo (papel, vidro, plástico, pilhas e lixo indiferenciado).
+	
+\end{itemize}	
+
+\begin{itemize}
+	\item \textbf{3ª Abordagem: Ponto de Recolha de um Determinado Resíduo Mais Próximo com Capacidade Suficiente}	
+	
+	Posteriormente, é necessário considerar que os pontos de recolha têm uma capacidade máxima, ou seja, depois de atingir essa capacidade, não poderá ser depositado nele mais nenhum resíduo. Assim sendo, se o ponto de recolha mais próximo do utilizador de um determinado resíduo ultrapassar a sua capacidade máxima com o depósito do utilizador, terá de ser atribuído a este um novo ponto de recolha desse mesmo resíduo, que será o mais próximo ainda com capacidade.
+	
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{4ª Abordagem: Implementação Paralela do Modelo de Negócio}	
+	
+	Por fim, neste última abordagem, terá de ser implementado um serviço de recolha de resíduos ao domicílio para exploração financeira, que depois serão levados para uma central de reciclagem. Assim sendo, terá de ser determinado o menor itinerário possível que passe pelas casas dos utilizadores que fornecem os resíduos a ser recolhidos.
+	
+\end{itemize}
+
 
 
 \newpage
@@ -157,7 +190,9 @@
 %	CHAPTER 6 - REFERÊNCIAS BIBLIOGRÁFICAS
 %----------------------------------------------------------------------------------------
 \chapter[Referências Bibliográficas][Referências Bibliográficas]{Referências Bibliográficas} \label{\thechapter}
+Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ Parte 1}. Projeto de Concepção e Análise de Algoritmos.
 
+[1] Docs.google.com. 2020. 2019-20 2S CAL Trabalhos Publicados. Disponível no Moodle.
 
 
 \newpage
