@@ -161,19 +161,28 @@ A perspetiva de solução adotada tem por base a aplicação de várias fases pr
 
 Inicialmente, e para reduzir a complexidade temporal do processamento, os passos iniciais baseiam-se na eliminação de arestas que não proporcionem nenhum tipo de vantagem (tais como as correspondentes a vias inutilizáveis - por obras, por exemplo - e as que tenham arestas/conjuntos de arestas com origem e destino comuns de peso total menor).
 
-O passo seguinte corresponde à ordenação dos pontos de recolha por proximidade a cada utilizador. Tendo em conta que a morada de um utilizador e os pontos de recolha podem corresponder a um nó ou a uma parte de uma aresta, se se tratar do primeiro caso apenas se tem de ter em conta as arestas adjacentes; quanto ao segundo caso, terá de se localizar o ponto de recolha ou a morada dentro da aresta, isto é, saber a distância deste(a) a cada uma das extremidades da aresta.
+O passo seguinte corresponde à ordenação dos pontos de recolha por proximidade a cada utilizador. Tendo em conta que a morada de um utilizador e os pontos de recolha podem corresponder a um nó ou a uma parte de uma aresta, se se tratar do primeiro caso apenas se tem de ter em conta as arestas adjacentes; quanto ao segundo caso, terá de se localizar o ponto de recolha ou a morada dentro da aresta, isto é, saber a distância deste(a) a cada uma das extremidades da aresta.\\\
 
-Para o primeiro caso, usa-se o algoritmo de \textit{Dijsktra} abordado nas aulas, cujo pseudocódigo é apresentado na figura seguinte\textsuperscript{[2]}, uma vez que o grafo não contem arestas de peso negativo. \\
+\section{Ponto de Recolha Mais Próximo}
+
+Para o primeiro caso, usa-se o algoritmo de \textit{Dijsktra} abordado nas aulas, cujo pseudocódigo é apresentado na figura seguinte\textsuperscript{[2]}, uma vez que o grafo não contem arestas de peso negativo. \\\
 
 \centerline{\includegraphics[scale=1]{Dijkstra_pseudocode.jpg}}
 
-A utilização deste algoritmo de cálculo do caminho mais curto desde o vértice inicial (morada do utilizador) até aos outros nós (pontos de recolha) resulta numa árvore de caminhos ordnad.
+A utilização deste algoritmo de cálculo do caminho mais curto desde o vértice inicial (morada do utilizador) até aos outros nós (pontos de recolha) resulta numa árvore de caminhos ordenada.
 
-A preparação do algoritmo tem complexidade temporal O($|V|$) e consiste na inicialização do campo \textbf{dist} a $\infty$ e \textbf{path} a "nil" (correspondente a \textit{nullptr}) em todos os vértices (à exceção da origem).	Posteriormente, a partir do vértice inicial, percorre-se todas as arestas adjacentes e adiciona-se os vértices de destino a uma fila de prioridade, atualizando a dist (distância do vértice anterior somada com o peso da aresta) e o path (vértice anterior), se este vértice ainda não tiver sido visitado, ou se a distância obtida for menor do que o valor prévio de dist.
+A preparação do algoritmo tem complexidade temporal O($|V|$) e consiste na inicialização do campo \textbf{dist} a $\infty$ e \textbf{path} a "nil" (correspondente a \textit{nullptr}) em todos os vértices (à exceção da origem).
+
+Posteriormente, a partir do vértice inicial, percorre-se todas as arestas adjacentes e adiciona-se os vértices de destino a uma fila de prioridade, atualizando a dist (distância do vértice anterior somada com o peso da aresta) e o path (vértice anterior), se este vértice ainda não tiver sido visitado, ou se a distância obtida for menor do que o valor prévio de dist.
 
 Este processo tem complexidade temporal O($(|V| + |E|)*log(|V|)$), uma vez que a cada passo - O($|V| + |E|$) - pode ser necessário adicionar, remover ou mover elementos na fila de prioridade - O($log(|V|)$).
+	
+Para o segundo caso, ter-se-ia de aplicar uma "translação" ao mesmo algoritmo (uma vez que não se teria de calcular a distância de um nó a todos os outros, mas de um potencial ponto interno da aresta até um potencial ponto interno de outra aresta), tendo que, para todas as distâncias calculadas a partir de cada uma das extremidades dessa aresta (pelo algoritmo referido), somar-se a distância do ponto interno a essa mesma extremidade.\\
 
-Para o segundo caso, ter-se-ia de aplicar uma "translação" ao mesmo algoritmo (uma vez que não se teria de calcular a distância de um nó a todos os outros, mas de um potencial ponto interno da aresta até um potencial ponto interno de outra aresta), tendo que, para todas as distâncias calculadas a partir de cada uma das extremidades dessa aresta (pelo algoritmo referido), somar-se a distância do ponto interno a essa mesma extremidade.
+\section{Novo Modelo de Negócio}
+
+
+
 
 \newpage
 %----------------------------------------------------------------------------------------
