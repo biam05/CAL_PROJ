@@ -191,7 +191,21 @@ Para o segundo caso, ter-se-ia de aplicar uma "translação" ao mesmo algoritmo 
 \chapter[Casos de Utilização][Casos de Utilização]{Casos de Utilização} \label{\thechapter}
 
 A aplicação \textit{Wasteapp} que vamos implementar terá como base uma interface simples de texto com a qual o utilizador poderá interagir. Deste modo, para facilitar a interação, esta terá um conjunto de menus com várias opções a serem disponibilizadas, dividindo-se em 2 menus gerais: 1 menu para o utilizador comum que procura os pontos de recolha mais próximos e 1 menu para o utilizador que irá explorar financeiramente o novo modelo de negócio.
+Para além disso, será possível guardar a informação de um mapa sob a forma de um grafo através da leitura de ficheiros de texto, no qual incidirão as diferentes funcionalidades da \textit{app}, dentro das quais se destacam:
 
+\begin{itemize}
+\item Visualização dos dados do grafo e da informação representada por este (vias de trânsito, pontos de recolha, etc.) no \textit{GraphViewer};
+\item Ordenação dos pontos de recolha por proximidade ao utilizador e do itinerário ótimo para o modelo de negócio;
+\item Consulta da informação sobre os pontos de recolha disponíveis(capacidade e tipo de resíduo);
+\item Verificação da acessibilidade dos pontos de recolha (verificação se as ruas se encontram desimpedidas, sem estarem em obras, por exemplo);
+\item Ordenação e atribuição das casas dos utilizadores que solicitaram a recolha de resíduos ao domicílio.
+
+\end{itemize}
+
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.6]{graphviewer.png}}
+  \caption{Exemplo de um grafo vizualidade no \textit{GraphViewer}.}
+\end{figure}
 
 
 \newpage
@@ -209,9 +223,17 @@ A aplicação \textit{Wasteapp} que vamos implementar terá como base uma interf
 \chapter[Referências Bibliográficas][Referências Bibliográficas]{Referências Bibliográficas} \label{\thechapter}
 Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ Parte 1}. Projeto de Concepção e Análise de Algoritmos.
 
-[1] Docs.google.com. 2020. 2019-20 2S CAL Trabalhos Publicados. Disponível no Moodle.
+[1]: Docs.google.com. 2020. 2019-20 2S CAL Trabalhos Publicados. Disponível no Moodle.
 
-[2] Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
+[2]: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
+
+[3]: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+
+Figura 1: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
+
+‌
+
+‌
 
 \newpage
 \end{document}
