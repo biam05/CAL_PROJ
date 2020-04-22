@@ -180,12 +180,28 @@ Posteriormente, a partir do vértice inicial, percorre-se todas as arestas adjac
 
 Este processo tem complexidade temporal O($(|V| + |E|)*log(|V|)$), uma vez que a cada passo - O($|V| + |E|$) - pode ser necessário adicionar, remover ou mover elementos na fila de prioridade - O($log(|V|)$).
 	
-Para o segundo caso, ter-se-ia de aplicar uma "translação" ao mesmo algoritmo (uma vez que não se teria de calcular a distância de um nó a todos os outros, mas de um potencial ponto interno da aresta até um potencial ponto interno de outra aresta), tendo que, para todas as distâncias calculadas a partir de cada uma das extremidades dessa aresta (pelo algoritmo referido), somar-se a distância do ponto interno a essa mesma extremidade.\\
+Para o segundo caso, ter-se-ia de aplicar uma "translação" ao mesmo algoritmo (uma vez que não se teria de calcular a distância de um nó a todos os outros, mas de um potencial ponto interno da aresta até um potencial ponto interno de outra aresta), tendo que, para todas as distâncias calculadas a partir de cada uma das extremidades dessa aresta (pelo algoritmo referido), somar-se a distância do ponto interno a essa mesma extremidade.
+
+Posteriormente, para implementar a especificidade dos resíduos, seria apenas necessário, em cada ponto de recolha, guardar o(s) tipo(s) de resíduos nele recolhidos.
+
+Após essa implementação, resta ter em consideração o fator capacidade, a ser guardado também em cada ponto de recolha e para cada um dos resíduos recolhidos.
 
 \section{Novo Modelo de Negócio}
 
+O processamento do novo modelo de negócio proposto baseia-se no cálculo do itinerário mais curto partindo da morada do utilizador e destinado a uma central de reciclagem, passando por todas as casas que desejam ver esse tipo de resíduo recolhido.
+
+Este problema assemelha-se ao \textbf{\textit{Travelling Salesman Problem} (TSP)}, pelo que os métodos a aplicar serão semelhantes às resoluções propostas. As três opções ponderadas consistem em:
+
+\begin{itemize}
+\item \textbf{Algoritmo de Held-Karp:} Este é um algoritmo de programação dinâmica baseado em \textbf{\textit{COMPLETAR!!!}}.
+
+\item \textbf{Algoritmo do Vizinho mais Próximo:} Este algoritmo baseia-se na ordenação dos pontos, encontrando o ponto não visitado mais próximo do anterior processado. Este algoritmo não garante um resultado ótimo, mas tem complexidade bastante inferior ao anterior (complexidade temporal O($|V|^2$) no pior caso).
+
+\item \textbf{Força bruta:} Esta alternativa consiste no cálculo de todas as opções possíveis e seleção da mais rentável. Obviamente, este é o método mais temporalmente complexo (O($|V|!$)) e, portanto, apesar de garantir um resultado ótimo, é pouco recomendável.
+\end{itemize}
 
 
+\newpage
 
 \newpage
 %----------------------------------------------------------------------------------------
@@ -263,6 +279,8 @@ Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ 
 [1]: Docs.google.com. 2020. 2019-20 2S CAL Trabalhos Publicados. Disponível no Moodle.
 
 [2]: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+
+[3]: Wikipedia Contributors (2019). \textit{Travelling salesman problem}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Travelling_salesman_problem}.
 
 Figura 1: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
 
