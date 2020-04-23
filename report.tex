@@ -150,7 +150,195 @@ A aplicação deve ser capaz de determinar a acessibilidade aos pontos de depós
 %----------------------------------------------------------------------------------------
 \chapter[Identificação e formalização do problema][Identificação e formalização do problema]{Identificação e formalização do problema} \label{\thechapter}
 
+\section{Ponto de Recolha Mais Próximo}
 
+\subsection{Identificação do Problema}
+
+Nesta vertente de utilização da \textit{app}, pretende-se disponibilizar ao utilizador o ponto de recolha mais próximo em que pode depositar o tipo e a quantidade de lixo que pretende, bem como o itinerário para lá chegar.
+
+\subsection{Dados de Entrada}
+
+\begin{itemize} %1
+
+\item $type$ – tipo de lixo que se pretende depositar (plástico, vidro, papel, etc.);
+\item $quantity$ – quantidade de lixo que se pretende depositar;
+\item $G = (V, E)$ – grafo dirigido pesado, composto por:
+
+	\begin{itemize} %2
+
+	\item $V$ – vértices, que representam interseções, compostos por:
+
+		\begin{itemize} %3
+		\item $Dist$ – distância a L;
+		\item $Adj \subseteq E$ – conjunto de arestas que partem do vértice.
+		\end{itemize} %3
+
+	\end{itemize} %2
+
+	\begin{itemize} %2
+
+	\item $E$ – arestas, que representam vias de comunicação, compostas por:
+
+		\begin{itemize} %3
+		\item $W$ – peso da aresta (distância entre os dois vértices);
+		\item $ID$ – identificador único da aresta;
+		\item $V\textsubscript{i} \in V$ – vértice de partida;
+		\item $V\textsubscript{f} \in V$ – vértice de chegada.
+		\end{itemize} %3
+
+	\end{itemize} %2
+
+\item $P$ – conjunto de pontos de recolha, cada um caracterizado por:
+
+	\begin{itemize} %2
+
+	\item $type$ – tipo de lixo que recolhem;
+	\item $Q$ – quantidade do lixo que lá está;
+	\item $Q \textsubscript{max}$ - quantidade máxima do lixo que pode lá estar;
+	\item $R \in E$ – aresta onde está;
+	\item $D$ – distância ao vértice de chegada da aresta.
+
+	\end{itemize} %2
+
+\end{itemize} %1
+
+\subsection{Dados de Saída}
+
+\begin{itemize}
+\item $P\textsubscript{f} \in P$ - ponto de recolha do tipo correspondente mais próximo do utilizador com capacidade para a quantidade de lixo que se pretende depositar;
+\item $C = {e \in E: 1 \leq i \leq |E|}$ - sequência de arestas, correspondente ao caminho a percorrer (e\textsubscript{i} = i-ésima aresta).
+\end{itemize}
+
+\subsection{Restrições}
+
+\begin{itemize}
+
+\item Dados de Entrada:
+
+	\begin{itemize}
+	\item $quantity > 0$, visto que representa peso ou volume;
+	\item $\forall  p \in P, Q \geq 0 \land Q\textsubscript{max} > 0$, pelo mesmo motivo;
+	\item $\forall  e \in E, W > 0$, visto que o peso das arestas representa uma distância;
+	\item $\forall L \land \forall p \in P, D \geq 0$, pelo mesmo motivo;
+	\item $\forall v \in V, Dist \geq 0$, pelo mesmo motivo.
+	\end{itemize}
+	
+\item Dados de Saída:
+
+	\begin{itemize}
+	\item $R(P\textsubscript{f}) = e\textsubscript{final}$.
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Funções Objetivo}
+
+A solução ótima do problema passa por minimizar a distância que o utilizador tem de percorrer para depositar o lixo, de modo que pretende-se minimizar a seguinte função:
+
+$$f = \sum_{c \in C} W(c)$$
+
+\section{Novo Modelo de Negócio}
+
+\subsection{Identificação do Problema}
+
+Nesta vertente da \textit{app}, pretende-se disponibilizar ao utilizador um itinerário desde a sua localização até à localização da central de reciclagem, passando por domicílios que tenham o tipo de resíduos que pretendem recolher, sem nunca ultrapassar a quantidade possibilitada pelo utilizador.
+
+\subsection{Dados de Entrada}
+
+\begin{itemize} %1
+
+\item $type$ – tipo de lixo que se pretende depositar (plástico, vidro, papel, etc.);
+\item $quantity$ – quantidade de lixo que se pretende recolher;
+\item $G = (V, E)$ – grafo dirigido pesado, composto por:
+
+	\begin{itemize} %2
+
+	\item $V$ – vértices, que representam interseções, compostos por:
+
+		\begin{itemize} %3
+		\item $Dist$ – distância a L\textsubscript{i};
+		\item $Adj \subseteq E$ – conjunto de arestas que partem do vértice.
+		\end{itemize} %3
+
+	\end{itemize} %2
+
+	\begin{itemize} %2
+
+	\item $E$ – arestas, que representam vias de comunicação, compostas por:
+
+		\begin{itemize} %3
+		\item $W$ – peso da aresta (distância entre os dois vértices);
+		\item $ID$ – identificador único da aresta;
+		\item $V\textsubscript{i} \in V$ – vértice de partida;
+		\item $V\textsubscript{f} \in V$ – vértice de chegada.
+		\end{itemize} %3
+
+	\end{itemize} %2
+
+\item $P\textsubscript{i}$ – conjunto de domicílios que pretendem recolha, cada um caracterizado por:
+
+	\begin{itemize} %2
+
+	\item $type$ – tipo de lixo que recolhem;
+	\item $Q$ – quantidade do lixo que lá está;
+	\item $R \in E$ – aresta onde está;
+	\item $D$ – distância ao vértice de chegada da aresta.
+
+	\end{itemize} %2
+
+\item $L\textsubscript{i}$ – localização do utilizador, caracterizada por:
+
+	\begin{itemize} %2
+	\item $R \in E$ – aresta onde está;
+	\item $D$ – distância ao vértice de chegada da aresta.
+	\end{itemize} %2
+	
+\item $L\textsubscript{f}$ – localização da central de reciclagem:
+
+	\begin{itemize} %2
+	\item $R \in E$ – aresta onde está;
+	\item $D$ – distância ao vértice de chegada da aresta.
+	\end{itemize} %2
+	
+\end{itemize} %1
+
+\subsection{Dados de Saída}
+
+\begin{itemize}
+\item $C = {e \in E: 1 \leq i \leq |E|}$ - sequência de arestas, correspondente ao caminho a percorrer (e\textsubscript{i} = i-ésima aresta);
+\item $P\textsubscript{f} = {p \in P: 1 \leq i \leq |P|}$ - sequência de domicílios de onde o utilizador deve recolher resíduos.
+\end{itemize}
+
+\subsection{Restrições}
+
+\begin{itemize}
+
+\item Dados de Entrada:
+
+	\begin{itemize}
+	\item $quantity > 0$, visto que representa peso ou volume;
+	\item $\forall  p \in P, Q \geq 0$, pelo mesmo motivo;
+	\item $\forall  e \in E, W > 0$, visto que o peso das arestas representa uma distância;
+	\item $\forall L \land \forall p \in P, D \geq 0$, pelo mesmo motivo;
+	\item $\forall v \in V, Dist \geq 0$, pelo mesmo motivo.
+	\end{itemize}
+	
+\item Dados de Saída:
+
+	\begin{itemize}
+	\item $\forall p \in P\textsubscript{f}, R(p) \in C$.
+	\item $\sum_{p \in P\textsubscript{f}} Q(p) < quantity$.
+	\end{itemize}
+
+\end{itemize}
+
+\subsection{Funções Objetivo}
+
+A solução do problema passa por maximizar a quantidade recolhida, sem ultrapassar a quantidade possível de recolher, e por minimizar a distância percorrida, dando prevalência ao primeiro critério. Assim, queremos minimizar as seguintes funções:
+
+$$f = quantity - \sum_{p \in P\textsubscript{f}} Q(p)$$, sendo que nunca pode ser $<$ 0
+
+$$g = \sum_{c \in C} W(c)$$
 
 \newpage
 %----------------------------------------------------------------------------------------
