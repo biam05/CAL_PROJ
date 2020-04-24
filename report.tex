@@ -200,6 +200,15 @@ Nesta vertente de utilização da \textit{app}, pretende-se disponibilizar ao ut
 
 	\end{itemize} %2
 
+\item $L$ - Localização do utilizador, caracterizada por:
+	
+	\begin{itemize}
+	
+	\item $R \in E$ - aresta onde está;
+	\item $D$ - distância ao vértice de chegada da aresta.
+	
+	\end{itemize}
+
 \end{itemize} %1
 
 \subsection{Dados de Saída}
@@ -208,6 +217,7 @@ Nesta vertente de utilização da \textit{app}, pretende-se disponibilizar ao ut
 \item $P\textsubscript{f} \in P$ - ponto de recolha do tipo correspondente mais próximo do utilizador com capacidade para a quantidade de lixo que se pretende depositar;
 \item $C = {e \in E: 1 \leq i \leq |E|}$ - sequência de arestas, correspondente ao caminho a percorrer (e\textsubscript{i} = i-ésima aresta).
 \end{itemize}
+
 
 \subsection{Restrições}
 
@@ -231,11 +241,13 @@ Nesta vertente de utilização da \textit{app}, pretende-se disponibilizar ao ut
 	
 \end{itemize}
 
+
 \subsection{Funções Objetivo}
 
 A solução ótima do problema passa por minimizar a distância que o utilizador tem de percorrer para depositar o lixo, de modo que pretende-se minimizar a seguinte função:
 
-$$f = \sum_{c \in C} W(c)$$
+$$f = \sum_{c \in C} W(c)$$\\
+
 
 \section{Novo Modelo de Negócio}
 
