@@ -390,20 +390,23 @@ Após essa implementação, resta ter em consideração o fator capacidade, a se
 
 O processamento do novo modelo de negócio proposto baseia-se no cálculo do itinerário mais curto partindo da morada do utilizador e destinado a uma central de reciclagem, passando por todas as casas que desejam ver esse tipo de resíduo recolhido.
 
-Este problema assemelha-se ao \textbf{\textit{Travelling Salesman Problem} (TSP)}, pelo que os métodos a aplicar serão semelhantes às resoluções propostas. As três opções ponderadas consistem em:
+Este problema assemelha-se ao \textbf{\textit{Travelling Salesman Problem} (TSP)}\textsuperscript{[2]}, pelo que os métodos a aplicar serão semelhantes às resoluções propostas. As três opções ponderadas consistem em:
 
 \begin{itemize}
-\item \textbf{Algoritmo de Held-Karp:} Este é um algoritmo de programação dinâmica baseado em \textbf{\textit{COMPLETAR!!!}}.
-
-\item \textbf{Algoritmo do Vizinho mais Próximo:} Este algoritmo baseia-se na ordenação dos pontos, encontrando o ponto não visitado mais próximo do anterior processado. Este algoritmo não garante um resultado ótimo, mas tem complexidade bastante inferior ao anterior (complexidade temporal O($|V|^2$) no pior caso).
-
 \item \textbf{Força bruta:} Esta alternativa consiste no cálculo de todas as opções possíveis e seleção da mais rentável. Obviamente, este é o método mais temporalmente complexo (O($|V|!$)) e, portanto, apesar de garantir um resultado ótimo, é pouco recomendável.
+
+\item \textbf{Algoritmo do Vizinho mais Próximo:} Este algoritmo baseia-se na ordenação dos pontos, encontrando o ponto não visitado mais próximo do anterior processado. Este algoritmo não garante um resultado ótimo, mas tem complexidade bastante inferior ao anterior (complexidade temporal O($|V|^2$) no pior caso).\\
+
+\item \textbf{Algoritmo de \textit{Held-Karp}:} Este é um algoritmo de programação dinâmica baseado na recursividade da distância mínima, no qual para cada vértice, se calcula a distância do vértice inicial até esse passando por todos os vértices de um subconjunto. A sua complexidade temporal é de O($2^n n^2$) e o algoritmo garante um resultado ótimo. O pseudocódigo do algoritmo de \textit{Held-Karp} é apresentado na figura seguinte.\textsuperscript{[3]}
 \end{itemize}
 
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=1]{Held-Karp Algorithm.PNG}}
+  \caption{Pseudocódigo do Algoritmo de \textit{Held-Karp}.}
+\end{figure}
 
 \newpage
 
-\newpage
 %----------------------------------------------------------------------------------------
 %	CHAPTER 4 - CASOS DE UTILIZAÇÃO
 %----------------------------------------------------------------------------------------
@@ -478,13 +481,15 @@ Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ 
 
 [1]: Docs.google.com. 2020. 2019-20 2S CAL Trabalhos Publicados. Disponível no Moodle.
 
-[2]: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+[2]: Wikipedia Contributors (2019). \textit{Travelling salesman problem}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Travelling_salesman_problem}.
 
-[3]: Wikipedia Contributors (2019). \textit{Travelling salesman problem}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Travelling_salesman_problem}.
+[3]: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
 
 Figura 1: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
 
-Figura 2: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
+Figura 2: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+
+Figura 3: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
 
 ‌
 
