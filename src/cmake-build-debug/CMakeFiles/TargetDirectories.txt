@@ -1,0 +1,3 @@
+D:/ESCOLA/fac/2o_ano/2_semestre/CAL_PROJ/src/cmake-build-debug/CMakeFiles/src.dir
+D:/ESCOLA/fac/2o_ano/2_semestre/CAL_PROJ/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/ESCOLA/fac/2o_ano/2_semestre/CAL_PROJ/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir

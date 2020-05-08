@@ -30,11 +30,3 @@
 *.exe
 *.out
 *.app
-
-# Others
-*.aux
-*.dvi
-*.log
-*.synctex.gz
-*.tex.bak
-*.toc
