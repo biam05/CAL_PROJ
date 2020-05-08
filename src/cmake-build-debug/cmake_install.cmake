@@ -1,4 +1,4 @@
-# Install script for directory: D:/ESCOLA/fac/2o_ano/2_semestre/CAL_PROJ/src
+# Install script for directory: D:/Henrique FEUP/2 Ano/2 Semestre/CAL/cal_proj/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/ESCOLA/fac/2o_ano/2_semestre/CAL_PROJ/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Henrique FEUP/2 Ano/2 Semestre/CAL/cal_proj/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

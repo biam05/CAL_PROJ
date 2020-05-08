@@ -38,4 +38,5 @@
 *.synctex.gz
 *.toc
 
-cmake-build-debug
+cmake-build-debug/
+.idea
