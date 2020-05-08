@@ -21,7 +21,8 @@ void gui_about(){
 
 void gui_mainMenu(){
 
-    int ans = 0;
+    int ans = 0, ret;
+    string user, password, address = "";
 
     cout << "\nEnter an option:\n\n";
 
@@ -38,9 +39,22 @@ void gui_mainMenu(){
 
     switch(ans){
         case 1: // --- Login
-
-
-
+            cout << "Login\n\n";
+            cout << "Username:";
+            getline(cin,user);
+            cout << "Password:";
+            getline(cin,password);
+            if (system("CLS"))
+                system("clear");
+            ret = ih_login(user,password,address);
+            if (ret == 0)
+                cout << "client()";
+            if (ret == 1)
+                cout << "worker()";
+            if (ret == 2)
+                cout << "Wrong password\n";
+            else
+                cout << "Unknown username\n";
             break;
         case 2: // --- Sign in
 

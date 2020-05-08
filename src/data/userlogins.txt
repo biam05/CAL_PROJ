@@ -1,0 +1,12 @@
+henrique123
+caliscool
+Rua das Flores, 153
+Client
+biam05
+bolachas
+Rua das Bolachas, 79
+Client
+danielgsilva
+password
+Rua das Passwords, 88
+Worker
