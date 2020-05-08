@@ -1,6 +1,8 @@
-#include <iostream>
+#include "include\gui.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    start_GUI();
+
     return 0;
 }
