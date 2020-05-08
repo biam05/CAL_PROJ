@@ -38,5 +38,6 @@
 *.synctex.gz
 *.toc
 
-src/cmake-build-debug/
-src/.idea
+# Folders
+.idea/
+cmake-build-debug/
