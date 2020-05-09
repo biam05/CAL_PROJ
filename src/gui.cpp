@@ -19,6 +19,11 @@ void gui_about(){
     cout << "\n INSERT SHORT DESCRIPTION HERE \n";
 }
 
+void gui_baseScreen(){
+    if (system("CLS")) system("clear");
+    gui_header();
+}
+
 void gui_mainMenu(){
 
     int ans = 0;
@@ -34,9 +39,7 @@ void gui_mainMenu(){
     cin >> ans;
     cin.ignore(1000, '\n');
 
-    if (system("CLS")) system("clear");
-
-    gui_header();
+    gui_baseScreen();
 
     switch(ans){
         case 1: // --- Login
@@ -54,13 +57,14 @@ void gui_mainMenu(){
 }
 
 void gui_login(){
+
     int ret = 2;
     char opt;
     string user, password, address;
 
     while (ret == 2)
     {
-        cout << " Login\n\n";
+        cout << "\t\t\tLogin\n\n";
 
         cout << " Username: ";
         getline(cin,user);
@@ -68,10 +72,8 @@ void gui_login(){
         cout << " Password: ";
         getline(cin,password);
 
-        if (system("CLS"))
-            system("clear");
+        gui_baseScreen();
 
-        gui_header();
         switch(ret = ih_login(user,password,address)){
             case 0: // --- The user is a client
                 cout << " Client Menu\n ";
@@ -98,9 +100,7 @@ void gui_login(){
                     case 'N':
                     case 'n':
                         ret = 2;
-                        if (system("CLS"))
-                            system("clear");
-                        gui_header();
+                        gui_baseScreen();
                         break;
                     default:
                         cout << " Invalid option!\n";
@@ -115,7 +115,7 @@ void gui_signin()
     char opt;
     string user, password, password2, address;
 
-    cout << " Sign in\n\n";
+    cout << "\t\t\tSign in\n\n";
 
     cout << " Username: ";
     getline(cin,user);

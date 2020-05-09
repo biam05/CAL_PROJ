@@ -31,6 +31,10 @@ void gui_header();
  */
 void gui_about();
 
+/*! \brief Function that cleans the screen and displays the header
+ */
+void gui_baseScreen();
+
 /*! \brief Function that displays the main menu
  *
  * The main menu has 3 options:
