@@ -21,8 +21,7 @@ void gui_about(){
 
 void gui_mainMenu(){
 
-    int ans = 0, ret;
-    string user, password, address = "";
+    int ans = 0;
 
     cout << "\nEnter an option:\n\n";
 
@@ -39,22 +38,7 @@ void gui_mainMenu(){
 
     switch(ans){
         case 1: // --- Login
-            cout << "Login\n\n";
-            cout << "Username:";
-            getline(cin,user);
-            cout << "Password:";
-            getline(cin,password);
-            if (system("CLS"))
-                system("clear");
-            ret = ih_login(user,password,address);
-            if (ret == 0)
-                cout << "client()";
-            if (ret == 1)
-                cout << "worker()";
-            if (ret == 2)
-                cout << "Wrong password\n";
-            else
-                cout << "Unknown username\n";
+            gui_login();
             break;
         case 2: // --- Sign in
 
@@ -63,6 +47,41 @@ void gui_mainMenu(){
 
             break;
         default:
+            break;
+    }
+}
+
+void gui_login(){
+    int ret;
+    string user, password, address = "";
+
+    gui_header();
+
+    cout << "Login\n\n";
+
+    cout << "Username:";
+    getline(cin,user);
+
+    cout << "Password:";
+    getline(cin,password);
+
+    ret = ih_login(user,password,address);
+
+    if (system("CLS"))
+        system("clear");
+
+    switch(ret){
+        case 0: // --- The user is a client
+            cout << "client()";
+            break;
+        case 1: // --- The user is a "worker"
+            cout << "worker()";
+            break;
+        case 2: // --- The user exists, but the password is wrong
+            cout << "Wrong password\n";
+            break;
+        default: // --- The user doesn't exist
+            cout << "Unknown username\n";
             break;
     }
 }

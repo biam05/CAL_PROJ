@@ -6,6 +6,9 @@ int ih_login(string user, string pass, string &address)
     ifstream loginfile("data/userlogins.txt");
     while (getline(loginfile,username))
     {
+        cout << "USERNAME: " << username << endl;
+        cout << "USER: " << user << endl;
+
         if (username == user)
         {
             getline(loginfile, password);
@@ -31,5 +34,5 @@ int ih_login(string user, string pass, string &address)
         }
     }
     address = "";
-    return 2;
+    return 3;
 }
