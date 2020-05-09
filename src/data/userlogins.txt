@@ -10,3 +10,7 @@ danielgsilva
 password
 Rua das Passwords, 88
 Worker
+henrique124
+calisnotcool
+Rua do Bispo de Sta. Iria, 55
+Client

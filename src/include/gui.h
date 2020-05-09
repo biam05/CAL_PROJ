@@ -40,9 +40,15 @@ void gui_about();
  */
 void gui_mainMenu();
 
-/*! \brief Function that displays the login data that is required
+/*! \brief Function that asks the login data that is required
  *
  *
  */
 void gui_login();
+
+/*! \brief Function that asks the sign in data that is required
+ *
+ *
+ */
+void gui_signin();
 #endif //SRC_GUI_H

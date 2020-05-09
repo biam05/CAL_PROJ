@@ -24,4 +24,15 @@ using namespace std;
  */
 int ih_login(string user, string pass, string &address);
 
+/*! \brief Function that handles the sign in
+ *
+ *  Creates an account for a new user
+ *  @param user: New username
+ *  @param pass: New password
+ *  @param address: Address associated to the user
+ *  @param role: Role of the new user (either c or w);
+ *  @return The function returns 0 upon success, otherwise returns another value.
+ */
+int ih_signin(string user, string pass, string address, char role);
+
 #endif //SRC_INPUTHANDLER_H

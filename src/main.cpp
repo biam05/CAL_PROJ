@@ -1,8 +1,8 @@
 #include "include\gui.h"
 
 int main() {
-    string tmp;
+    string a;
     start_GUI();
-    cin >> tmp;
+    cin >> a;
     return 0;
 }

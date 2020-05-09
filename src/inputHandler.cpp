@@ -3,12 +3,9 @@
 int ih_login(string user, string pass, string &address)
 {
     string username, password, position;
-    ifstream loginfile("data/userlogins.txt");
+    ifstream loginfile("../data/userlogins.txt");
     while (getline(loginfile,username))
     {
-        cout << "USERNAME: " << username << endl;
-        cout << "USER: " << user << endl;
-
         if (username == user)
         {
             getline(loginfile, password);
@@ -35,4 +32,24 @@ int ih_login(string user, string pass, string &address)
     }
     address = "";
     return 3;
+}
+
+int ih_signin(string user, string pass, string address, char role)
+{
+    string username, password, position;
+    ifstream iloginfile("../data/userlogins.txt");
+    while (getline(iloginfile,username))
+    {
+        if (username == user)
+        {
+            return 1;
+        }
+    }
+    ofstream ologinfile("../data/userlogins.txt",fstream::app);
+    ologinfile << "\n" << user << "\n" << pass << "\n" << address << "\n";
+    if (role == 'c')
+        ologinfile << "Client";
+    else
+        ologinfile << "Worker";
+    return 0;
 }
