@@ -55,4 +55,32 @@ void gui_login();
  *
  */
 void gui_signin();
+
+/*! \brief Function that shows the client menu
+ *
+ * The client menu has 3 options:
+ * - ?: ???
+ * - ?: ???
+ * - Exit: exit program
+ *
+ * @param username: name of the user
+ */
+void gui_client(string username);
+
+/*! \brief Function that shows the worker menu
+ *
+ * The worker menu has 3 options:
+ * - ?: ???
+ * - ?: ???
+ * - Exit: exit program
+ *
+ * @param username: name of the user
+ */
+void gui_worker(string username);
+
+/*! \brief Function that deals with an unknow user
+ *
+ * @return 2 if the user want to try again, 0 if the user wants to create an account
+ */
+int gui_unknownUser();
 #endif //SRC_GUI_H

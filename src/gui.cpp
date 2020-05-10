@@ -76,35 +76,16 @@ void gui_login(){
 
         switch(ret = ih_login(user,password,address)){
             case 0: // --- The user is a client
-                cout << " Client Menu\n ";
+                gui_client(user);
                 break;
             case 1: // --- The user is a "worker"
-                cout << " Worker Menu\n ";
+                gui_worker(user);
                 break;
             case 2: // --- The user exists, but the password is wrong
-                cout << " Wrong password\n ";
+                cout << " Wrong password!\n ";
                 break;
             default: // --- The user doesn't exist
-                cout << " Unknown username\n Would you like to create an account? (Y/N)\n ";
-                cin >> opt;
-                cin.ignore(1000, '\n');
-                switch(opt)
-                {
-                    case 'Y':
-                    case 'y':
-                    {
-                        cout << " New account being created!\n";
-                        gui_signin();
-                        break;
-                    }
-                    case 'N':
-                    case 'n':
-                        ret = 2;
-                        gui_baseScreen();
-                        break;
-                    default:
-                        cout << " Invalid option!\n";
-                }
+                ret = gui_unknownUser();
                 break;
         }
     }
@@ -115,6 +96,7 @@ void gui_signin()
     char opt;
     string user, password, password2, address;
 
+    gui_baseScreen();
     cout << "\t\t\tSign in\n\n";
 
     cout << " Username: ";
@@ -138,4 +120,110 @@ void gui_signin()
     cin >> opt;
 
     ih_signin(user,password,address,opt);
+
+    if(opt =='c')
+        gui_client(user);
+    else
+        gui_worker(user);
+
+}
+
+int gui_unknownUser(){
+    char opt;
+    int ret;
+    cout << " Unknown username!\n Would you like to create an account? (Y/N)\n ";
+    cin >> opt;
+    cin.ignore(1000, '\n');
+    switch(opt)
+    {
+        case 'Y':
+        case 'y':
+        {
+            cout << " New account being created!\n";
+            gui_signin();
+            ret = 0;
+            break;
+        }
+        case 'N':
+        case 'n':
+            ret = 2;
+            gui_baseScreen();
+            break;
+        default:
+            cout << " Invalid option!\n";
+    }
+    return ret;
+}
+
+void gui_client(string username){
+
+    gui_baseScreen();
+
+    int ans;
+
+    cout << "\t\t\tClient Menu\n ";
+    cout << endl << " Welcome, " << username << "!" << endl;
+
+    cout << "\n Enter an option:\n\n";
+
+    cout << " [1] ?\n";
+    cout << " [2] ?\n";
+    cout << " [0] Exit\n";
+
+    cout << "\n Option: ";
+
+    cin >> ans;
+    cin.ignore(1000, '\n');
+
+    gui_baseScreen();
+
+    switch(ans){
+        case 1: // --- ?
+            cout << "\t\t\tOption 1!";
+            break;
+        case 2: // --- ?
+            cout << "\t\t\tOption 2!";
+            break;
+        case 0: // --- Exit
+            cout << "\t\t\tGoodbye!";
+            break;
+        default:
+            break;
+    }
+}
+
+void gui_worker(string username){
+    gui_baseScreen();
+
+    int ans;
+
+    cout << "\t\t\tWorker Menu\n ";
+    cout << endl << " Welcome, " << username << "!" << endl;
+
+    cout << "\n Enter an option:\n\n";
+
+    cout << " [1] ?\n";
+    cout << " [2] ?\n";
+    cout << " [0] Exit\n";
+
+    cout << "\n Option: ";
+
+    cin >> ans;
+    cin.ignore(1000, '\n');
+
+    gui_baseScreen();
+
+    switch(ans){
+        case 1: // --- ?
+            cout << "\t\t\tOption 1!";
+            break;
+        case 2: // --- ?
+            cout << "\t\t\tOption 2!";
+            break;
+        case 0: // --- Exit
+            cout << "\t\t\tGoodbye!";
+            break;
+        default:
+            break;
+    }
 }
