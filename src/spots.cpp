@@ -21,7 +21,7 @@ Edge Spot::get_edge() {
 }
 
 float Spot::get_distance() {
-    return edge;
+    return distance;
 }
 
 bool Spot::fits(float q) {
