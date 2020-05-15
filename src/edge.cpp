@@ -1,18 +1,18 @@
 #include <edge.h>
 
-float Edge::get_weight() {
+float Edge::getWeight() {
     return weight;
 }
 
-int Edge::get_ID() {
+int Edge::getId() {
     return ID;
 }
 
-Vertex Edge::get_vi() {
+Vertex Edge::getVi() {
     return vi;
 }
 
-Vertex Edge::get_vf() {
+Vertex Edge::getVf() {
     return vf;
 }
 

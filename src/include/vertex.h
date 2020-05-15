@@ -15,9 +15,9 @@ public:
     }
     Vertex (float d, vector<int> adj) : distance(d), adjacent_IDs(adj) {};
 
-    void set_distance (float d);
+    void setDistance (float d);
 
-    vector<int> get_adjacent();
+    vector<int> getAdjacentIds();
 };
 
 #endif //CAL_PROJ_VERTEXES_H

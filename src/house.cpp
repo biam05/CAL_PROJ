@@ -1,21 +1,21 @@
 #include "house.h"
 
-void House::set_quantity(float q) {
+void House::setQuantity(float q) {
     quantity = q;
 }
 
-enum type House::get_type() {
+enum type House::getType() {
     return type;
 }
 
-float House::get_quantity() {
+float House::getQuantity() {
     return quantity;
 }
 
-int House::get_edge() {
+int House::getEdge() {
     return edge;
 }
 
-float House::get_distance() {
+float House::getDistance() {
     return distance;
 }

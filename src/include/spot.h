@@ -15,13 +15,13 @@ class Spot {
 public:
     Spot (enum type t, float q, float max_q, int e, float d) : type(t), quantity(q), max_quantity(max_q), edge(e), distance(d) {};
 
-    void set_quantity(float q);
+    void setQuantity(float q);
 
-    enum type get_type();
-    float get_quantity();
-    float get_max_quantity();
-    int get_edge();
-    float get_distance();
+    enum type getType();
+    float getQuantity();
+    float getMaxQuantity();
+    int getEdge();
+    float getDistance();
 
     bool fits(float q);
 };

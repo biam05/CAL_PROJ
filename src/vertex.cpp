@@ -1,9 +1,9 @@
 #include "vertex.h"
 
-void Vertex::set_distance(float d) {
+void Vertex::setDistance(float d) {
     distance = d;
 }
 
-vector<int> Vertex::get_adjacent() {
+vector<int> Vertex::getAdjacentIds() {
     return adjacent_IDs;
 }

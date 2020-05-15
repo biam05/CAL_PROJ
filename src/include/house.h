@@ -12,14 +12,14 @@ class House {
 public:
     House (enum type t, float q, int e, float d) : type(t), quantity(q), edge(e), distance(d) {};
 
-    void set_quantity(float q);
+    void setQuantity(float q);
 
-    enum type get_type();
+    enum type getType();
 
-    float get_quantity();
+    float getQuantity();
 
-    int get_edge();
+    int getEdge();
 
-    float get_distance();
+    float getDistance();
 };
 #endif //SRC_HOUSES_H

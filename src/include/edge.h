@@ -18,10 +18,10 @@ public:
     }
     Edge (float w, int id, Vertex v1, Vertex v2) : weight(w), ID(id), vi(v1), vf(v2) {};
 
-    float get_weight();
-    int get_ID();
-    Vertex get_vi();
-    Vertex get_vf();
+    float getWeight();
+    int getId();
+    Vertex getVi();
+    Vertex getVf();
 };
 
 #endif //CAL_PROJ_EDGES_H

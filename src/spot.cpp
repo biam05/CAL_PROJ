@@ -1,26 +1,26 @@
 #include "spot.h"
 
-void Spot::set_quantity(float q) {
+void Spot::setQuantity(float q) {
     quantity = q;
 }
 
-enum type Spot::get_type() {
+enum type Spot::getType() {
     return type;
 }
 
-float Spot::get_quantity() {
+float Spot::getQuantity() {
     return quantity;
 }
 
-float Spot::get_max_quantity() {
+float Spot::getMaxQuantity() {
     return max_quantity;
 }
 
-int Spot::get_edge() {
+int Spot::getEdge() {
     return edge;
 }
 
-float Spot::get_distance() {
+float Spot::getDistance() {
     return distance;
 }
 
