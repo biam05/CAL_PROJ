@@ -1,4 +1,4 @@
-#include "houses.h"
+#include "house.h"
 
 void House::set_quantity(float q) {
     quantity = q;

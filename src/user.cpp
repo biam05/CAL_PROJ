@@ -1,25 +1,25 @@
 #include "user.h"
 
-void User::set_type(enum type t) {
-    type = t;
+const string &User::getUsername() const {
+    return username;
 }
 
-void User::set_quantity(float q) {
-    quantity = q;
+void User::setUsername(const string &username) {
+    User::username = username;
 }
 
-enum type User::get_type() {
-    return type;
+const string &User::getPassword() const {
+    return password;
 }
 
-float User::get_quantity() {
-    return quantity;
+void User::setPassword(const string &password) {
+    User::password = password;
 }
 
-int User::get_location_ID() {
+int User::getLocationId() const {
     return location_ID;
 }
 
-float User::get_distance() {
-    return distance;
+void User::setLocationId(int locationId) {
+    location_ID = locationId;
 }

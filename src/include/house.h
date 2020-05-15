@@ -1,7 +1,7 @@
 #ifndef SRC_HOUSES_H
 #define SRC_HOUSES_H
 
-#include "spots.h"
+#include "spot.h"
 
 class House {
     enum type type;

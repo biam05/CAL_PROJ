@@ -3,5 +3,5 @@ project(src)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(src main.cpp gui.cpp inputHandler.cpp spots.cpp edges.cpp vertexes.cpp user.cpp houses.cpp)
+add_executable(src main.cpp gui.cpp inputHandler.cpp spot.cpp edge.cpp vertex.cpp user.cpp house.cpp fileHandler.cpp include/fileHandler.h request.cpp include/request.h)
 include_directories(include)

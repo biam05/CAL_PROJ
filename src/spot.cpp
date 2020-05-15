@@ -1,4 +1,4 @@
-#include "spots.h"
+#include "spot.h"
 
 void Spot::set_quantity(float q) {
     quantity = q;

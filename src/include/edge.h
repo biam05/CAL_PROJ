@@ -1,7 +1,7 @@
 #ifndef CAL_PROJ_EDGES_H
 #define CAL_PROJ_EDGES_H
 
-#include "vertexes.h"
+#include "vertex.h"
 
 using namespace std;
 

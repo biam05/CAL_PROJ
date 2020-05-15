@@ -1,24 +1,28 @@
 #ifndef SRC_USER_H
 #define SRC_USER_H
 
-#include "spots.h"
+#include <string>
+
+// Might include this -> spot vector
+// #include "spot.h"
+
+using namespace std;
 
 class User {
-    enum type type;
-    float quantity;
+    string username;
+    string password;
     int location_ID;
-    float distance;
 
 public:
-    User(enum type t, float q, int l, float d) : type(t), quantity(q), location_ID(l), distance(d) {};
+    User(int l, string u, string p) : location_ID(l), username(u), password(p){};
 
-    void set_type(enum type t);
-    void set_quantity(float q);
+    const string &getUsername() const;
+    const string &getPassword() const;
+    int getLocationId() const;
 
-    enum type get_type();
-    float get_quantity();
-    int get_location_ID();
-    float get_distance();
+    void setUsername(const string &username);
+    void setPassword(const string &password);
+    void setLocationId(int locationId);
 };
 
 #endif //SRC_USER_H

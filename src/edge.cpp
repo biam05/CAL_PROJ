@@ -1,4 +1,4 @@
-#include <edges.h>
+#include <edge.h>
 
 float Edge::get_weight() {
     return weight;

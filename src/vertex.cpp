@@ -1,4 +1,4 @@
-#include "vertexes.h"
+#include "vertex.h"
 
 void Vertex::set_distance(float d) {
     distance = d;
