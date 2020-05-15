@@ -2,7 +2,6 @@
 #define CAL_PROJ_VERTEXES_H
 
 #include <vector>
-#include "edges.h"
 
 using namespace std;
 
@@ -11,6 +10,9 @@ class Vertex {
     vector<int> adjacent_IDs;
 
 public:
+    Vertex () {
+        distance = 0;
+    }
     Vertex (float d, vector<int> adj) : distance(d), adjacent_IDs(adj) {};
 
     void set_distance (float d);
