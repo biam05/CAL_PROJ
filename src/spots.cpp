@@ -16,7 +16,7 @@ float Spot::get_max_quantity() {
     return max_quantity;
 }
 
-Edge Spot::get_edge() {
+int Spot::get_edge() {
     return edge;
 }
 
