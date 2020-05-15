@@ -1,8 +1,6 @@
 #ifndef CAL_PROJ_EDGES_H
 #define CAL_PROJ_EDGES_H
 
-#endif //CAL_PROJ_EDGES_H
-
 using namespace std;
 
 class Edge {
@@ -19,3 +17,5 @@ public:
     float get_vi();
     float get_vf();
 };
+
+#endif //CAL_PROJ_EDGES_H

@@ -1,8 +1,6 @@
 #ifndef CAL_PROJ_SPOTS_H
 #define CAL_PROJ_SPOTS_H
 
-#endif //CAL_PROJ_SPOTS_H
-
 using namespace std;
 
 enum type {PLASTIC, PAPER, GLASS, ORGANIC};
@@ -27,3 +25,5 @@ public:
 
     bool fits(float q);
 };
+
+#endif //CAL_PROJ_SPOTS_H
