@@ -1,5 +1,8 @@
 #include "user.h"
 
+User::User(const string &username, const string &password, const pair<float, float> &address, userType type) : username(
+        username), password(password), address(address), type(type) {}
+
 const string &User::getUsername() const {
     return username;
 }
@@ -16,10 +19,19 @@ void User::setPassword(const string &password) {
     User::password = password;
 }
 
-int User::getLocationId() const {
-    return location_ID;
+userType User::getType() const {
+    return type;
 }
 
-void User::setLocationId(int locationId) {
-    location_ID = locationId;
+void User::setType(userType type) {
+    User::type = type;
 }
+
+const pair<float, float> &User::getAddress() const {
+    return address;
+}
+
+void User::setAddress(const pair<float, float> &address) {
+    User::address = address;
+}
+

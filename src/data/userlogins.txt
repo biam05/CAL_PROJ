@@ -1,16 +1,12 @@
 henrique123
 caliscool
-Rua das Flores, 153
+(123, 123)
 Client
 biam05
 bolachas
-Rua das Bolachas, 79
+(456, 456)
 Client
 danielgsilva
 password
-Rua das Passwords, 88
+(789, 789)
 Worker
-henrique124
-calisnotcool
-Rua do Bispo de Sta. Iria, 55
-Client

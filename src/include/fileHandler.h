@@ -3,6 +3,10 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
+
+#include "user.h"
+#include "wasteApp.h"
 
 using namespace std;
 
@@ -15,8 +19,8 @@ using namespace std;
 /*! \brief Function reads the data from the users
  *
  *  Saves all the information from the users
- *  @param filename: name of the file where the information is stored
+ *  @param
  */
-void readUserData(string filename);
+void readUserData(WasteApp &wasteApp);
 
 #endif //SRC_FILEHANDLER_H

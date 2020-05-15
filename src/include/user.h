@@ -8,21 +8,26 @@
 
 using namespace std;
 
+enum userType {CLIENT, WORKER};
+
 class User {
     string username;
     string password;
-    int location_ID;
+    pair<float, float> address;
+    enum userType type;
 
 public:
-    User(int l, string u, string p) : location_ID(l), username(u), password(p){};
+    User(const string &username, const string &password, const pair<float, float> &address, userType type);
 
     const string &getUsername() const;
     const string &getPassword() const;
-    int getLocationId() const;
+    const pair<float, float> &getAddress() const;
+    userType getType() const;
 
     void setUsername(const string &username);
     void setPassword(const string &password);
-    void setLocationId(int locationId);
+    void setAddress(const pair<float, float> &address);
+    void setType(userType type);
 };
 
 #endif //SRC_USER_H
