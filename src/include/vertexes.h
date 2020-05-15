@@ -1,18 +1,21 @@
 #ifndef CAL_PROJ_VERTEXES_H
 #define CAL_PROJ_VERTEXES_H
 
+#include <vector>
+#include "edges.h"
+
 using namespace std;
 
 class Vertex {
     float distance;
-    vector<Edge> adjacent;
+    vector<int> adjacent_IDs;
 
 public:
-    Vertex (float d, vector<Edge> adj) : distance(d), adjacent(adj) {};
+    Vertex (float d, vector<int> adj) : distance(d), adjacent_IDs(adj) {};
 
     void set_distance (float d);
 
-    vector<Edge> get_adjacent();
+    vector<int> get_adjacent();
 };
 
 #endif //CAL_PROJ_VERTEXES_H
