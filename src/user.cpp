@@ -1,8 +1,7 @@
 #include "user.h"
 
-User::User(const string &username, const string &password, float x, float y, userType type) : username(username),
-                                                                                              password(password), x(x),
-                                                                                              y(y), type(type) {}
+User::User(const string &username, const string &password, int edge, float distance, userType type): username(username),
+                                                                password(password), house(edge, distance), type(type) {}
 
 const string &User::getUsername() const {
     return username;
@@ -28,21 +27,8 @@ void User::setType(userType type) {
     User::type = type;
 }
 
-float User::getX() const {
-    return x;
+const House &User::getHouse() const {
+    return house;
 }
-
-void User::setX(float x) {
-    User::x = x;
-}
-
-float User::getY() const {
-    return y;
-}
-
-void User::setY(float y) {
-    User::y = y;
-}
-
 
 

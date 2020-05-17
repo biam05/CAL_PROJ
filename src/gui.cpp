@@ -94,7 +94,7 @@ void gui_login(vector<User> &users){
 void gui_signin(vector<User> &users)
 {
     char opt;
-    string user, password, password2, x, y;
+    string user, password, password2, edge, distance;
 
     gui_baseScreen();
     cout << "\t\t\tSign in\n\n";
@@ -113,16 +113,16 @@ void gui_signin(vector<User> &users)
         return;
     }
 
-    cout << " X: ";
-    getline(cin, x);
+    cout << " Edge: ";
+    getline(cin, edge);
 
-    cout << " Y: ";
-    getline(cin, y);
+    cout << " Distance: ";
+    getline(cin, distance);
 
     cout << " Do you intend to be a client or a worker (c/w)? ";
     cin >> opt;
 
-    ih_signin(users, user,password,x, y,opt);
+    ih_signin(users,user,password,edge,distance,opt);
 
     if(opt =='c')
         gui_client(users, user);
