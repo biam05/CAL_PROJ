@@ -4,15 +4,15 @@ float Edge::getWeight() {
     return weight;
 }
 
-int Edge::getId() {
+int Edge::getID() {
     return ID;
 }
 
-Vertex Edge::getVi() {
+int Edge::getVi() {
     return vi;
 }
 
-Vertex Edge::getVf() {
+int Edge::getVf() {
     return vf;
 }
 

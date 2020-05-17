@@ -14,6 +14,10 @@ void WasteApp::addVertex(Vertex v) {
     vertexes.push_back(v);
 }
 
+void WasteApp::addEdge(Edge e) {
+    edges.push_back(e);
+}
+
 void WasteApp::generateGraph() {
     GraphViewer *gv = new GraphViewer(700, 700, false);
     gv->createWindow(700, 700);
@@ -23,6 +27,9 @@ void WasteApp::generateGraph() {
         x = i->getX();
         y = i->getY();
         gv->addNode(id, x, y);
+    }
+    for (auto j = edges.begin(); j != edges.end(); j++) {
+        gv->addEdge(j->getID(), j->getVi(), j->getVf(), EdgeType::UNDIRECTED);
     }
     gv->rearrange();
 }

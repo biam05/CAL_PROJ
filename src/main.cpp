@@ -5,12 +5,10 @@
 #include "wasteApp.h"
 
 int main() {
-    string a;
     WasteApp wasteApp;
     readGraphData(wasteApp, "../data/GridGraphs/4x4");
     wasteApp.generateGraph();
-//    readUserData(wasteApp);
-//    start_GUI();
-    cin >> a;
+    readUserData(wasteApp);
+    start_GUI();
     return 0;
 }
