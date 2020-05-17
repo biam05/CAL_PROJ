@@ -4,19 +4,11 @@
 #include "spot.h"
 
 class House {
-    enum type type;
-    float quantity;
     int edge;
     float distance;
 
 public:
-    House (enum type t, float q, int e, float d) : type(t), quantity(q), edge(e), distance(d) {};
-
-    void setQuantity(float q);
-
-    enum type getType();
-
-    float getQuantity();
+    House (int e, float d) : edge(e), distance(d) {};
 
     int getEdge();
 
