@@ -13,20 +13,23 @@ enum userType {CLIENT, WORKER};
 class User {
     string username;
     string password;
-    pair<float, float> address;
+    float x;
+    float y;
     enum userType type;
 
 public:
-    User(const string &username, const string &password, const pair<float, float> &address, userType type);
+    User(const string &username, const string &password, float x, float y, userType type);
 
     const string &getUsername() const;
     const string &getPassword() const;
-    const pair<float, float> &getAddress() const;
+    float getX() const;
+    float getY() const;
     userType getType() const;
 
     void setUsername(const string &username);
     void setPassword(const string &password);
-    void setAddress(const pair<float, float> &address);
+    void setX(float x);
+    void setY(float y);
     void setType(userType type);
 };
 

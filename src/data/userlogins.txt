@@ -1,12 +1,15 @@
 henrique123
 caliscool
-(123, 123)
+123
+123
 Client
 biam05
 bolachas
-(456, 456)
+456
+456
 Client
 danielgsilva
 password
-(789, 789)
+789
+789
 Worker

@@ -1,9 +1,9 @@
 #include "include/gui.h"
 
-void start_GUI(){
+void start_GUI(vector<User> &users){
     gui_header();
     gui_about();
-    gui_mainMenu();
+    gui_mainMenu(users);
 }
 
 void gui_header(){
@@ -24,7 +24,7 @@ void gui_baseScreen(){
     gui_header();
 }
 
-void gui_mainMenu(){
+void gui_mainMenu(vector<User> &users){
 
     int ans = 0;
 
@@ -43,10 +43,10 @@ void gui_mainMenu(){
 
     switch(ans){
         case 1: // --- Login
-            gui_login();
+            gui_login(users);
             break;
         case 2: // --- Sign in
-            gui_signin();
+            gui_signin(users);
             break;
         case 0: // --- Exit
             cout << "Goodbye!";
@@ -56,7 +56,7 @@ void gui_mainMenu(){
     }
 }
 
-void gui_login(){
+void gui_login(vector<User> &users){
 
     int ret = 2;
     char opt;
@@ -74,27 +74,27 @@ void gui_login(){
 
         gui_baseScreen();
 
-        switch(ret = ih_login(user,password,address)){
+        switch(ret = ih_login(users, user,password)){
             case 0: // --- The user is a client
-                gui_client(user);
+                gui_client(users, user);
                 break;
             case 1: // --- The user is a "worker"
-                gui_worker(user);
+                gui_worker(users, user);
                 break;
             case 2: // --- The user exists, but the password is wrong
                 cout << " Wrong password!\n ";
                 break;
             default: // --- The user doesn't exist
-                ret = gui_unknownUser();
+                ret = gui_unknownUser(users);
                 break;
         }
     }
 }
 
-void gui_signin()
+void gui_signin(vector<User> &users)
 {
     char opt;
-    string user, password, password2, address;
+    string user, password, password2, x, y;
 
     gui_baseScreen();
     cout << "\t\t\tSign in\n\n";
@@ -113,24 +113,27 @@ void gui_signin()
         return;
     }
 
-    cout << " Address: ";
-    getline(cin, address);
+    cout << " X: ";
+    getline(cin, x);
+
+    cout << " Y: ";
+    getline(cin, y);
 
     cout << " Do you intend to be a client or a worker (c/w)? ";
     cin >> opt;
 
-    ih_signin(user,password,address,opt);
+    ih_signin(users, user,password,x, y,opt);
 
     if(opt =='c')
-        gui_client(user);
+        gui_client(users, user);
     else
-        gui_worker(user);
+        gui_worker(users, user);
 
 }
 
-int gui_unknownUser(){
+int gui_unknownUser(vector<User> &users){
     char opt;
-    int ret;
+    int ret = 0;
     cout << " Unknown username!\n Would you like to create an account? (Y/N)\n ";
     cin >> opt;
     cin.ignore(1000, '\n');
@@ -140,8 +143,7 @@ int gui_unknownUser(){
         case 'y':
         {
             cout << " New account being created!\n";
-            gui_signin();
-            ret = 0;
+            gui_signin(users);
             break;
         }
         case 'N':
@@ -155,7 +157,7 @@ int gui_unknownUser(){
     return ret;
 }
 
-void gui_client(string username){
+void gui_client(vector<User> &users, string username){
 
     gui_baseScreen();
 
@@ -192,7 +194,7 @@ void gui_client(string username){
     }
 }
 
-void gui_worker(string username){
+void gui_worker(vector<User> &users, string username){
     gui_baseScreen();
 
     int ans;

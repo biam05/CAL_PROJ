@@ -1,12 +1,19 @@
 #include "fileHandler.h"
 
 void readUserData(WasteApp &wasteApp){
-    string username, password, userType, address; // --- ALTERAR: ADDRESS -> COORDENADAS
+    string username, password, userType, x, y, position;
+    enum userType type;
     ifstream userFile("../data/userlogins.txt");
     while(getline(userFile, username)){
         getline(userFile, password);
-        getline(userFile, address);
-        getline(userFile, address);
+        getline(userFile, x);
+        getline(userFile, y);
+        getline(userFile, position);
+        if(position == "Client")
+            type = CLIENT;
+        else
+            type = WORKER;
+        wasteApp.addUser(User(username, password,stof(x),stof(y),type));
     }
 }
 

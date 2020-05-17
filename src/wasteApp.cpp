@@ -2,12 +2,16 @@
 
 WasteApp::WasteApp() {}
 
-const vector<User> &WasteApp::getUsers() const {
+vector<User> &WasteApp::getUsers(){
     return users;
 }
 
-void WasteApp::setUsers(const vector<User> &users) {
+void WasteApp::setUsers(vector<User> &users) {
     WasteApp::users = users;
+}
+
+void WasteApp::addUser(User u) {
+    users.push_back(u);
 }
 
 void WasteApp::addVertex(Vertex v) {

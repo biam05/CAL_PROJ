@@ -1,55 +1,43 @@
 #include "include/inputHandler.h"
 
-int ih_login(string user, string pass, string &address)
+int ih_login(const vector<User> &users, string user, string pass)
 {
-    string username, password, position;
-    ifstream loginfile("../data/userlogins.txt");
-    while (getline(loginfile,username))
-    {
-        if (username == user)
-        {
-            getline(loginfile, password);
-
-            if (password == pass)
-            {
-                getline(loginfile, address);
-                getline(loginfile,position);
-                if (position == "Client")
+    for (auto u : users){
+        if(u.getUsername() == user){
+            if(u.getPassword() == pass){
+                if(u.getType() == CLIENT)
                     return 0;
-                if (position == "Worker")
+                else
                     return 1;
             }
-            getline(loginfile, address);
-            getline(loginfile,position);
-            return 2;
-        }
-        else
-        {
-            getline(loginfile, password);
-            getline(loginfile, address);
-            getline(loginfile,position);
+            else
+                return 2;
         }
     }
-    address = "";
     return 3;
 }
 
-int ih_signin(string user, string pass, string address, char role)
+int ih_signin(vector<User> &users, string user, string pass, string x, string y, char role)
 {
     string username, password, position;
-    ifstream iloginfile("../data/userlogins.txt");
-    while (getline(iloginfile,username))
-    {
-        if (username == user)
-        {
+    enum userType type;
+    for(auto u : users){
+        if(u.getUsername() == user)
             return 1;
-        }
     }
+
     ofstream ologinfile("../data/userlogins.txt",fstream::app);
-    ologinfile << "\n" << user << "\n" << pass << "\n" << address << "\n";
-    if (role == 'c')
+    ologinfile << "\n" << user << "\n" << pass << "\n" << x << "\n" << y << "\n";
+    if (role == 'c'){
         ologinfile << "Client";
-    else
+        type = CLIENT;
+    }
+    else{
         ologinfile << "Worker";
+        type = WORKER;
+    }
+
+    users.emplace_back(username, password,stof(x),stof(y),type);
+
     return 0;
 }

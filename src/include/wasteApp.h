@@ -18,9 +18,11 @@ class WasteApp {
 public:
     WasteApp();
 
-    const vector<User> &getUsers() const;
+    vector<User> &getUsers();
 
-    void setUsers(const vector<User> &users);
+    void setUsers(vector<User> &users);
+
+    void addUser(User u);
 
     void addVertex(Vertex v);
 
@@ -29,6 +31,8 @@ public:
     bool hasVertex(int id);
 
     Vertex getVertex (int id);
+
+
 
     void generateGraph();
 };

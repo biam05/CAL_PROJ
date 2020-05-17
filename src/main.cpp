@@ -4,11 +4,20 @@
 #include "gui.h"
 #include "wasteApp.h"
 
+using namespace std;
+
 int main() {
     WasteApp wasteApp;
-    readGraphData(wasteApp, "../data/GridGraphs/4x4");
-    wasteApp.generateGraph();
+
+    // --- READING INFORMATION FROM FILES
     readUserData(wasteApp);
-    start_GUI();
+    readGraphData(wasteApp, "../data/GridGraphs/4x4");
+
+    // --- GENERATE GRAPH
+    wasteApp.generateGraph();
+
+    // --- START GUI
+    start_GUI(wasteApp.getUsers());
+
     return 0;
 }

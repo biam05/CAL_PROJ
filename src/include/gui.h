@@ -5,6 +5,8 @@
 #include <stdlib.h>
 
 #include "inputHandler.h"
+#include <vector>
+#include "user.h"
 
 using namespace std;
 
@@ -17,8 +19,10 @@ using namespace std;
 /*! \brief Function that starts the GUI
  *
  *  Calls the main GUI functions
+ *
+ *  @param users: vector with all the WasteApp users
  */
-void start_GUI();
+void start_GUI(vector<User> &users);
 
 /*! \brief Function that displays the header
  */
@@ -41,20 +45,22 @@ void gui_baseScreen();
  * - Login: user login (user already has an account)
  * - Sign in: user creates an account
  * - Exit: exit program
+ *
+ * @param users: vector with all the WasteApp users
  */
-void gui_mainMenu();
+void gui_mainMenu(vector<User> &users);
 
 /*! \brief Function that asks the login data that is required
  *
- *
+ * @param users: vector with all the WasteApp users
  */
-void gui_login();
+void gui_login(vector<User> &users);
 
 /*! \brief Function that asks the sign in data that is required
  *
- *
+ * @param users: vector with all the WasteApp users
  */
-void gui_signin();
+void gui_signin(vector<User> &users);
 
 /*! \brief Function that shows the client menu
  *
@@ -63,9 +69,10 @@ void gui_signin();
  * - ?: ???
  * - Exit: exit program
  *
+ * @param users: vector with all the WasteApp users
  * @param username: name of the user
  */
-void gui_client(string username);
+void gui_client(vector<User> &users, string username);
 
 /*! \brief Function that shows the worker menu
  *
@@ -74,13 +81,16 @@ void gui_client(string username);
  * - ?: ???
  * - Exit: exit program
  *
+ * @param users: vector with all the WasteApp users
  * @param username: name of the user
  */
-void gui_worker(string username);
+void gui_worker(vector<User> &users, string username);
 
 /*! \brief Function that deals with an unknow user
  *
+ * @param users: vector with all the WasteApp users
+ *
  * @return 2 if the user want to try again, 0 if the user wants to create an account
  */
-int gui_unknownUser();
+int gui_unknownUser(vector<User> &users);
 #endif //SRC_GUI_H
