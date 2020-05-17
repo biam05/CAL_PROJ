@@ -22,16 +22,30 @@ void WasteApp::generateGraph() {
     GraphViewer *gv = new GraphViewer(700, 700, false);
     gv->createWindow(700, 700);
     int id, x, y;
-    for(auto i = vertexes.begin(); i != vertexes.end(); i++) {
-        id = i->getID();
-        x = i->getX();
-        y = i->getY();
+    for(auto & vertex : vertexes) {
+        id = vertex.getID();
+        x = vertex.getX();
+        y = vertex.getY();
         gv->addNode(id, x, y);
     }
-    for (auto j = edges.begin(); j != edges.end(); j++) {
-        gv->addEdge(j->getID(), j->getVi(), j->getVf(), EdgeType::UNDIRECTED);
+    for (auto & edge : edges) {
+        gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
     }
     gv->rearrange();
+}
+
+bool WasteApp::hasVertex(int id) {
+    for (auto & vertex : vertexes) {
+        if (vertex.getID() == id) return true;
+    }
+    return false;
+}
+
+Vertex WasteApp::getVertex(int id) {
+    for (auto & vertex : vertexes) {
+        if (vertex.getID() == id) return vertex;
+    }
+    return Vertex();
 }
 
 

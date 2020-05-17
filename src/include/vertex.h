@@ -15,9 +15,9 @@ class Vertex {
 public:
     Vertex () {
         distance = 0;
-        ID = 0;
-        x = 0;
-        y = 0;
+        ID = -1;
+        x = -1;
+        y = -1;
     }
     Vertex (int ID, int x, int y) : ID(ID), x(x), y(y) {
         distance = 0;
@@ -26,6 +26,8 @@ public:
     void setDistance (float d);
 
     vector<int> getAdjacentIds();
+
+    void addAdjacent(int id);
 
     int getID();
     int getX();

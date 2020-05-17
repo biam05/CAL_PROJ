@@ -19,3 +19,7 @@ int Vertex::getX() {
 int Vertex::getY() {
     return y;
 }
+
+void Vertex::addAdjacent(int id) {
+    adjacent_IDs.push_back(id);
+}

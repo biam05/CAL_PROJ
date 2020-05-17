@@ -47,7 +47,12 @@ void readGraphData(WasteApp &wasteApp, string folder) {
             c1 = temp.find(',', 0);
             v1 = stoi(temp.substr(1, c1-1));
             v2 = stoi(temp.substr(c1+2, temp.length()-1));
-            wasteApp.addEdge(Edge(1, i, v1, v2));
+            if (wasteApp.hasVertex(v1) && wasteApp.hasVertex(v2)) {
+                wasteApp.addEdge(Edge(1, i, v1, v2));
+                wasteApp.getVertex(v1).addAdjacent(i);
+                wasteApp.getVertex(v2).addAdjacent(i);
+            }
+            else cout << "Couldn't add edge: " << v1 << " -> " << v2 << endl;
         }
         edges.close();
     } else {

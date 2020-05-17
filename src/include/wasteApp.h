@@ -26,6 +26,10 @@ public:
 
     void addEdge(Edge e);
 
+    bool hasVertex(int id);
+
+    Vertex getVertex (int id);
+
     void generateGraph();
 };
 
