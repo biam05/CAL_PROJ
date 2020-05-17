@@ -29,6 +29,6 @@ void readUserData(WasteApp &wasteApp);
  * @param wasteApp the app instance
  * @param folder the folder with the graph files
  */
- void readGraphData(WasteApp &wasteApp, string folder);
+ void readGraphData(WasteApp &wasteApp, const string &folder);
 
 #endif //SRC_FILEHANDLER_H

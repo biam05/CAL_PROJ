@@ -2,8 +2,6 @@
 #define SRC_GUI_H
 
 #include <iostream>
-#include <stdlib.h>
-
 #include "inputHandler.h"
 #include <vector>
 #include "user.h"
@@ -72,11 +70,11 @@ void gui_signin(vector<User> &users);
  * @param users: vector with all the WasteApp users
  * @param username: name of the user
  */
-void gui_client(vector<User> &users, string username);
+void gui_client(vector<User> &users, const string &username);
 
 /*! \brief Function that shows the worker menu
  *
- * The worker menu has 3 options:
+ * Thconst e work&er menu has 3 options:
  * - ?: ???
  * - ?: ???
  * - Exit: exit program
@@ -84,7 +82,7 @@ void gui_client(vector<User> &users, string username);
  * @param users: vector with all the WasteApp users
  * @param username: name of the user
  */
-void gui_worker(vector<User> &users, string username);
+void gui_worker(vector<User> &users, const string &username);
 
 /*! \brief Function that deals with an unknow user
  *

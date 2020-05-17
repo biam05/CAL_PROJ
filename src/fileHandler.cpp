@@ -17,7 +17,7 @@ void readUserData(WasteApp &wasteApp){
     }
 }
 
-void readGraphData(WasteApp &wasteApp, string folder) {
+void readGraphData(WasteApp &wasteApp, const string &folder) {
     int n, id, x, y, v1, v2, c1, c2;
     string temp;
 

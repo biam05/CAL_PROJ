@@ -1,5 +1,3 @@
-#include <vector>
-
 #include "fileHandler.h"
 #include "gui.h"
 #include "wasteApp.h"

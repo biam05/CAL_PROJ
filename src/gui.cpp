@@ -25,9 +25,7 @@ void gui_baseScreen(){
 }
 
 void gui_mainMenu(vector<User> &users){
-
     int ans = 0;
-
     cout << "\n Enter an option:\n\n";
 
     cout << " [1] Login\n";
@@ -41,7 +39,7 @@ void gui_mainMenu(vector<User> &users){
 
     gui_baseScreen();
 
-    switch(ans){
+    switch(ans) {
         case 1: // --- Login
             gui_login(users);
             break;
@@ -59,7 +57,6 @@ void gui_mainMenu(vector<User> &users){
 void gui_login(vector<User> &users){
 
     int ret = 2;
-    char opt;
     string user, password, address;
 
     while (ret == 2)
@@ -142,7 +139,6 @@ int gui_unknownUser(vector<User> &users){
         case 'Y':
         case 'y':
         {
-            cout << " New account being created!\n";
             gui_signin(users);
             break;
         }
@@ -157,75 +153,77 @@ int gui_unknownUser(vector<User> &users){
     return ret;
 }
 
-void gui_client(vector<User> &users, string username){
-
-    gui_baseScreen();
-
+void gui_client(vector<User> &users, const string &username){
     int ans;
+    while (true) {
+        gui_baseScreen();
 
-    cout << "\t\t\tClient Menu\n ";
-    cout << endl << " Welcome, " << username << "!" << endl;
+        cout << "\t\t\tClient Menu\n ";
+        cout << endl << " Welcome, " << username << "!" << endl;
 
-    cout << "\n Enter an option:\n\n";
+        cout << "\n Enter an option:\n\n";
 
-    cout << " [1] ?\n";
-    cout << " [2] ?\n";
-    cout << " [0] Exit\n";
+        cout << " [1] Find your nearest waste deposit spot\n";
+        cout << " [2] Request home collection\n";
+        cout << " [0] Exit\n";
 
-    cout << "\n Option: ";
+        cout << "\n Option: ";
 
-    cin >> ans;
-    cin.ignore(1000, '\n');
+        cin >> ans;
+        cin.ignore(1000, '\n');
 
-    gui_baseScreen();
+        gui_baseScreen();
 
-    switch(ans){
-        case 1: // --- ?
-            cout << "\t\t\tOption 1!";
-            break;
-        case 2: // --- ?
-            cout << "\t\t\tOption 2!";
-            break;
-        case 0: // --- Exit
-            cout << "\t\t\tGoodbye!";
-            break;
-        default:
-            break;
+        switch (ans) {
+            case 1: // Apply Dijkstra's Algorithm to find the shortest path to the desired waste deposit spot
+                cout << "\t\t\tOption 1!";
+                break;
+            case 2: // Request a worker to collect a certain type of waste to your home
+                cout << "\t\t\tOption 2!";
+                break;
+            case 0: // Exit
+                cout << "\t\t\tGoodbye!";
+                return;
+            default:
+                break;
+        }
     }
 }
 
-void gui_worker(vector<User> &users, string username){
-    gui_baseScreen();
-
+void gui_worker(vector<User> &users, const string &username){
     int ans;
 
-    cout << "\t\t\tWorker Menu\n ";
-    cout << endl << " Welcome, " << username << "!" << endl;
+    while (true) {
+        gui_baseScreen();
 
-    cout << "\n Enter an option:\n\n";
+        cout << "\t\t\tWorker Menu\n ";
+        cout << endl << " Welcome, " << username << "!" << endl;
 
-    cout << " [1] ?\n";
-    cout << " [2] ?\n";
-    cout << " [0] Exit\n";
+        cout << "\n Enter an option:\n\n";
 
-    cout << "\n Option: ";
+        cout << " [1] ?\n";
+        cout << " [2] ?\n";
+        cout << " [0] Exit\n";
 
-    cin >> ans;
-    cin.ignore(1000, '\n');
+        cout << "\n Option: ";
 
-    gui_baseScreen();
+        cin >> ans;
+        cin.ignore(1000, '\n');
 
-    switch(ans){
-        case 1: // --- ?
-            cout << "\t\t\tOption 1!";
-            break;
-        case 2: // --- ?
-            cout << "\t\t\tOption 2!";
-            break;
-        case 0: // --- Exit
-            cout << "\t\t\tGoodbye!";
-            break;
-        default:
-            break;
+        gui_baseScreen();
+
+        switch (ans) {
+            case 1: // --- ?
+                cout << "\t\t\tOption 1!";
+                break;
+            case 2: // --- ?
+                cout << "\t\t\tOption 2!";
+                break;
+            case 0: // --- Exit
+                cout << "\t\t\tGoodbye!";
+                return;
+            default:
+                break;
+        }
     }
 }

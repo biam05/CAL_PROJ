@@ -25,7 +25,7 @@ using namespace std;
  *  @return The function returns 0 if the account belongs to a client, 1 if it belongs to a worker, 2 if the password is
  *  incorrect and 3 if the username isn't registered
  */
-int ih_login(const vector<User> &users, string user, string pass);
+int ih_login(const vector<User> &users, const string &user, const string &pass);
 
 /*! \brief Function that handles the sign in
  *
@@ -34,10 +34,11 @@ int ih_login(const vector<User> &users, string user, string pass);
  *  @param users: vector with all the WasteApp users
  *  @param user: New username
  *  @param pass: New password
- *  @param address: Address associated to the user
- *  @param role: Role of the new user (either c or w);
+ *  @param edge: Edge of the user's house
+ *  @param distance: Distance to the starting point of the edge
+ *  @param role: Role of the new user (either c or w)
  *  @return The function returns 0 upon success, otherwise returns another value.
  */
-int ih_signin(vector<User> &users, string user, string pass, string x, string y, char role);
+int ih_signin(vector<User> &users, const string &user, const string &pass, const string &edge, const string &distance, char role);
 
 #endif //SRC_INPUTHANDLER_H

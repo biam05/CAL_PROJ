@@ -32,8 +32,6 @@ public:
 
     Vertex getVertex (int id);
 
-
-
     void generateGraph();
 };
 

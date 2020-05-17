@@ -1,8 +1,8 @@
 #include "include/inputHandler.h"
 
-int ih_login(const vector<User> &users, string user, string pass)
+int ih_login(const vector<User> &users, const string &user, const string &pass)
 {
-    for (auto u : users){
+    for (const auto &u : users){
         if(u.getUsername() == user){
             if(u.getPassword() == pass){
                 if(u.getType() == CLIENT)
@@ -17,11 +17,11 @@ int ih_login(const vector<User> &users, string user, string pass)
     return 3;
 }
 
-int ih_signin(vector<User> &users, string user, string pass, string edge, string distance, char role)
+int ih_signin(vector<User> &users, const string &user, const string &pass, const string &edge, const string &distance, char role)
 {
     string username, password, position;
     enum userType type;
-    for(auto u : users){
+    for(const auto &u : users){
         if(u.getUsername() == user)
             return 1;
     }
