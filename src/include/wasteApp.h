@@ -4,11 +4,14 @@
 #include <vector>
 
 #include "user.h"
+#include "vertex.h"
+#include "../lib/graphviewer.h"
 
 using namespace std;
 
 class WasteApp {
     vector<User> users;
+    vector<Vertex> vertexes;
 
 public:
     WasteApp();
@@ -17,6 +20,9 @@ public:
 
     void setUsers(const vector<User> &users);
 
+    void addVertex(Vertex v);
+
+    void generateGraph();
 };
 
 
