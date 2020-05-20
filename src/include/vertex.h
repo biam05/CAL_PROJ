@@ -8,8 +8,8 @@ using namespace std;
 class Vertex {
     float distance;
     vector<int> adjacent_IDs;
-    int x;
-    int y;
+    float x;
+    float y;
     int ID;
 
 public:
@@ -19,7 +19,7 @@ public:
         x = -1;
         y = -1;
     }
-    Vertex (int ID, int x, int y) : ID(ID), x(x), y(y) {
+    Vertex (int ID, float x, float y) : ID(ID), x(x), y(y) {
         distance = 0;
     };
 
@@ -30,8 +30,8 @@ public:
     void addAdjacent(int id);
 
     int getID();
-    int getX();
-    int getY();
+    float getX();
+    float getY();
 };
 
 #endif //CAL_PROJ_VERTEXES_H

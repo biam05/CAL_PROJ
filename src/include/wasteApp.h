@@ -14,6 +14,10 @@ class WasteApp {
     vector<User> users;
     vector<Vertex> vertexes;
     vector<Edge> edges;
+    float xMin;
+    float yMin;
+    float xMax;
+    float yMax;
 
 public:
     WasteApp();
@@ -33,6 +37,10 @@ public:
     Vertex getVertex (int id);
 
     void generateGraph();
+
+    int getXVertex(float x);
+
+    int getYVertex(float y);
 };
 
 
