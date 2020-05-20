@@ -14,9 +14,13 @@ A informação é lida da pasta ```data```, sendo que esta contém uma subpasta 
 
 + *Graphviewer*
   
-### Instruções de Compilação
+## Instruções de Compilação
 
 + Compilar o projeto (normalmente compilamos no *Clion*);
 + Correr o executável.
 
+## Autores
 
++ Beatriz Costa Silva Mendes - up201806551@fe.up.pt
++ Daniel Garcia Lima Sarmento da Silva - up201806524@fe.up.pt
++ Henrique Manuel Ruivo Pereira - up201806538@fe.up.pt
