@@ -114,7 +114,7 @@
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	CHAPTER 1 - DESCRIÇÃO DO TEMA A SER IMPLEMENTADO
+%	DESCRIÇÃO DO TEMA A SER IMPLEMENTADO
 %----------------------------------------------------------------------------------------
 \chapter[Descrição][Descrição]{Descrição} \label{\thechapter}
 
@@ -146,7 +146,7 @@ A aplicação deve ser capaz de determinar a acessibilidade aos pontos de depós
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	CHAPTER 2 - IDENTIFICAÇÃO E FORMALIZAÇÃO DO PROBLEMA
+%	IDENTIFICAÇÃO E FORMALIZAÇÃO DO PROBLEMA
 %----------------------------------------------------------------------------------------
 \chapter[Identificação e formalização do problema][Identificação e formalização do problema]{Identificação e formalização do problema} \label{\thechapter}
 
@@ -354,7 +354,59 @@ $$g = \sum_{c \in C} W(c)$$
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	CHAPTER 3 - PERSPETIVA DE SOLUÇÃO
+%	ESTRUTURAS DE DADOS UTILIZADAS E CLASSES UTILIZADAS
+%----------------------------------------------------------------------------------------
+\chapter[Estruturas de Dados  e Classes Utilizadas][Estruturas de Dados e Classes Utilizadas]{Estruturas de Dados e Classes Utilizadas} \label{\thechapter}
+
+\section{Representação do Grafo}
+
+\subsection{Grafo}
+
+A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{vetor de vértices} e um \textbf{vetor de arestas}, sendo os dois últimos os utilizados na representação do grafo. O vetor é necessário para se poder realizar uma iteração sobre todo o conjunto de vértices do grafo. Possui diversos métodos para a manipulação deste, algoritmos de pesquisa e ainda um método que possibilita a visualização do grafo.
+
+\subsection{Aresta}
+
+As arestas do grafo são representadas pela classe \textbf{\textit{Edge}}, definida em \textit{edge.h}. Cada aresta é constituída por 4 parâmetros: um \textbf{peso}, um \textbf{ID}, o \textbf{vértice inicial} e o \textbf{vértice de chegada}).
+
+\subsection{Vértice}
+
+Os vértices utilizados na representação do grafo são representados pela classe \textbf{\textit{Vertex}}, definida em \textit{vertex.h}. Esta estrutura de dados possui uma \textit{distância} ao utilizador (utilizado para determinar o percurso mais curto), um \textbf{vetor} com todos os IDs das arestas que estão ligadas a este vértice, uma \textbf{coordenada horizontal}, uma \textbf{coordenada vertical} e um \textbf{ID} que o identifica.
+
+\section{Desenho dos Mapas e Itinerários}
+
+A classe \textbf{\textit{WasteApp}} é responsável também por, utilizando o \textit{GraphViewer}, representar no ecrã os mapas, itinerários e grafos resultantes dos algoritmos utilizados ao longo da aplicação.
+
+\section{WasteApp}
+
+\subsection{Serviços}
+
+A classe \textbf{\textit{WasteApp}} é também responsável pela gestão de serviços da aplicação. Deste modo, esta classe tem como atributos os 3 vetores mencionados anteriormente.
+
+\subsection{Utilizadores}
+
+Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENTE}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
+
+\subsection{Lixo a ser Depositado pelo Utilizador}
+
+Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{Request}}, definida em \textit{request.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade} e o \textbf{utilizador} que pretende fazê-lo, de modo a ser possível calcular o caminho mais curto deste até a um ponto de recolha
+
+\subsection{Casa}
+
+A classe \textbf{\textit{House}}, definida em \textit{house.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
+
+\subsection{Ponto de Recolha}
+
+A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
+
+\subsection{Pedido de Recolha de Resíduos ao Domicílio}
+
+Os pedidos de recolha de resíduos ao domicílio são representados pela classe \textbf{\textit{HouseRequest}}, definida em \textit{houserequest.h}. Esta classe é constituída por um \textbf{tipo de lixo} que vai se recolhido e uma \textbf{quantidade} de lixo a ser recolhido.
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	PERSPETIVA DE SOLUÇÃO
 %----------------------------------------------------------------------------------------
 \chapter[Perspetiva de Solução][Perspetiva de Solução]{Perspetiva de Solução} \label{\thechapter}
 A perspetiva de solução adotada tem por base a aplicação de várias fases prévias ao processamento do problema.
@@ -408,7 +460,7 @@ Este problema assemelha-se ao \textbf{\textit{Travelling Salesman Problem} (TSP)
 \newpage
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER 4 - CASOS DE UTILIZAÇÃO
+%	CASOS DE UTILIZAÇÃO
 %----------------------------------------------------------------------------------------
 \chapter[Casos de Utilização][Casos de Utilização]{Casos de Utilização} \label{\thechapter}
 
@@ -432,7 +484,7 @@ Para além disso, será possível guardar a informação de um mapa sob a forma 
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	CHAPTER 5 - CONCLUSÃO
+%	CONCLUSÃO
 %----------------------------------------------------------------------------------------
 \chapter[Conclusão][Conclusão]{Conclusão} \label{\thechapter}
 
@@ -445,7 +497,7 @@ Por fim, podemos concluir que, após a realização deste relatório, dominamos 
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	CHAPTER 6 - CONTRIBUIÇÃO
+%	CONTRIBUIÇÃO
 %----------------------------------------------------------------------------------------
 \chapter[Contribuição][Contribuição]{Contribuição} \label{\thechapter}
 
@@ -488,7 +540,7 @@ Por fim, podemos concluir que, após a realização deste relatório, dominamos 
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	CHAPTER 7 - REFERÊNCIAS BIBLIOGRÁFICAS
+%	REFERÊNCIAS BIBLIOGRÁFICAS
 %----------------------------------------------------------------------------------------
 \chapter[Referências Bibliográficas][Referências Bibliográficas]{Referências Bibliográficas} \label{\thechapter}
 Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ Parte 1}. Projeto de Concepção e Análise de Algoritmos.

@@ -37,7 +37,9 @@
 *.out
 *.synctex.gz
 *.toc
+*.bak
 
 # Folders
 .idea/
 cmake-build-debug/
+
