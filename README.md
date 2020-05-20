@@ -1,12 +1,22 @@
-# CAL_PROJ
-## WasteApp: recolha seletiva de lixo
+# WasteApp: recolha seletiva de lixo
 
-Nos seus vários esforços para reduzir o desperdício e aumentar a reciclagem, líderes da indústria, freguesias, câmaras municipais e empresas de tecnologia estão a implementar uma série de apps móveis inovadoras e informativas. Essas apps permitem que os utilizadores façam a gestão do seu lixo e reciclagem, encontrem locais próximos para a recolha, e aumentem seu conhecimento sobre onde os itens devem ser depositados para evitar o acúmulo de aterros sanitários.
+## Lista de Dependências
 
-Nas chamadas “smart cities,” pretende-se realizar tal recolha de uma forma mais inteligente. Neste trabalho pretende-se implementar a WasteApp, uma aplicação para a gestão doméstica da recolha seletiva de resíduos. A app deverá ser capaz de localizar os pontos de recolha seletiva, e os tipos de resíduos que lá se podem depositar. Considere também que os pontos de recolha estão equipados com sensores, capazes de indicar a sua capacidade e o quando ainda poderão receber de resíduos, antes da próxima recolha pelo camião especializado. A app indica ao utente os pontos de recolha mais próximos, que ainda têm capacidade para depósito de resíduo.  
+### Ficheiros de Input
 
-A app também permite a exploração de um novo modelo de negócio, em que alguns utentes poderão desejar recolher determinados tipos de resíduos para exploração financeira, disponibilizando-se para recolher resíduos ao domicílio, levando-os diretamente a uma central de reciclagem. Neste caso, a app deve oferecer a funcionalidade para a geração otimizada de itinerário de recolha, passando pelas residências dos utilizadores que desejam ter o lixo recolhido em casa.
+A informação é lida da pasta ```data```, sendo que esta contém uma subpasta - ```Porto``` - onde estão presentes os documentos necessários para a prdução do grafo no *GraphViewer* e um ficheiro ```userlogins.txt``` onde está guardada a informação sobre os utilizadores da aplicação (tanto clientes como trabalhadores)
 
-Avalie a conectividade do grafo, a fim de evitar que contentores sejam colocados em pontos inacessíveis da rede. Algumas vezes, obras nas vias públicas podem fazer com que certas zonas tornem-se inacessíveis.
+### Bibliotecas Utilizadas
 
-Considere a possibilidade de utilizar mapas reais, extraídos do OpenStreetMaps (www.openstreetmap.org) e coordenadas geográficas da central onde estão estacionados os camiões, das estações de tratamento, e dos contentores distribuídos na cidade.
++ ```#include <winsock2.h>``` - necessário uma vez que projeto foi desenvolvido em Windows.
+
+### APIs Utilizadas
+
++ *Graphviewer*
+  
+### Instruções de Compilação
+
++ Compilar o projeto (normalmente compilamos no *Clion*);
++ Correr o executável.
+
+
