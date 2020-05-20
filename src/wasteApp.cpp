@@ -73,7 +73,7 @@ int WasteApp::getXVertex(float x) {
 }
 
 int WasteApp::getYVertex(float y) {
-    return (y - yMin) * 0.1;
+    return (yMax - y) * 0.1;
 }
 
 
