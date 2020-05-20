@@ -18,10 +18,11 @@ void readUserData(WasteApp &wasteApp){
 }
 
 void readGraphData(WasteApp &wasteApp, const string &folder) {
-    int n, id, x, y, v1, v2, c1, c2;
+    int n, id, v1, v2, c1, c2;
+    float x, y;
     string temp;
 
-    string filename = folder + "/nodes.txt";
+    string filename = folder + "/nodes_x_y_porto.txt";
     ifstream nodes (filename);
 
     if(nodes.is_open()) {
@@ -33,8 +34,8 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
             c1 = temp.find(',', 0);
             id = stoi(temp.substr(1, c1 - 1));
             c2 = temp.find(',', c1 + 1);
-            x = stoi(temp.substr(c1 + 2, c2 - c1 + 2));
-            y = stoi(temp.substr(c2 + 2, temp.length() - 1));
+            x = stof(temp.substr(c1 + 2, c2 - c1 + 2));
+            y = stof(temp.substr(c2 + 2, temp.length() - 1));
             wasteApp.addVertex(Vertex(id, x, y));
         }
         nodes.close();
@@ -42,7 +43,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         cout << "Couldn't open nodes file!" << endl;
     }
 
-    filename = folder + "/edges.txt";
+    filename = folder + "/edges_porto.txt";
     ifstream edges (filename);
 
     if(edges.is_open()) {

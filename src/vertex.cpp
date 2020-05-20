@@ -12,11 +12,11 @@ int Vertex::getID() {
     return ID;
 }
 
-int Vertex::getX() {
+float Vertex::getX() {
     return x;
 }
 
-int Vertex::getY() {
+float Vertex::getY() {
     return y;
 }
 
