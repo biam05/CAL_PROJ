@@ -520,6 +520,8 @@ A aplicação \textit{WasteApp} desenvolvida pelo nosso grupo de trabalho tem co
 
 A informação relativamente aos pontos de interesse é guardada num grafo, sendo que estes são os vértices (nem todos os vértices são pontos de interesse, no entanto todos os pontos de interesse são vértices). Este grafo é gerado e apresentado no ecrã do utilizador com o auxílio da API \textit{GraphViewer}, sendo que este é atualizado ao longo do programa de forma a ser possível a visualização dos diferentes trajetos selecionados pelo utilizador e diferentes pontos de recolha disponíveis para o utilizador.
 
+{\Large ALTERAR: PODERÁ TER ERROS; REVER!!!}
+
 \newpage
 %----------------------------------------------------------------------------------------
 %	ESTRUTURAS DE DADOS UTILIZADAS E CLASSES UTILIZADAS
@@ -560,11 +562,15 @@ Quando um cliente pretende saber em que local poderá depositar os seus resíduo
 
 \subsection{Casa}
 
-A classe \textbf{\textit{House}}, definida em \textit{house.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
+A classe \textbf{\textit{House}}, definida em \textit{house.h}, 
+
+{\Large COMPLETAR AQUI COM A NOVA INFORMAÇÃO.}
 
 \subsection{Ponto de Recolha}
 
-A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
+A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, 
+
+{\Large COMPLETAR AQUI COM A NOVA INFORMAÇÃO.}
 
 \subsection{Pedido de Recolha de Resíduos ao Domicílio}
 
@@ -593,7 +599,7 @@ Os pedidos de recolha de resíduos ao domicílio são representados pela classe 
 %----------------------------------------------------------------------------------------
 \chapter[Conectividade dos Grafos Utilizados][Conectividade dos Grafos Utilizados]{Conectividade dos Grafos Utilizados} \label{\thechapter}
 
-[4] [5]
+\textsuperscript{[4]} \textsuperscript{[5]}
 
 
 
