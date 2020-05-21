@@ -104,13 +104,13 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
     while (!mutablePriorityQueue.empty()) {
         Vertex v = *mutablePriorityQueue.extractMin();
         for (int &eid : v.getAdjacentIds()) {
-            cout << "doing something!\n";
             for (Edge &e : edges) {
                 if (e.getID() == eid) {
                     for (Vertex &vert : vertexes) {
                         if (vert.getID() == e.getVf()) {
                             if (!vert.getVisited() || vert.getDistance() > v.getDistance() + e.getWeight()) {
                                 vert.setDistance(v.getDistance() + e.getWeight());
+                                vert.setVisited(true);
                                 mutablePriorityQueue.insert(&vert);
                             }
                         }

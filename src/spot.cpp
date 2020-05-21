@@ -21,5 +21,5 @@ int Spot::getVertex() {
 }
 
 bool Spot::fits(float q) {
-    return quantity + q < max_quantity;
+    return quantity + q <= max_quantity;
 }
