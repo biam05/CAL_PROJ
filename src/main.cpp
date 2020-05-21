@@ -9,13 +9,14 @@ int main() {
 
     // --- READING INFORMATION FROM FILES
     readUserData(wasteApp);
+    readSpotsData(wasteApp);
     readGraphData(wasteApp, "../data/Porto");
 
     // --- GENERATE GRAPH
     wasteApp.generateGraph();
 
     // --- START GUI
-    start_GUI(wasteApp.getUsers());
+    start_GUI(wasteApp);
 
     return 0;
 }

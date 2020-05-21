@@ -23,6 +23,13 @@ using namespace std;
  */
 void readUserData(WasteApp &wasteApp);
 
+/*! \brief Function reads the data from the spots
+ *
+ *  Saves all the information from the users
+ *  @param
+ */
+void readSpotsData(WasteApp &wasteApp);
+
 /** \brief Function reads the data from map files and generates the graph
  *
  * Saves all the information about vertexes

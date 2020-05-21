@@ -34,11 +34,10 @@ int ih_login(const vector<User> &users, const string &user, const string &pass);
  *  @param users: vector with all the WasteApp users
  *  @param user: New username
  *  @param pass: New password
- *  @param edge: Edge of the user's house
- *  @param distance: Distance to the starting point of the edge
+ *  @param vertex: Vertex of the user's house
  *  @param role: Role of the new user (either c or w)
  *  @return The function returns 0 upon success, otherwise returns another value.
  */
-int ih_signin(vector<User> &users, const string &user, const string &pass, const string &edge, const string &distance, char role);
+int ih_signin(vector<User> &users, const string &user, const string &pass, const string &vertex, char role);
 
 #endif //SRC_INPUTHANDLER_H

@@ -1,17 +1,12 @@
 #ifndef SRC_HOUSES_H
 #define SRC_HOUSES_H
 
-#include "spot.h"
-
 class House {
-    int edge;
-    float distance;
+    int vertex;
 
 public:
-    House (int e, float d) : edge(e), distance(d) {};
+    House (int v) : vertex(v) {};
 
-    int getEdge();
-
-    float getDistance();
+    int getVertex();
 };
 #endif //SRC_HOUSES_H

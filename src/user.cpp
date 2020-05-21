@@ -1,7 +1,7 @@
 #include "user.h"
 
-User::User(const string &username, const string &password, int edge, float distance, userType type): username(username),
-                                                                password(password), house(edge, distance), type(type) {}
+User::User(const string &username, const string &password, int vertex, userType type): username(username),
+                                                                        password(password), house(vertex), type(type) {}
 
 const string &User::getUsername() const {
     return username;

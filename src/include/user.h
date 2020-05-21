@@ -18,7 +18,7 @@ class User {
     enum userType type;
 
 public:
-    User(const string &username, const string &password, int edge, float distance, userType type);
+    User(const string &username, const string &password, int vertex, userType type);
 
     const string &getUsername() const;
     const string &getPassword() const;

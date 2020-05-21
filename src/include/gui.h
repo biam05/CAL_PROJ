@@ -2,9 +2,9 @@
 #define SRC_GUI_H
 
 #include <iostream>
-#include "inputHandler.h"
 #include <vector>
-#include "user.h"
+#include "inputHandler.h"
+#include "wasteApp.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ using namespace std;
  *
  *  @param users: vector with all the WasteApp users
  */
-void start_GUI(vector<User> &users);
+void start_GUI(WasteApp &wasteApp);
 
 /*! \brief Function that displays the header
  */
@@ -46,19 +46,19 @@ void gui_baseScreen();
  *
  * @param users: vector with all the WasteApp users
  */
-void gui_mainMenu(vector<User> &users);
+void gui_mainMenu(WasteApp &wasteApp);
 
 /*! \brief Function that asks the login data that is required
  *
  * @param users: vector with all the WasteApp users
  */
-void gui_login(vector<User> &users);
+void gui_login(WasteApp &wasteApp);
 
 /*! \brief Function that asks the sign in data that is required
  *
  * @param users: vector with all the WasteApp users
  */
-void gui_signin(vector<User> &users);
+void gui_signin(WasteApp &wasteApp);
 
 /*! \brief Function that shows the client menu
  *
@@ -70,7 +70,7 @@ void gui_signin(vector<User> &users);
  * @param users: vector with all the WasteApp users
  * @param username: name of the user
  */
-void gui_client(vector<User> &users, const string &username);
+void gui_client(WasteApp &wasteApp, const string &username);
 
 /*! \brief Function that shows the worker menu
  *
@@ -82,7 +82,7 @@ void gui_client(vector<User> &users, const string &username);
  * @param users: vector with all the WasteApp users
  * @param username: name of the user
  */
-void gui_worker(vector<User> &users, const string &username);
+void gui_worker(WasteApp &wasteApp, const string &username);
 
 /*! \brief Function that deals with an unknow user
  *
@@ -90,5 +90,5 @@ void gui_worker(vector<User> &users, const string &username);
  *
  * @return 2 if the user want to try again, 0 if the user wants to create an account
  */
-int gui_unknownUser(vector<User> &users);
+int gui_unknownUser(WasteApp &wasteApp);
 #endif //SRC_GUI_H

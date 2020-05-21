@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "user.h"
+#include "spot.h"
 #include "MutablePriorityQueue.h"
 #include "edge.h"
 #include "../lib/graphviewer.h"
@@ -15,6 +16,8 @@ class WasteApp {
     vector<Vertex> vertexes;
     vector<Edge> edges;
     vector<Spot> spots;
+    vector<House> houses;
+    vector<House> centrals;
     float xMin;
     float yMin;
     float xMax;
@@ -27,11 +30,19 @@ public:
 
     void setUsers(vector<User> &users);
 
+    void addAdjacent(int v, int e);
+
     void addUser(User u);
 
     void addVertex(Vertex v);
 
     void addEdge(Edge e);
+
+    void addSpot(Spot s);
+
+    void addHouse(House h);
+
+    void addCentral(House c);
 
     bool hasVertex(int id);
 

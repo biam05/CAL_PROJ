@@ -514,7 +514,7 @@ building=house
 297369597
 481392126
 479225855
-building=centre
+building=central
 4
 479183873
 420776961

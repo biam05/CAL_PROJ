@@ -76,37 +76,41 @@ int WasteApp::getYVertex(float y) {
     return (yMax - y) * 0.1;
 }
 
+void WasteApp::addAdjacent(int v, int e)
+{
+    for (Vertex &vert : vertexes)
+    {
+        if (vert.getID() == v)
+        {
+            vert.addAdjacent(e);
+        }
+    }
+}
+
 Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
     MutablePriorityQueue<Vertex> mutablePriorityQueue;
     House house = u.getHouse();
-    Edge edge;
-    Vertex vi, vf;
     for (auto &v : vertexes) {
-        v.setVisited(false);
-        v.setDistance(1000000);
-    }
-    for (auto &e : edges) {
-        if (e.getID() == house.getEdge()) {
-            edge = e;
-            break;
-        }
-    }
-    for (auto &v : vertexes) {
-        if (v.getID() == edge.getVf()) {
+        if (v.getID() == house.getVertex()) {
             v.setVisited(true);
-            v.setDistance(house.getDistance() - edge.getWeight());
+            v.setDistance(0);
             mutablePriorityQueue.insert(&v);
+        }
+        else {
+            v.setVisited(false);
+            v.setDistance(1000000);
         }
     }
     while (!mutablePriorityQueue.empty()) {
-        Vertex *v = mutablePriorityQueue.extractMin();
-        for (int &eid : v->getAdjacentIds()) {
+        Vertex v = *mutablePriorityQueue.extractMin();
+        for (int &eid : v.getAdjacentIds()) {
+            cout << "doing something!\n";
             for (Edge &e : edges) {
                 if (e.getID() == eid) {
                     for (Vertex &vert : vertexes) {
                         if (vert.getID() == e.getVf()) {
-                            if (!vert.getVisited() || vert.getDistance() > v->getDistance() + e.getWeight()) {
-                                vert.setDistance(v->getDistance() + e.getWeight());
+                            if (!vert.getVisited() || vert.getDistance() > v.getDistance() + e.getWeight()) {
+                                vert.setDistance(v.getDistance() + e.getWeight());
                                 mutablePriorityQueue.insert(&vert);
                             }
                         }
@@ -130,5 +134,17 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
         }
     }
     return closestSpot;
+}
+
+void WasteApp::addSpot(Spot s) {
+    spots.push_back(s);
+}
+
+void WasteApp::addHouse(House h) {
+    houses.push_back(h);
+}
+
+void WasteApp::addCentral(House c) {
+    centrals.push_back(c);
 }
 

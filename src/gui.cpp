@@ -1,9 +1,9 @@
 #include "include/gui.h"
 
-void start_GUI(vector<User> &users){
+void start_GUI(WasteApp &wasteApp){
     gui_header();
     gui_about();
-    gui_mainMenu(users);
+    gui_mainMenu(wasteApp);
 }
 
 void gui_header(){
@@ -24,7 +24,7 @@ void gui_baseScreen(){
     gui_header();
 }
 
-void gui_mainMenu(vector<User> &users){
+void gui_mainMenu(WasteApp &wasteApp) {
     int ans = 0;
     cout << "\n Enter an option:\n\n";
 
@@ -41,10 +41,10 @@ void gui_mainMenu(vector<User> &users){
 
     switch(ans) {
         case 1: // --- Login
-            gui_login(users);
+            gui_login(wasteApp);
             break;
         case 2: // --- Sign in
-            gui_signin(users);
+            gui_signin(wasteApp);
             break;
         case 0: // --- Exit
             cout << "Goodbye!";
@@ -54,7 +54,7 @@ void gui_mainMenu(vector<User> &users){
     }
 }
 
-void gui_login(vector<User> &users){
+void gui_login(WasteApp &wasteApp){
 
     int ret = 2;
     string user, password, address;
@@ -71,27 +71,27 @@ void gui_login(vector<User> &users){
 
         gui_baseScreen();
 
-        switch(ret = ih_login(users, user,password)){
+        switch(ret = ih_login(wasteApp.getUsers(), user,password)){
             case 0: // --- The user is a client
-                gui_client(users, user);
+                gui_client(wasteApp, user);
                 break;
             case 1: // --- The user is a "worker"
-                gui_worker(users, user);
+                gui_worker(wasteApp, user);
                 break;
             case 2: // --- The user exists, but the password is wrong
                 cout << " Wrong password!\n ";
                 break;
             default: // --- The user doesn't exist
-                ret = gui_unknownUser(users);
+                ret = gui_unknownUser(wasteApp);
                 break;
         }
     }
 }
 
-void gui_signin(vector<User> &users)
+void gui_signin(WasteApp &wasteApp)
 {
     char opt;
-    string user, password, password2, edge, distance;
+    string user, password, password2, vertex;
 
     gui_baseScreen();
     cout << "\t\t\tSign in\n\n";
@@ -110,25 +110,22 @@ void gui_signin(vector<User> &users)
         return;
     }
 
-    cout << " Edge: ";
-    getline(cin, edge);
-
-    cout << " Distance: ";
-    getline(cin, distance);
+    cout << " Vertex: ";
+    getline(cin, vertex);
 
     cout << " Do you intend to be a client or a worker (c/w)? ";
     cin >> opt;
 
-    ih_signin(users,user,password,edge,distance,opt);
+    ih_signin(wasteApp.getUsers(),user,password,vertex,opt);
 
     if(opt =='c')
-        gui_client(users, user);
+        gui_client(wasteApp, user);
     else
-        gui_worker(users, user);
+        gui_worker(wasteApp, user);
 
 }
 
-int gui_unknownUser(vector<User> &users){
+int gui_unknownUser(WasteApp &wasteApp){
     char opt;
     int ret = 0;
     cout << " Unknown username!\n Would you like to create an account? (Y/N)\n ";
@@ -139,7 +136,7 @@ int gui_unknownUser(vector<User> &users){
         case 'Y':
         case 'y':
         {
-            gui_signin(users);
+            gui_signin(wasteApp);
             break;
         }
         case 'N':
@@ -153,8 +150,17 @@ int gui_unknownUser(vector<User> &users){
     return ret;
 }
 
-void gui_client(vector<User> &users, const string &username){
+void gui_client(WasteApp &wasteApp, const string &username){
     int ans;
+    string type, quantity;
+    enum type wtype;
+    User user("","",-1,CLIENT);
+    Spot s(ORGANIC,0,0,-1);
+    for (User &u : wasteApp.getUsers())
+    {
+        if (u.getUsername() == username)
+            user = u;
+    }
     while (true) {
         gui_baseScreen();
 
@@ -176,7 +182,32 @@ void gui_client(vector<User> &users, const string &username){
 
         switch (ans) {
             case 1: // Apply Dijkstra's Algorithm to find the shortest path to the desired waste deposit spot
-                cout << "\t\t\tOption 1!";
+                cout << " What type of waste are you looking for? (Glass, Plastic, Paper, Organic) ";
+                getline(cin, type);
+                if (type == "Glass" || type == "glass")
+                {
+                    wtype = GLASS;
+                }
+                else if (type == "Plastic" || type == "plastic")
+                {
+                    wtype = PLASTIC;
+                }
+                else if (type == "Paper" || type == "paper")
+                {
+                    wtype = PAPER;
+                }
+                else
+                {
+                    wtype = ORGANIC;
+                }
+                cout << " What is the amount of waste you want to deposit? ";
+                getline(cin, quantity);
+                s = wasteApp.closestSpot(user,stof(quantity),wtype);
+                if (s.getVertex() == -1)
+                    cout << " Not found\n";
+                else
+                    cout << s.getVertex();
+                cin >> quantity;
                 break;
             case 2: // Request a worker to collect a certain type of waste to your home
                 cout << "\t\t\tOption 2!";
@@ -190,7 +221,7 @@ void gui_client(vector<User> &users, const string &username){
     }
 }
 
-void gui_worker(vector<User> &users, const string &username){
+void gui_worker(WasteApp &wasteApp, const string &username){
     int ans;
 
     while (true) {

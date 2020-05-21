@@ -17,7 +17,7 @@ int ih_login(const vector<User> &users, const string &user, const string &pass)
     return 3;
 }
 
-int ih_signin(vector<User> &users, const string &user, const string &pass, const string &edge, const string &distance, char role)
+int ih_signin(vector<User> &users, const string &user, const string &pass, const string &vertex, char role)
 {
     string username, password, position;
     enum userType type;
@@ -27,7 +27,7 @@ int ih_signin(vector<User> &users, const string &user, const string &pass, const
     }
 
     ofstream ologinfile("../data/userlogins.txt",fstream::app);
-    ologinfile << "\n" << user << "\n" << pass << "\n" << edge << "\n" << distance << "\n";
+    ologinfile << "\n" << user << "\n" << pass << "\n" << vertex << "\n";
     if (role == 'c'){
         ologinfile << "Client";
         type = CLIENT;
@@ -37,7 +37,7 @@ int ih_signin(vector<User> &users, const string &user, const string &pass, const
         type = WORKER;
     }
 
-    users.emplace_back(username, password,stoi(edge),stof(distance),type);
+    users.emplace_back(username, password, stoi(vertex), type);
 
     return 0;
 }
