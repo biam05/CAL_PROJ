@@ -76,5 +76,59 @@ int WasteApp::getYVertex(float y) {
     return (yMax - y) * 0.1;
 }
 
-
+Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
+    MutablePriorityQueue<Vertex> mutablePriorityQueue;
+    House house = u.getHouse();
+    Edge edge;
+    Vertex vi, vf;
+    for (auto &v : vertexes) {
+        v.setVisited(false);
+        v.setDistance(1000000);
+    }
+    for (auto &e : edges) {
+        if (e.getID() == house.getEdge()) {
+            edge = e;
+            break;
+        }
+    }
+    for (auto &v : vertexes) {
+        if (v.getID() == edge.getVf()) {
+            v.setVisited(true);
+            v.setDistance(house.getDistance() - edge.getWeight());
+            mutablePriorityQueue.insert(&v);
+        }
+    }
+    while (!mutablePriorityQueue.empty()) {
+        Vertex *v = mutablePriorityQueue.extractMin();
+        for (int &eid : v->getAdjacentIds()) {
+            for (Edge &e : edges) {
+                if (e.getID() == eid) {
+                    for (Vertex &vert : vertexes) {
+                        if (vert.getID() == e.getVf()) {
+                            if (!vert.getVisited() || vert.getDistance() > v->getDistance() + e.getWeight()) {
+                                vert.setDistance(v->getDistance() + e.getWeight());
+                                mutablePriorityQueue.insert(&vert);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    float min_dist = 1000000;
+    Spot closestSpot(type,-1,-1,-1);
+    for (Spot &s : spots) {
+        for (Vertex &v : vertexes) {
+            if (s.getVertex() == v.getID()) {
+                if (s.fits(q) && s.getType() == type) {
+                    if (min_dist > v.getDistance()) {
+                        min_dist = v.getDistance();
+                        closestSpot = s;
+                    }
+                }
+            }
+        }
+    }
+    return closestSpot;
+}
 

@@ -9,19 +9,17 @@ class Spot {
     enum type type;
     float quantity;
     float max_quantity;
-    int edge;
-    float distance;
+    int vertex;
 
 public:
-    Spot (enum type t, float q, float max_q, int e, float d) : type(t), quantity(q), max_quantity(max_q), edge(e), distance(d) {};
+    Spot (enum type t, float q, float max_q, int v) : type(t), quantity(q), max_quantity(max_q), vertex(v) {};
 
     void setQuantity(float q);
 
     enum type getType();
     float getQuantity();
     float getMaxQuantity();
-    int getEdge();
-    float getDistance();
+    int getVertex();
 
     bool fits(float q);
 };

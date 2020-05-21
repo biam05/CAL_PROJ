@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "user.h"
-#include "vertex.h"
+#include "MutablePriorityQueue.h"
 #include "edge.h"
 #include "../lib/graphviewer.h"
 
@@ -14,6 +14,7 @@ class WasteApp {
     vector<User> users;
     vector<Vertex> vertexes;
     vector<Edge> edges;
+    vector<Spot> spots;
     float xMin;
     float yMin;
     float xMax;
@@ -41,6 +42,8 @@ public:
     int getXVertex(float x);
 
     int getYVertex(float y);
+
+    Spot closestSpot(const User &u, float q, enum type type);
 };
 
 

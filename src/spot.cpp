@@ -16,12 +16,8 @@ float Spot::getMaxQuantity() {
     return max_quantity;
 }
 
-int Spot::getEdge() {
-    return edge;
-}
-
-float Spot::getDistance() {
-    return distance;
+int Spot::getVertex() {
+    return vertex;
 }
 
 bool Spot::fits(float q) {

@@ -30,5 +30,3 @@ void User::setType(userType type) {
 const House &User::getHouse() const {
     return house;
 }
-
-
