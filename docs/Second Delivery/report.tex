@@ -114,6 +114,18 @@
 
 \newpage
 %----------------------------------------------------------------------------------------
+%									PRIMEIRA PARTE
+%----------------------------------------------------------------------------------------
+\thispagestyle{plain}
+
+\begin{center}
+\vspace*{\stretch{1}}
+\LARGE Primeira Parte
+\vspace*{\stretch{1}}
+\end{center}
+
+\newpage
+%----------------------------------------------------------------------------------------
 %	DESCRIÇÃO DO TEMA A SER IMPLEMENTADO
 %----------------------------------------------------------------------------------------
 \chapter[Descrição][Descrição]{Descrição} \label{\thechapter}
@@ -124,7 +136,7 @@ Para além disso, a \textit{app} tem ainda por objetivo dar origem a um modelo d
 
 A aplicação deve ser capaz de determinar a acessibilidade aos pontos de depósito/recolha.\textsuperscript{[1]}
 
-\section[1ª Abordagem: Ponto de Recolha Mais Próximo][1ª Abordagem: Ponto de Recolha Mais Próximo]{1ª Abordagem: Ponto de Recolha Mais Próximo} \label{\thesection}
+\subsection[1ª Abordagem: Ponto de Recolha Mais Próximo][1ª Abordagem: Ponto de Recolha Mais Próximo]{1ª Abordagem: Ponto de Recolha Mais Próximo} \label{\thesection}
 	
 	Numa fase inicial, despreza-se a capacidade do ponto de recolha e os tipos de resíduos que poderão ser depositados neste. Deste modo, o único objetivo acaba por ser apenas determinar qual o ponto de recolha mais próximo do utilizador, calculando a rota mais curta até um qualquer ponto de recolha (partindo-se do princípio de que este se encontra acessível).
 
@@ -354,58 +366,6 @@ $$g = \sum_{c \in C} W(c)$$
 
 \newpage
 %----------------------------------------------------------------------------------------
-%	ESTRUTURAS DE DADOS UTILIZADAS E CLASSES UTILIZADAS
-%----------------------------------------------------------------------------------------
-\chapter[Estruturas de Dados  e Classes Utilizadas][Estruturas de Dados e Classes Utilizadas]{Estruturas de Dados e Classes Utilizadas} \label{\thechapter}
-
-\section{Representação do Grafo}
-
-\subsection{Grafo}
-
-A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{vetor de vértices} e um \textbf{vetor de arestas}, sendo os dois últimos os utilizados na representação do grafo. O vetor é necessário para se poder realizar uma iteração sobre todo o conjunto de vértices do grafo. Possui diversos métodos para a manipulação deste, algoritmos de pesquisa e ainda um método que possibilita a visualização do grafo.
-
-\subsection{Aresta}
-
-As arestas do grafo são representadas pela classe \textbf{\textit{Edge}}, definida em \textit{edge.h}. Cada aresta é constituída por 4 parâmetros: um \textbf{peso}, um \textbf{ID}, o \textbf{vértice inicial} e o \textbf{vértice de chegada}).
-
-\subsection{Vértice}
-
-Os vértices utilizados na representação do grafo são representados pela classe \textbf{\textit{Vertex}}, definida em \textit{vertex.h}. Esta estrutura de dados possui uma \textit{distância} ao utilizador (utilizado para determinar o percurso mais curto), um \textbf{vetor} com todos os IDs das arestas que estão ligadas a este vértice, uma \textbf{coordenada horizontal}, uma \textbf{coordenada vertical} e um \textbf{ID} que o identifica.
-
-\section{Desenho dos Mapas e Itinerários}
-
-A classe \textbf{\textit{WasteApp}} é responsável também por, utilizando o \textit{GraphViewer}, representar no ecrã os mapas, itinerários e grafos resultantes dos algoritmos utilizados ao longo da aplicação.
-
-\section{WasteApp}
-
-\subsection{Serviços}
-
-A classe \textbf{\textit{WasteApp}} é também responsável pela gestão de serviços da aplicação. Deste modo, esta classe tem como atributos os 3 vetores mencionados anteriormente.
-
-\subsection{Utilizadores}
-
-Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENTE}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
-
-\subsection{Lixo a ser Depositado pelo Utilizador}
-
-Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{Request}}, definida em \textit{request.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade} e o \textbf{utilizador} que pretende fazê-lo, de modo a ser possível calcular o caminho mais curto deste até a um ponto de recolha
-
-\subsection{Casa}
-
-A classe \textbf{\textit{House}}, definida em \textit{house.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
-
-\subsection{Ponto de Recolha}
-
-A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
-
-\subsection{Pedido de Recolha de Resíduos ao Domicílio}
-
-Os pedidos de recolha de resíduos ao domicílio são representados pela classe \textbf{\textit{HouseRequest}}, definida em \textit{houserequest.h}. Esta classe é constituída por um \textbf{tipo de lixo} que vai se recolhido e uma \textbf{quantidade} de lixo a ser recolhido.
-
-
-
-\newpage
-%----------------------------------------------------------------------------------------
 %	PERSPETIVA DE SOLUÇÃO
 %----------------------------------------------------------------------------------------
 \chapter[Perspetiva de Solução][Perspetiva de Solução]{Perspetiva de Solução} \label{\thechapter}
@@ -486,7 +446,7 @@ Para além disso, será possível guardar a informação de um mapa sob a forma 
 %----------------------------------------------------------------------------------------
 %	CONCLUSÃO
 %----------------------------------------------------------------------------------------
-\chapter[Conclusão][Conclusão]{Conclusão} \label{\thechapter}
+\chapter[Conclusão (Primeira Parte)][Conclusão (Primeira Parte)]{Conclusão (Primeira Parte)} \label{\thechapter}
 
 Após um estudo rigoroso do problema que nos foi atribuído, percebemos que existem diversas maneiras para resolver problemas deste género. Depois do aconselhamento por parte da professora das aulas práticas e dos monitores, acreditamos que obtivemos uma abordagem correta para a solução do problema de identificação dos itinerários ótimos.
 
@@ -499,7 +459,7 @@ Por fim, podemos concluir que, após a realização deste relatório, dominamos 
 %----------------------------------------------------------------------------------------
 %	CONTRIBUIÇÃO
 %----------------------------------------------------------------------------------------
-\chapter[Contribuição][Contribuição]{Contribuição} \label{\thechapter}
+\chapter[Contribuição (Primeira Parte)][Contribuição (Primeira Parte)]{Contribuição (Primeira Parte)} \label{\thechapter}
 
 \textbf{Beatriz Costa Silva Mendes} - up201806551@fe.up.pt
 
@@ -540,6 +500,136 @@ Por fim, podemos concluir que, após a realização deste relatório, dominamos 
 
 \newpage
 %----------------------------------------------------------------------------------------
+%									SEGUNDA PARTE
+%----------------------------------------------------------------------------------------
+\thispagestyle{plain}
+
+\begin{center}
+\vspace*{\stretch{1}}
+\LARGE Segunda Parte
+\vspace*{\stretch{1}}
+\end{center}
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	PRINCIPAIS CASOS DE USO IMPLEMENTADOS
+%----------------------------------------------------------------------------------------
+\chapter[Principais Casos de Uso Implementados][Principais Casos de Uso Implementados]{Principais Casos de Uso Implementados} \label{\thechapter}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	ESTRUTURAS DE DADOS UTILIZADAS E CLASSES UTILIZADAS
+%----------------------------------------------------------------------------------------
+\chapter[Estruturas de Dados  e Classes Utilizadas][Estruturas de Dados e Classes Utilizadas]{Estruturas de Dados e Classes Utilizadas} \label{\thechapter}
+
+\section{Representação do Grafo}
+
+\subsection{Grafo}
+
+A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{vetor de vértices} e um \textbf{vetor de arestas}, sendo os dois últimos os utilizados na representação do grafo. O vetor é necessário para se poder realizar uma iteração sobre todo o conjunto de vértices do grafo. Possui diversos métodos para a manipulação deste, algoritmos de pesquisa e ainda um método que possibilita a visualização do grafo.
+
+\subsection{Aresta}
+
+As arestas do grafo são representadas pela classe \textbf{\textit{Edge}}, definida em \textit{edge.h}. Cada aresta é constituída por 4 parâmetros: um \textbf{peso}, um \textbf{ID}, o \textbf{vértice inicial} e o \textbf{vértice de chegada}).
+
+\subsection{Vértice}
+
+Os vértices utilizados na representação do grafo são representados pela classe \textbf{\textit{Vertex}}, definida em \textit{vertex.h}. Esta estrutura de dados possui uma \textit{distância} ao utilizador (utilizado para determinar o percurso mais curto), um \textbf{vetor} com todos os IDs das arestas que estão ligadas a este vértice, uma \textbf{coordenada horizontal}, uma \textbf{coordenada vertical} e um \textbf{ID} que o identifica.
+
+\section{Desenho dos Mapas e Itinerários}
+
+A classe \textbf{\textit{WasteApp}} é responsável também por, utilizando o \textit{GraphViewer}, representar no ecrã os mapas, itinerários e grafos resultantes dos algoritmos utilizados ao longo da aplicação.
+
+\section{WasteApp}
+
+\subsection{Serviços}
+
+A classe \textbf{\textit{WasteApp}} é também responsável pela gestão de serviços da aplicação. Deste modo, esta classe tem como atributos os 3 vetores mencionados anteriormente.
+
+\subsection{Utilizadores}
+
+Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENTE}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
+
+\subsection{Lixo a ser Depositado pelo Utilizador}
+
+Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{Request}}, definida em \textit{request.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade} e o \textbf{utilizador} que pretende fazê-lo, de modo a ser possível calcular o caminho mais curto deste até a um ponto de recolha
+
+\subsection{Casa}
+
+A classe \textbf{\textit{House}}, definida em \textit{house.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
+
+\subsection{Ponto de Recolha}
+
+A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, COMPLETAR AQUI COM A NOVA INFORMAÇÃO.
+
+\subsection{Pedido de Recolha de Resíduos ao Domicílio}
+
+Os pedidos de recolha de resíduos ao domicílio são representados pela classe \textbf{\textit{HouseRequest}}, definida em \textit{houserequest.h}. Esta classe é constituída por um \textbf{tipo de lixo} que vai se recolhido e uma \textbf{quantidade} de lixo a ser recolhido.
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	ALGORITMOS EFETIVAMENTE IMPLEMENTADOS
+%----------------------------------------------------------------------------------------
+\chapter[Algoritmos Efetivamente Implementados][Algoritmos Efetivamente Implementados]{Algoritmos Efetivamente Implementados} \label{\thechapter}
+
+
+
+
+
+\section{Análise de complexidade dos algoritmos efetivamente implementados}
+
+\subsection{Análise teórica (temporal e espacial)}
+
+\subsection{Análise temporal empírica }
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CONECTIVIDADE DOS GRAFOS UTILIZADOS
+%----------------------------------------------------------------------------------------
+\chapter[Conectividade dos Grafos Utilizados][Conectividade dos Grafos Utilizados]{Conectividade dos Grafos Utilizados} \label{\thechapter}
+
+
+
+
+
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CONCLUSÃO GERAL
+%----------------------------------------------------------------------------------------
+\chapter[Conclusão Geral][Conclusão Geral]{Conclusão Geral} \label{\thechapter}
+
+
+
+
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	CONTRIBUIÇÃO (SEGUNDA PARTE)
+%----------------------------------------------------------------------------------------
+\chapter[Contribuição (Segunda Parte)][Contribuição (Segunda Parte)]{Contribuição (Segunda Parte)} \label{\thechapter}
+
+
+
+\newpage
+%----------------------------------------------------------------------------------------
 %	REFERÊNCIAS BIBLIOGRÁFICAS
 %----------------------------------------------------------------------------------------
 \chapter[Referências Bibliográficas][Referências Bibliográficas]{Referências Bibliográficas} \label{\thechapter}
@@ -550,6 +640,11 @@ Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ 
 [2]: Wikipedia Contributors (2019). \textit{Travelling salesman problem}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Travelling_salesman_problem}.
 
 [3]: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+
+[4] Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Conectividade}.
+
+[5] \textit{Data Structures and Algorithm Analysis in Java}, Second
+Edition, Mark Allen Weiss, Addison Wesley, 2006 
 
 Figura 1: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
 
