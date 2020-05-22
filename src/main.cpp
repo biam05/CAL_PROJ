@@ -15,7 +15,7 @@ int main() {
     readGraphData(wasteApp, "../data/Porto");
 
     // --- GENERATE GRAPH
-    wasteApp.generateGraph();
+//    wasteApp.generateGraph();
 
     // --- START GUI
     start_GUI(wasteApp);

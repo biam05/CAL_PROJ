@@ -81,7 +81,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
     float x, y;
     string temp;
 
-    string filename = folder + "/porto_strong_nodes_latlng.txt";
+    string filename = folder + "/nodes_x_y_porto.txt";
     ifstream nodes (filename);
 
     if(nodes.is_open()) {
@@ -103,7 +103,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         cout << "Couldn't open nodes file!" << endl;
     }
 
-    filename = folder + "/porto_strong_edges.txt";
+    filename = folder + "/edges_porto.txt";
     ifstream edges (filename);
 
     if(edges.is_open()) {

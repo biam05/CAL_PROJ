@@ -180,6 +180,7 @@ void gui_client(WasteApp &wasteApp, const string &username){
         switch (ans) {
             case 1: // Apply Dijkstra's Algorithm to find the shortest path to the desired waste deposit spot
                 gui_nearestSpot(wasteApp, user);
+                //wasteApp.generateGraph();
                 break;
             case 2: // Request a worker to collect a certain type of waste to your home
                 cout << "\t\t\tOption 2!";
@@ -219,7 +220,7 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
     if (s.getVertex() == -1)
         cout << " Not found\n";
     else
-        cout << endl <<  " " << s.getVertex();
+        wasteApp.generateGraph(s);
     cin >> quantity;
 
 }

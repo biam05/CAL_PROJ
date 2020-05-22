@@ -32,9 +32,9 @@ void WasteApp::addEdge(Edge e) {
     edges.push_back(e);
 }
 
-void WasteApp::generateGraph() {
-    //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
-    float scale = 10000;
+void WasteApp::generateGraph(Spot s) {
+    //Se estiver a usar ficheiros x e y, scale = 0.1; com ficheiros lat e lon, scale = 10000
+    float scale = 0.1;
 
     GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
     gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
@@ -44,8 +44,11 @@ void WasteApp::generateGraph() {
 
     int id, x, y;
 
+    Vertex v;
+
     for(auto & vertex : vertexes) {
         id = vertex.getID();
+        if (id == s.getVertex()) v = vertex;
         x = getXVertex(vertex.getX(), scale);
         y = getYVertex(vertex.getY(), scale);
         gv->addNode(id, x, y);
@@ -54,6 +57,17 @@ void WasteApp::generateGraph() {
     for (auto & edge : edges) {
         gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
     }
+    gv->rearrange();
+
+    Edge e;
+
+    while(v.getPrevEdge() != -1) {
+        e = getEdge(v.getPrevEdge());
+        gv->setEdgeColor(e.getID(), "red");
+        gv->setEdgeThickness(e.getID(), 3);
+        v = getVertex(e.getVi());
+    }
+
     gv->rearrange();
 }
 
@@ -152,5 +166,12 @@ void WasteApp::addHouse(House h) {
 
 void WasteApp::addCentral(House c) {
     centrals.push_back(c);
+}
+
+Edge WasteApp::getEdge(int id) {
+    for (Edge e : edges) {
+        if (id == e.getID()) return e;
+    }
+    return Edge(1, -1, -1, -1);
 }
 
