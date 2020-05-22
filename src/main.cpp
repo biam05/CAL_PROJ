@@ -7,6 +7,8 @@ using namespace std;
 int main() {
     WasteApp wasteApp;
 
+    cout << "\n\n\n\n\n\n\n\t\t\tLOADING GRAPH...";
+
     // --- READING INFORMATION FROM FILES
     readUserData(wasteApp);
     readSpotsData(wasteApp);
