@@ -1,7 +1,7 @@
 #include "include/gui.h"
 
 void start_GUI(WasteApp &wasteApp){
-    gui_header();
+    gui_baseScreen();
     gui_about();
     gui_mainMenu(wasteApp);
 }
@@ -151,11 +151,10 @@ int gui_unknownUser(WasteApp &wasteApp){
 }
 
 void gui_client(WasteApp &wasteApp, const string &username){
-    int ans;
-    string type, quantity;
-    enum type wtype;
+
     User user("","",-1,CLIENT);
-    Spot s(ORGANIC,0,0,-1);
+    int ans;
+
     for (User &u : wasteApp.getUsers())
     {
         if (u.getUsername() == username)
@@ -169,8 +168,8 @@ void gui_client(WasteApp &wasteApp, const string &username){
 
         cout << "\n Enter an option:\n\n";
 
-        cout << " [1] Find your nearest waste deposit spot\n";
-        cout << " [2] Request home collection\n";
+        cout << " [1] Find Your Nearest Waste Deposit Spot\n";
+        cout << " [2] Request Home Collection\n";
         cout << " [0] Exit\n";
 
         cout << "\n Option: ";
@@ -178,36 +177,9 @@ void gui_client(WasteApp &wasteApp, const string &username){
         cin >> ans;
         cin.ignore(1000, '\n');
 
-        gui_baseScreen();
-
         switch (ans) {
             case 1: // Apply Dijkstra's Algorithm to find the shortest path to the desired waste deposit spot
-                cout << " What type of waste are you looking for? (Glass, Plastic, Paper, Organic) ";
-                getline(cin, type);
-                if (type == "Glass" || type == "glass")
-                {
-                    wtype = GLASS;
-                }
-                else if (type == "Plastic" || type == "plastic")
-                {
-                    wtype = PLASTIC;
-                }
-                else if (type == "Paper" || type == "paper")
-                {
-                    wtype = PAPER;
-                }
-                else
-                {
-                    wtype = ORGANIC;
-                }
-                cout << " What is the amount of waste you want to deposit? ";
-                getline(cin, quantity);
-                s = wasteApp.closestSpot(user,stof(quantity),wtype);
-                if (s.getVertex() == -1)
-                    cout << " Not found\n";
-                else
-                    cout << s.getVertex();
-                cin >> quantity;
+                gui_nearestSpot(wasteApp, user);
                 break;
             case 2: // Request a worker to collect a certain type of waste to your home
                 cout << "\t\t\tOption 2!";
@@ -219,6 +191,37 @@ void gui_client(WasteApp &wasteApp, const string &username){
                 break;
         }
     }
+}
+
+void gui_nearestSpot(WasteApp &wasteApp, User &user){
+
+    string type, quantity;
+    enum type wtype;
+    Spot s(ORGANIC,0,0,-1);
+
+    gui_baseScreen();
+
+    cout << "\t\tClient Menu - Nearest Spot\n ";
+
+    cout << endl << " What type of waste are you looking for? (Glass, Plastic, Paper, Organic) ";
+    getline(cin, type);
+
+    if (type == "Glass" || type == "glass")             wtype = GLASS;
+    else if (type == "Plastic" || type == "plastic")    wtype = PLASTIC;
+    else if (type == "Paper" || type == "paper")        wtype = PAPER;
+    else                                                wtype = ORGANIC;
+
+    cout << " What is the amount of waste you want to deposit? ";
+    getline(cin, quantity);
+
+    s = wasteApp.closestSpot(user,stof(quantity),wtype);
+
+    if (s.getVertex() == -1)
+        cout << " Not found\n";
+    else
+        cout << endl <<  " " << s.getVertex();
+    cin >> quantity;
+
 }
 
 void gui_worker(WasteApp &wasteApp, const string &username){
