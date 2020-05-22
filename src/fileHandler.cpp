@@ -119,7 +119,6 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
             if (wasteApp.hasVertex(v1) && wasteApp.hasVertex(v2)) {
                 wasteApp.addEdge(Edge(sqrt(pow((wasteApp.getVertex(v1).getX() - wasteApp.getVertex(v2).getX()),2) + pow((wasteApp.getVertex(v1).getY() - wasteApp.getVertex(v2).getY()),2)), i, v1, v2));
                 wasteApp.addAdjacent(v1,i);
-                wasteApp.addAdjacent(v2,i);
             }
             else cout << "Couldn't add edge: " << v1 << " -> " << v2 << endl;
         }

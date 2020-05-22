@@ -14,9 +14,6 @@ int main() {
     readSpotsData(wasteApp);
     readGraphData(wasteApp, "../data/GridGraphs/4x4");
 
-    // --- GENERATE GRAPH
-//    wasteApp.generateGraph();
-
     // --- START GUI
     start_GUI(wasteApp);
 

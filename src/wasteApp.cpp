@@ -32,7 +32,7 @@ void WasteApp::addEdge(Edge e) {
     edges.push_back(e);
 }
 
-void WasteApp::generateGraph() {
+void WasteApp::generateGraph(Spot s) {
     //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
     float scale = 1;
 
