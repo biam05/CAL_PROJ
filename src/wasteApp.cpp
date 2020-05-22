@@ -33,8 +33,11 @@ void WasteApp::addEdge(Edge e) {
 }
 
 void WasteApp::generateGraph() {
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * 0.1, (yMax - yMin) * 0.1, false);
-    gv->createWindow((xMax-xMin) * 0.1, (yMax - yMin) * 0.1);
+    //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
+    float scale = 10000;
+
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
+    gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
@@ -43,8 +46,8 @@ void WasteApp::generateGraph() {
 
     for(auto & vertex : vertexes) {
         id = vertex.getID();
-        x = getXVertex(vertex.getX());
-        y = getYVertex(vertex.getY());
+        x = getXVertex(vertex.getX(), scale);
+        y = getYVertex(vertex.getY(), scale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
@@ -68,12 +71,12 @@ Vertex WasteApp::getVertex(int id) {
     return Vertex();
 }
 
-int WasteApp::getXVertex(float x) {
-    return (x - xMin) * 0.1;
+int WasteApp::getXVertex(float x, float s) {
+    return (x - xMin) * s;
 }
 
-int WasteApp::getYVertex(float y) {
-    return (yMax - y) * 0.1;
+int WasteApp::getYVertex(float y, float s) {
+    return (yMax -y) * s;
 }
 
 void WasteApp::addAdjacent(int v, int e)

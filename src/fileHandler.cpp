@@ -81,7 +81,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
     float x, y;
     string temp;
 
-    string filename = folder + "/nodes_x_y_porto.txt";
+    string filename = folder + "/nodes_lat_lon_porto.txt";
     ifstream nodes (filename);
 
     if(nodes.is_open()) {
@@ -93,8 +93,10 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
             c1 = temp.find(',', 0);
             id = stoi(temp.substr(1, c1 - 1));
             c2 = temp.find(',', c1 + 1);
-            x = stof(temp.substr(c1 + 2, c2 - c1 + 2));
-            y = stof(temp.substr(c2 + 2, temp.length() - 1));
+
+            //Se estiver a usar ficheiros x e y, ler primeiro x e dps y; com ficheiros lat e lon, primeiro y e dps x
+            y = stof(temp.substr(c1 + 2, c2 - c1 + 2));
+            x = stof(temp.substr(c2 + 2, temp.length() - 1));
             wasteApp.addVertex(Vertex(id, x, y));
         }
         nodes.close();
