@@ -220,8 +220,9 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
         cout << " Not found\n";
     else
         cout << endl <<  " " << s.getVertex();
-    cin >> quantity;
 
+    // To avoid going back to the menu, waits here for an input!
+    cin >> quantity;
 }
 
 void gui_worker(WasteApp &wasteApp, const string &username){

@@ -12,7 +12,7 @@ int main() {
     // --- READING INFORMATION FROM FILES
     readUserData(wasteApp);
     readSpotsData(wasteApp);
-    readGraphData(wasteApp, "../data/Porto");
+    readGraphData(wasteApp, "../data/GridGraphs/4x4");
 
     // --- GENERATE GRAPH
     wasteApp.generateGraph();

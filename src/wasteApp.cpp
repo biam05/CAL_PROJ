@@ -34,7 +34,7 @@ void WasteApp::addEdge(Edge e) {
 
 void WasteApp::generateGraph() {
     //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
-    float scale = 10000;
+    float scale = 1;
 
     GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
     gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
@@ -50,6 +50,7 @@ void WasteApp::generateGraph() {
         y = getYVertex(vertex.getY(), scale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
+        gv->setVertexLabel(id, to_string(id));
     }
     for (auto & edge : edges) {
         gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
@@ -97,13 +98,11 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
         if (v.getID() == house.getVertex()) {
             v.setVisited(true);
             v.setDistance(0);
-            v.setPrevEdge(-1);
             mutablePriorityQueue.insert(&v);
         }
         else {
             v.setVisited(false);
             v.setDistance(1000000);
-            v.setPrevEdge(-1);
         }
     }
     while (!mutablePriorityQueue.empty()) {

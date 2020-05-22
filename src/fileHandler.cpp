@@ -1,3 +1,4 @@
+#include <cmath>
 #include "fileHandler.h"
 
 void readUserData(WasteApp &wasteApp){
@@ -20,7 +21,7 @@ void readSpotsData(WasteApp &wasteApp){
     string num_tag_string, tag, num_spots_string, vertex;
     int num_tags, num_spots;
     enum type tGlass = GLASS, tPaper = PAPER, tPlastic = PLASTIC, tOrganic = ORGANIC;
-    ifstream spotFile("../data/Porto/t02_tags_porto.txt");
+    ifstream spotFile("../data/GridGraphs/4x4/tags.txt");
     getline(spotFile, num_tag_string);
     num_tags = stoi(num_tag_string);
     while (num_tags != 0) {
@@ -81,7 +82,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
     float x, y;
     string temp;
 
-    string filename = folder + "/porto_strong_nodes_latlng.txt";
+    string filename = folder + "/nodes.txt";
     ifstream nodes (filename);
 
     if(nodes.is_open()) {
@@ -103,7 +104,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         cout << "Couldn't open nodes file!" << endl;
     }
 
-    filename = folder + "/porto_strong_edges.txt";
+    filename = folder + "/edges.txt";
     ifstream edges (filename);
 
     if(edges.is_open()) {
@@ -116,7 +117,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
             v1 = stoi(temp.substr(1, c1-1));
             v2 = stoi(temp.substr(c1 + 1, temp.length()-1));
             if (wasteApp.hasVertex(v1) && wasteApp.hasVertex(v2)) {
-                wasteApp.addEdge(Edge(1, i, v1, v2));
+                wasteApp.addEdge(Edge(sqrt(pow((wasteApp.getVertex(v1).getX() - wasteApp.getVertex(v2).getX()),2) + pow((wasteApp.getVertex(v1).getY() - wasteApp.getVertex(v2).getY()),2)), i, v1, v2));
                 wasteApp.addAdjacent(v1,i);
                 wasteApp.addAdjacent(v2,i);
             }
