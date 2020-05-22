@@ -12,7 +12,7 @@ int main() {
     // --- READING INFORMATION FROM FILES
     readUserData(wasteApp);
     readSpotsData(wasteApp);
-    readGraphData(wasteApp, "../data/GridGraphs/4x4");
+    readGraphData(wasteApp, "../data/Porto");
 
     // --- START GUI
     start_GUI(wasteApp);

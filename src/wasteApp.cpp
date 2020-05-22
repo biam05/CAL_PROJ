@@ -34,7 +34,7 @@ void WasteApp::addEdge(Edge e) {
 
 void WasteApp::generateGraph(Spot s) {
     //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
-    float scale = 1;
+    float scale = 0.1;
 
     GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
     gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
@@ -53,7 +53,6 @@ void WasteApp::generateGraph(Spot s) {
         y = getYVertex(vertex.getY(), scale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
-        gv->setVertexLabel(id, to_string(id));
     }
     for (auto & edge : edges) {
         gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
@@ -62,12 +61,18 @@ void WasteApp::generateGraph(Spot s) {
 
     Edge e;
 
+    gv->setVertexSize(v.getID(), 10);
+    gv->setVertexColor(v.getID(), "blue");
+
     while(v.getPrevEdge() != -1) {
         e = getEdge(v.getPrevEdge());
         gv->setEdgeColor(e.getID(), "red");
         gv->setEdgeThickness(e.getID(), 3);
         v = getVertex(e.getVi());
     }
+
+    gv->setVertexSize(v.getID(), 10);
+    gv->setVertexColor(v.getID(), "green");
 
     gv->rearrange();
 }
