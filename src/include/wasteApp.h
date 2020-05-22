@@ -50,9 +50,9 @@ public:
 
     void generateGraph();
 
-    int getXVertex(float x);
+    int getXVertex(float x, float s);
 
-    int getYVertex(float y);
+    int getYVertex(float y, float s);
 
     Spot closestSpot(const User &u, float q, enum type type);
 };
