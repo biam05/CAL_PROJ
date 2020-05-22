@@ -97,11 +97,13 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
         if (v.getID() == house.getVertex()) {
             v.setVisited(true);
             v.setDistance(0);
+            v.setPrevEdge(-1);
             mutablePriorityQueue.insert(&v);
         }
         else {
             v.setVisited(false);
             v.setDistance(1000000);
+            v.setPrevEdge(-1);
         }
     }
     while (!mutablePriorityQueue.empty()) {
@@ -114,6 +116,7 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
                             if (!vert.getVisited() || vert.getDistance() > v.getDistance() + e.getWeight()) {
                                 vert.setDistance(v.getDistance() + e.getWeight());
                                 vert.setVisited(true);
+                                vert.setPrevEdge(e.getID());
                                 mutablePriorityQueue.insert(&vert);
                             }
                         }

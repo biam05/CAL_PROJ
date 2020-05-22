@@ -39,3 +39,12 @@ float Vertex::getDistance() {
 bool Vertex::operator<(Vertex &vertex) const {
     return distance < vertex.distance;
 }
+
+int Vertex::getPrevEdge() {
+    return prevEdge;
+}
+
+void Vertex::setPrevEdge(int e) {
+    prevEdge = e;
+
+}

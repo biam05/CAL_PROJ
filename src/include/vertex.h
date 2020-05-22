@@ -12,9 +12,10 @@ class Vertex {
     float x;
     float y;
     int ID;
+    int prevEdge;
 
 public:
-    int queueIndex = 0; 		// required by MutablePriorityQueue4
+    int queueIndex = 0; 		// required by MutablePriorityQueue
 
     Vertex () {
         visited = false;
@@ -22,15 +23,19 @@ public:
         ID = -1;
         x = -1;
         y = -1;
+        prevEdge = -1;
     }
     Vertex (int ID, float x, float y) : ID(ID), x(x), y(y) {
         distance = 0;
         visited = false;
+        prevEdge = -1;
     };
 
     void setDistance (float d);
 
     void setVisited(bool v);
+
+    void setPrevEdge(int e);
 
     vector<int> getAdjacentIds();
 
@@ -41,6 +46,7 @@ public:
     float getDistance();
     float getX();
     float getY();
+    int getPrevEdge();
 
     bool operator<(Vertex & vertex) const;
 };
