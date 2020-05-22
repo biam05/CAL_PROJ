@@ -183,7 +183,7 @@ void gui_client(WasteApp &wasteApp, const string &username){
                 //wasteApp.generateGraph();
                 break;
             case 2: // Request a worker to collect a certain type of waste to your home
-                cout << "\t\t\tOption 2!";
+                gui_homeCollection(wasteApp, username);
                 break;
             case 0: // Exit
                 cout << "\t\t\tGoodbye!";
@@ -228,8 +228,25 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 		cout << endl << " " << s.getVertex();
 		wasteApp.generateGraph(s);
 	}
+}
 
-    
+void gui_homeCollection(WasteApp &wasteApp, const string &username){
+
+    string type, quantity;
+
+    gui_baseScreen();
+
+    cout << "\t\tClient Menu - Home Collection\n ";
+
+    cout << endl << " What type of waste you want to have collected at your house? (Glass, Plastic, Paper, Organic) ";
+    getline(cin, type);
+
+    cout << " What is the amount of waste you want to have collected? ";
+    getline(cin, quantity);
+
+    ih_request(wasteApp.getUsers(), username, type, quantity);
+
+    cout << " Request Complete!";
 }
 
 void gui_worker(WasteApp &wasteApp, const string &username){

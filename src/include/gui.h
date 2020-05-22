@@ -74,6 +74,8 @@ void gui_client(WasteApp &wasteApp, const string &username);
 
 void gui_nearestSpot(WasteApp &wasteApp, User &user);
 
+void gui_homeCollection(WasteApp &wasteApp, const string &username);
+
 /*! \brief Function that shows the worker menu
  *
  * Thconst e work&er menu has 3 options:
