@@ -12,6 +12,7 @@ int main() {
     // --- READING INFORMATION FROM FILES
     readUserData(wasteApp);
     readSpotsData(wasteApp);
+    readRequestData(wasteApp);
     readGraphData(wasteApp, "../data/Porto");
 
     // --- START GUI

@@ -30,6 +30,8 @@ void readUserData(WasteApp &wasteApp);
  */
 void readSpotsData(WasteApp &wasteApp);
 
+void readRequestData(WasteApp &wasteapp);
+
 /** \brief Function reads the data from map files and generates the graph
  *
  * Saves all the information about vertexes

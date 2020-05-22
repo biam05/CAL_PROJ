@@ -30,3 +30,11 @@ void User::setType(userType type) {
 const House &User::getHouse() const {
     return house;
 }
+
+const vector<HouseRequest> &User::getRequests() const {
+    return requests;
+}
+
+void User::setRequests(const vector<HouseRequest> &requests) {
+    User::requests = requests;
+}

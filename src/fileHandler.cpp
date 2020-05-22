@@ -17,6 +17,29 @@ void readUserData(WasteApp &wasteApp){
     }
 }
 
+void readRequestData(WasteApp &wasteapp){
+    string username, type, quantity;
+    auto tGlass = GLASS, tPaper = PAPER, tPlastic = PLASTIC, tOrganic = ORGANIC;
+    ifstream requestFile("../data/requests.txt");
+    while(getline(requestFile, username))
+    {
+        getline(requestFile, type);
+        getline(requestFile, quantity);
+        for(User &u : wasteapp.getUsers())
+        {
+            if(u.getUsername() == username)
+            {
+                vector<HouseRequest> r = u.getRequests();
+                if (type == "Organic")       r.push_back(HouseRequest(tOrganic, stoi(quantity)));
+                else if(type == "Glass")     r.push_back(HouseRequest(tGlass, stoi(quantity)));
+                else if(type == "Paper")     r.push_back(HouseRequest(tPaper, stoi(quantity)));
+                else if(type == "Plastic")   r.push_back(HouseRequest(tPlastic, stoi(quantity)));
+                u.setRequests(r);
+            }
+        }
+    }
+}
+
 void readSpotsData(WasteApp &wasteApp){
     string num_tag_string, tag, num_spots_string, vertex;
     int num_tags, num_spots;
