@@ -112,14 +112,16 @@ void WasteApp::generatePath(Vertex next) {
     while (next.getPrevVert() != -1)
     {
         dijkstra(next.getPrevVert());
+        // Não sei pôr as casas a amarelo, tentei isso mas não funcionou:
+        gv->setVertexSize(next.getPrevVert(), 10);
+        gv->setVertexColor(next.getPrevVert(), "yellow");
         while(next.getPrevEdge() != -1) {
             e = getEdge(next.getPrevEdge());
             gv->setEdgeColor(e.getID(), "red");
             gv->setEdgeThickness(e.getID(), 3);
             next = getVertex(e.getVi());
         }
-        gv->setVertexSize(next.getID(), 10);
-        gv->setVertexColor(next.getID(), "yellow");
+
     }
 
     gv->setVertexSize(next.getID(), 10);
