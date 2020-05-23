@@ -61,6 +61,8 @@ public:
 
     void setGraphScale(float g);
 
+    const vector<House> &getHouses() const;
+
     Spot closestSpot(const User &u, float q, enum type type);
 
     void homeCollection(const User &u, type type);

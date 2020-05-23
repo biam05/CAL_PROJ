@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include "wasteApp.h"
 #include "user.h"
 #include "spot.h"
 
@@ -39,7 +40,7 @@ int ih_login(const vector<User> &users, const string &user, const string &pass);
  *  @param role: Role of the new user (either c or w)
  *  @return The function returns 0 upon success, otherwise returns another value.
  */
-int ih_signin(vector<User> &users, const string &user, const string &pass, const string &vertex, char role);
+int ih_signin(WasteApp &wasteApp, const string &user, const string &pass, const string &vertex, char role);
 
 int ih_request(vector<User>&users, const string &user, const string &type, const string &quantity);
 

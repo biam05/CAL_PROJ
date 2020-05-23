@@ -92,6 +92,8 @@ void gui_login(WasteApp &wasteApp){
 void gui_signin(WasteApp &wasteApp)
 {
     char opt;
+    bool isHouse = false;
+    vector<House> h = wasteApp.getHouses();
     string user, password, password2, vertex;
 
     gui_baseScreen();
@@ -111,13 +113,24 @@ void gui_signin(WasteApp &wasteApp)
         return;
     }
 
-    cout << " Vertex: ";
-    getline(cin, vertex);
+    while(!isHouse){
+        cout << " Vertex (check the tags.txt file and choose and vertex that has the tag 'building=house'): ";
+        getline(cin, vertex);
+
+        for(House house : h){
+            if(house.getVertex() == stoi(vertex)){
+                isHouse = true;
+                break;
+            }
+        }
+        if(!isHouse) cout << "\n That's not a house... try again!\n";
+    }
+
 
     cout << " Do you intend to be a client or a worker (c/w)? ";
     cin >> opt;
 
-    ih_signin(wasteApp.getUsers(),user,password,vertex,opt);
+    ih_signin(wasteApp,user,password,vertex,opt);
 
     if(opt =='c')
         gui_client(wasteApp, user);
@@ -208,7 +221,7 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
     cout << endl << " What type of waste are you looking for? (Glass, Plastic, Paper, Organic) ";
     getline(cin, type);
 
-    if (type == "Glass" || type == "glass")             wtype = GLASS;
+    if      (type == "Glass" || type == "glass")        wtype = GLASS;
     else if (type == "Plastic" || type == "plastic")    wtype = PLASTIC;
     else if (type == "Paper" || type == "paper")        wtype = PAPER;
     else                                                wtype = ORGANIC;
@@ -221,7 +234,7 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 	if (s.getVertex() == -1)
 	{
 		cout << " Not found\n";
-		// To avoid going back to the menu, waits here for an input!
+		cout << " Type any key to go back to your menu.";
 		cin >> quantity;
 	}
 	else
@@ -268,7 +281,6 @@ void gui_worker(WasteApp &wasteApp, const string &username){
         cout << "\n Enter an option:\n\n";
 
         cout << " [1] Collect Waste from Houses in the Neighbourhood\n";
-        cout << " [2] ?\n";
         cout << " [0] Exit\n";
 
         cout << "\n Option: ";
@@ -281,9 +293,6 @@ void gui_worker(WasteApp &wasteApp, const string &username){
         switch (ans) {
             case 1: // Collect from Houses --- Held-Karp
                 gui_collectFromHouses(wasteApp,user);
-                break;
-            case 2: // --- ?
-                cout << "\t\t\tOption 2!";
                 break;
             case 0: // --- Exit
                 cout << "\t\t\tGoodbye!";
@@ -317,6 +326,4 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
     updateRequests(wasteApp);
 
     cout << " Collection Complete!";
-
-
 }
