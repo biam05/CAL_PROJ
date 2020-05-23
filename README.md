@@ -4,7 +4,12 @@
 
 ### Ficheiros de Input
 
-A informação é lida da pasta ```data```, sendo que esta contém uma subpasta - ```Porto``` - onde estão presentes os documentos necessários para a prdução do grafo no *GraphViewer* e um ficheiro ```userlogins.txt``` onde está guardada a informação sobre os utilizadores da aplicação (tanto clientes como trabalhadores)
+A informação é lida da pasta ```data```, sendo que esta contém duas subpastas - ```Porto``` e ```GridGraphs``` - onde estão presentes os documentos necessários para a produção do grafo no *GraphViewer*, sendo estes:
+
++ ```edges.txt``` - ficheiro com informação sobre as arestas;
++ ```nodes.txt``` - ficheiro com informação sobre os vértices;
++ ```tags.txt``` - ficheiro com informação sobre o que cada vértice representa;
++ ```userlogins.txt``` - ficheiro com informação sobre cada utilizador da aplicação (*username*, *password*, vértice onde tem a sua casa e tipo de utilizador (cliente ou trabalhador)).
 
 ### Bibliotecas Utilizadas
 
