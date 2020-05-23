@@ -16,7 +16,8 @@ void gui_header(){
 }
 
 void gui_about(){
-    cout << "\n INSERT SHORT DESCRIPTION HERE \n";
+    cout << "\n 'Reuse, Reduce and Recycle' with the help of WasteApp!\n "
+            "Make your life greener and easier at the same time\n";
 }
 
 void gui_baseScreen(){
@@ -313,6 +314,9 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
 
     wasteApp.homeCollection(user, wtype);
 
+    updateRequests(wasteApp);
+
     cout << " Collection Complete!";
+
 
 }

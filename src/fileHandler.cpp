@@ -150,3 +150,28 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         cout << "Couldn't open edges file!" << endl;
     }
 }
+
+void updateRequests(WasteApp &wasteApp){
+    string type;
+
+    ofstream requestFile("../data/requests.txt");
+
+    for(int j = 0; j < wasteApp.getUsers().size(); j++)
+    {
+        User u = wasteApp.getUsers()[j];
+        vector<HouseRequest> r = u.getRequests();
+
+        for(int i = 0; i < r.size(); i++)
+        {
+            if     (r[i].getType() == ORGANIC)  type = "Organic";
+            else if(r[i].getType() == GLASS)    type = "Glass";
+            else if(r[i].getType() == PAPER)    type = "Paper";
+            else                                type = "Plastic";
+
+            if(i != r.size()-1 || j != wasteApp.getUsers().size())
+                requestFile << u.getUsername() << endl << type << endl << r[i].getQuantity() << endl;
+            else
+                requestFile << endl << u.getUsername() << endl << type << endl << r[i].getQuantity();
+        }
+    }
+}
