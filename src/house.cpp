@@ -1,5 +1,5 @@
 #include "house.h"
 
-int House::getVertex() {
+int House::getVertex() const {
     return vertex;
 }

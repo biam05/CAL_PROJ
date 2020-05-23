@@ -8,7 +8,7 @@ vector<int> Vertex::getAdjacentIds() {
     return adjacent_IDs;
 }
 
-int Vertex::getID() {
+int Vertex::getID() const {
     return ID;
 }
 

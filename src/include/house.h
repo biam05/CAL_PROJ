@@ -7,6 +7,6 @@ class House {
 public:
     House (int v) : vertex(v) {};
 
-    int getVertex();
+    int getVertex() const;
 };
 #endif //SRC_HOUSES_H

@@ -41,7 +41,7 @@ public:
 
     void addAdjacent(int id);
 
-    int getID();
+    int getID() const;
     bool getVisited();
     float getDistance();
     float getX();

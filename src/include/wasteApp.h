@@ -57,6 +57,14 @@ public:
     int getYVertex(float y, float s);
 
     Spot closestSpot(const User &u, float q, enum type type);
+
+    vector<Vertex> homeCollection(const User &u, type type);
+
+    void dijkstra(const int &vID);
+
+    vector<Vertex> held_karp(const User &w, vector<Vertex> housesToCollect);
+
+    vector<vector<Vertex>> subsets(const vector<Vertex>& set);
 };
 
 
