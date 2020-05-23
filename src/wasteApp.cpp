@@ -210,6 +210,12 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
             }
         }
     }
+    for (Spot &s : spots) {
+        if (sp.getVertex() == s.getVertex() && sp.getType() == s.getType()) {
+            s.setQuantity(s.getQuantity() + q);
+            break;
+        }
+    }
     return sp;
 }
 
