@@ -516,11 +516,72 @@ Por fim, podemos concluir que, após a realização deste relatório, dominamos 
 %----------------------------------------------------------------------------------------
 \chapter[Principais Casos de Uso Implementados][Principais Casos de Uso Implementados]{Principais Casos de Uso Implementados} \label{\thechapter}
 
-A aplicação \textit{WasteApp} desenvolvida pelo nosso grupo de trabalho tem como base uma interface com a qual o utilizador poderá interagir. Inicialmente, o utilizador terá selecionar se pretende fazer \textit{login} na sua conta ou criar uma conta nova. Estas opções são necessárias uma vez que o utilizador poderá ter um utilizador "normal" que tem como objetivo saber qual o ponto de recolha mais próximo de sua casa ou um utilizador que pretende ir a casa dos restantes recolher os resíduos, logo terão de ser apresentados menus diferentes com funcionalidades igualmente diferentes.
+A aplicação \textit{WasteApp} desenvolvida pelo nosso grupo de trabalho tem como base uma interface com a qual o utilizador poderá interagir. 
 
-A informação relativamente aos pontos de interesse é guardada num grafo, sendo que estes são os vértices (nem todos os vértices são pontos de interesse, no entanto todos os pontos de interesse são vértices). Este grafo é gerado e apresentado no ecrã do utilizador com o auxílio da API \textit{GraphViewer}, sendo que este é atualizado ao longo do programa de forma a ser possível a visualização dos diferentes trajetos selecionados pelo utilizador e diferentes pontos de recolha disponíveis para o utilizador.
+Inicialmente, o utilizador terá de selecionar que mapa pretende ler e os ficheiros que terão de ser analisados. Existem duas opções: mapa \textbf{4x4} (utilizado para testar os algoritmos implementados) e o mapa \textbf{Porto}. Cada um destes está guardado dentro da pasta \textit{data} e tem um ficheiros de nós, \textit{nodes.txt}, de arestas \textit{edges.txt} e de utilizadores da aplicação, \textit{userlogins.txt}. O ficheiro dos pedidos de cada cliente está guardado na pasta \textit{data} e é comum aos dois mapas. 
 
-{\Large ALTERAR: PODERÁ TER ERROS; REVER!!!}
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.8]{wasteapp_1stmenu.png}}
+  \caption{Primeiro Menu da aplicação \textit{WasteApp}.}
+\end{figure}
+
+Posteriormente, o utilizador terá selecionar se pretende fazer \textit{login} na sua conta ou criar uma conta nova. Estas opções são necessárias uma vez que o utilizador poderá ser um utilizador "normal" que tem como objetivo saber qual o ponto de recolha mais próximo de sua casa ou um utilizador que pretende ir a casa dos restantes recolher os resíduos, logo terão de ser apresentados menus diferentes com funcionalidades igualmente diferentes.
+
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.8]{wasteapp_2ndmenu.png}}
+  \caption{Segundo Menu: \textit{Login} ou Sign In.}
+\end{figure}
+
+Ao selecionar a opção de \textbf{\textit{login}}, o utilizador terá de escrever o seu \textit{username} e a sua \textit{password}. Poderão acontecer três situações distintas:
+
+\begin{itemize}
+	\item Se for encontrado no ficheiro de \textit{users} o utilizador com esse \textit{username} e \textit{password}, ele será redirecionado para a sua página (ou de cliente ou de trabalhador);
+	\item Se for encontrado um utilizador com esse \textit{username} mas a \textit{password} não for igual à que está guardada, terá a oportunidade de digitar novamente os seus dados;
+	\item Se não for encontrado um utilizador com o \textit{username} dado, este poderá tentar outra vez colocar os dados ou poderá criar uma conta nova (será redirecionado para a página de \textit{sign in}).
+\end{itemize}
+
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.8]{wasteapp_login.png}}
+  \caption{Exemplo de um \textit{Login}.}
+\end{figure}
+
+Por outro lado, se o utilizador selecionar a opção de \textit{\textbf{sign in}}, este terá de dar algumas das suas credenciais: o \textbf{\textit{username}} que pretende utilizar na aplicação, uma \textbf{\textit{password}}, um \textbf{vértice} que será a sua morada e se pretende ser um \textbf{trabalhador ou cliente}
+
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.8]{wasteapp_signin.png}}
+  \caption{Exemplo de um \textit{Sign In}.}
+\end{figure}
+
+A informação relativamente aos pontos de interesse é guardada num grafo, sendo que estes são os vértices (nem todos os vértices são pontos de interesse, no entanto todos os pontos de interesse são vértices). Este grafo é gerado e apresentado no ecrã do utilizador com o auxílio da API \textit{GraphViewer} dependendo das opções que este seleciona ao longo do programa. Poderá ter duas visualizações distintas:
+
+\begin{itemize}
+	\item Se o utilizador for um \textbf{cliente} e quiser saber qual o ponto de recolha de um determinado resíduo mais perto da sua habitação, este terá de digitar o resíduo que pretende depositar e a quantidade deste, uma vez que os pontos de recolha poderão já ter atingido a sua capacidade máxima. Após a introdução dos dados, é apresentado \textit{GraphViewer}:
+	\begin{itemize}
+		\item o \textbf{grafo} lido;
+		\item um \textbf{ponto verde} - casa do utilizador;
+		\item um \textbf{ponto azul} - o ponto de recolha do resíduo escolhido ainda com capacidade mais próximo da habitação;
+		\item \textbf{caminho vermelho} - o caminho que o utilizador teria de tomar para chegar ao ponto determinado. 
+	\end{itemize}
+	
+	\begin{figure}[h!]
+  		\centerline{\includegraphics[scale=0.4]{wasteapp_4x4henrique123organic.png}}
+  		\caption{Grafo gerado no \textit{GraphViewer} quando o utilizador escolho o mapa 4x4 e dá como \textit{input} "Organic" e "3".}
+	\end{figure}
+	
+	\item Se o utilizador for um \textbf{trabalhador} e quiser saber qual o percurso que terá de tomar para recolher determinados resíduos às casas dos utilizadores que realizaram o pedido, este terá de digitar o resíduo que pretende depositar. Após a introdução dos dados, é apresentado \textit{GraphViewer}:
+	\begin{itemize}
+		\item o \textbf{grafo} lido;
+		\item um \textbf{ponto verde} - casa do trabalhador;
+		\item um \textbf{ponto azul} - central de recolha que torna o percurso gerado mais curto;
+		\item \textbf{caminho vermelho} - o caminho que o utilizador teria de percorrer de forma a passar em todas as casas possíveis onde os utilizadores fizeram pedidos de recolha, sendo que este será o caminho mais curto possível;
+		\item \textbf{pontos amarelos} - casas das pessoas que pretendem que os resíduos sejam recolhidos à sua porta.
+		
+		{\Large FALTA IMAGEM COM PONTOS AMARELOS!!!}
+		
+	\end{itemize}
+	
+\end{itemize}
+
 
 \newpage
 %----------------------------------------------------------------------------------------
@@ -562,20 +623,15 @@ Quando um cliente pretende saber em que local poderá depositar os seus resíduo
 
 \subsection{Casa}
 
-A classe \textbf{\textit{House}}, definida em \textit{house.h}, 
-
-{\Large COMPLETAR AQUI COM A NOVA INFORMAÇÃO.}
-
-\subsection{Ponto de Recolha}
-
-A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, 
-
-{\Large COMPLETAR AQUI COM A NOVA INFORMAÇÃO.}
+A classe \textbf{\textit{House}}, definida em \textit{house.h}, é constituída por um único parâmetro que é o \textbf{vértice} onde esta se encontra.
 
 \subsection{Pedido de Recolha de Resíduos ao Domicílio}
 
 Os pedidos de recolha de resíduos ao domicílio são representados pela classe \textbf{\textit{HouseRequest}}, definida em \textit{houserequest.h}. Esta classe é constituída por um \textbf{tipo de lixo} que vai se recolhido e uma \textbf{quantidade} de lixo a ser recolhido.
 
+\subsection{Ponto de Recolha}
+
+A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída por quatro parâmetros: um \textbf{tipo} de resíduos que poderá recolher, a \textit{quantidade} que terá neste (iniciada a 0 e atualizada ao longo do programa), a \textit{capacidade} total deste (20 em todos os spots) e o \textbf{vértice} em que se encontra.
 
 \newpage
 %----------------------------------------------------------------------------------------

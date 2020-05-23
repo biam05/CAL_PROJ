@@ -114,7 +114,7 @@ void gui_signin(WasteApp &wasteApp)
     }
 
     while(!isHouse){
-        cout << " Vertex (check the tags.txt file and choose and vertex that has the tag 'building=house'): ";
+        cout << " Vertex (check the tags.txt file and choose a vertex that has the tag 'building=house'): ";
         getline(cin, vertex);
 
         for(House house : h){
