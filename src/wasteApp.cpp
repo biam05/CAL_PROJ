@@ -306,7 +306,7 @@ float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex> &path)
     float dist;
     if (path.empty())
     {
-        v.setPrevVert(path[0].getID());
+        v.setPrevVert(s.getID());
         dijkstra(s.getID());
         dist = v.getDistance();
     }
