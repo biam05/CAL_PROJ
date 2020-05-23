@@ -21,14 +21,14 @@ using namespace std;
  *  Saves all the information from the users
  *  @param
  */
-void readUserData(WasteApp &wasteApp);
+void readUserData(WasteApp &wasteApp, string userfilename);
 
 /*! \brief Function reads the data from the spots
  *
  *  Saves all the information from the users
  *  @param
  */
-void readSpotsData(WasteApp &wasteApp);
+void readSpotsData(WasteApp &wasteApp, string spotsfilename);
 
 void readRequestData(WasteApp &wasteapp);
 

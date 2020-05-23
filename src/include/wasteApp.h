@@ -22,6 +22,7 @@ class WasteApp {
     float yMin;
     float xMax;
     float yMax;
+    float graphScale;
 
 public:
     WasteApp();
@@ -55,6 +56,10 @@ public:
     int getXVertex(float x, float s);
 
     int getYVertex(float y, float s);
+
+    float getGraphScale() const;
+
+    void setGraphScale(float g);
 
     Spot closestSpot(const User &u, float q, enum type type);
 

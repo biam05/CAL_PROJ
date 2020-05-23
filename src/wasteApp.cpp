@@ -33,11 +33,9 @@ void WasteApp::addEdge(Edge e) {
 }
 
 void WasteApp::generateGraph(Vertex s) {
-    //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
-    float scale = 0.1;
 
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
-    gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
+    gv->createWindow((xMax-xMin) * graphScale, (yMax - yMin) * graphScale);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
@@ -49,8 +47,8 @@ void WasteApp::generateGraph(Vertex s) {
     for(auto & vertex : vertexes) {
         id = vertex.getID();
         if (id == s.getID()) v = vertex;
-        x = getXVertex(vertex.getX(), scale);
-        y = getYVertex(vertex.getY(), scale);
+        x = getXVertex(vertex.getX(), graphScale);
+        y = getYVertex(vertex.getY(), graphScale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
@@ -78,11 +76,9 @@ void WasteApp::generateGraph(Vertex s) {
 }
 
 void WasteApp::generatePath(Vertex next) {
-    //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
-    float scale = 0.1;
 
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
-    gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
+    gv->createWindow((xMax-xMin) * graphScale, (yMax - yMin) * graphScale);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
@@ -94,8 +90,8 @@ void WasteApp::generatePath(Vertex next) {
     for(auto & vertex : vertexes) {
         id = vertex.getID();
         if (id == next.getID()) v = vertex;
-        x = getXVertex(vertex.getX(), scale);
-        y = getYVertex(vertex.getY(), scale);
+        x = getXVertex(vertex.getX(), graphScale);
+        y = getYVertex(vertex.getY(), graphScale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
@@ -384,5 +380,13 @@ Vertex WasteApp::held_karp(const User &w, vector<Vertex> housesToCollect) {
     }
     g(start,centralV,housesToCollect);
     return centralV;
+}
+
+float WasteApp::getGraphScale() const {
+    return graphScale;
+}
+
+void WasteApp::setGraphScale(float g) {
+    graphScale = g;
 }
 
