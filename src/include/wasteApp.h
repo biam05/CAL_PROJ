@@ -48,7 +48,7 @@ public:
 
     Vertex getVertex (int id);
 
-    void generateGraph(Spot s);
+    void generateGraph(Vertex s);
 
     Edge getEdge (int id);
 

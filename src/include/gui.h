@@ -95,4 +95,7 @@ void gui_worker(WasteApp &wasteApp, const string &username);
  * @return 2 if the user want to try again, 0 if the user wants to create an account
  */
 int gui_unknownUser(WasteApp &wasteApp);
+
+void gui_collectFromHouses(WasteApp &wasteApp,  User &user);
+
 #endif //SRC_GUI_H

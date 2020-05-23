@@ -225,8 +225,7 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 	}
 	else
 	{
-		cout << endl << " " << s.getVertex();
-		wasteApp.generateGraph(s);
+		wasteApp.generateGraph(wasteApp.getVertex(s.getVertex()));
 	}
 }
 
@@ -250,7 +249,14 @@ void gui_homeCollection(WasteApp &wasteApp, const string &username){
 }
 
 void gui_worker(WasteApp &wasteApp, const string &username){
+    User user("","",-1,WORKER);
     int ans;
+
+    for (User &u : wasteApp.getUsers())
+    {
+        if (u.getUsername() == username)
+            user = u;
+    }
 
     while (true) {
         gui_baseScreen();
@@ -260,7 +266,7 @@ void gui_worker(WasteApp &wasteApp, const string &username){
 
         cout << "\n Enter an option:\n\n";
 
-        cout << " [1] ?\n";
+        cout << " [1] Collect Waste from Houses in the Neighbourhood\n";
         cout << " [2] ?\n";
         cout << " [0] Exit\n";
 
@@ -272,8 +278,8 @@ void gui_worker(WasteApp &wasteApp, const string &username){
         gui_baseScreen();
 
         switch (ans) {
-            case 1: // --- ?
-                cout << "\t\t\tOption 1!";
+            case 1: // Collect from Houses --- Held-Karp
+                gui_collectFromHouses(wasteApp,user);
                 break;
             case 2: // --- ?
                 cout << "\t\t\tOption 2!";
@@ -285,4 +291,40 @@ void gui_worker(WasteApp &wasteApp, const string &username){
                 break;
         }
     }
+}
+
+void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
+
+    string type;
+    enum type wtype;
+    vector<Vertex> path;
+
+    gui_baseScreen();
+
+    cout << "\t\tWorker Menu - Collect from Houses\n ";
+
+    cout << endl << " What type of waste you want to collect? (Glass, Plastic, Paper, Organic) ";
+    getline(cin, type);
+
+    if (type == "Glass" || type == "glass")             wtype = GLASS;
+    else if (type == "Plastic" || type == "plastic")    wtype = PLASTIC;
+    else if (type == "Paper" || type == "paper")        wtype = PAPER;
+    else                                                wtype = ORGANIC;
+
+    path = wasteApp.homeCollection(user, wtype);
+
+    if (path.size() == 2)
+    {
+        cout << " No Houses to have Waste Collected\n";
+        // To avoid going back to the menu, waits here for an input!
+        cin >> type;
+    }
+    else
+    {
+        cout << endl << " " << path.size();
+        wasteApp.generateGraph();
+    }
+
+    cout << " Collection Complete!";
+
 }

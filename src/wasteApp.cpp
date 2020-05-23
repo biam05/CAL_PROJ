@@ -32,7 +32,7 @@ void WasteApp::addEdge(Edge e) {
     edges.push_back(e);
 }
 
-void WasteApp::generateGraph(Spot s) {
+void WasteApp::generateGraph(Vertex s) {
     //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
     float scale = 0.1;
 
@@ -48,7 +48,7 @@ void WasteApp::generateGraph(Spot s) {
 
     for(auto & vertex : vertexes) {
         id = vertex.getID();
-        if (id == s.getVertex()) v = vertex;
+        if (id == s.getID()) v = vertex;
         x = getXVertex(vertex.getX(), scale);
         y = getYVertex(vertex.getY(), scale);
         gv->addNode(id, x, y);
