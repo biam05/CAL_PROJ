@@ -7,6 +7,7 @@
 
 #include "user.h"
 #include "wasteApp.h"
+#include "houseRequest.h"
 
 using namespace std;
 
@@ -38,6 +39,8 @@ void readRequestData(WasteApp &wasteapp);
  * @param wasteApp the app instance
  * @param folder the folder with the graph files
  */
- void readGraphData(WasteApp &wasteApp, const string &folder);
+void readGraphData(WasteApp &wasteApp, const string &folder);
+
+void updateRequests(WasteApp &wasteApp);
 
 #endif //SRC_FILEHANDLER_H

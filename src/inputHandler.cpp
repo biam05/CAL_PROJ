@@ -17,27 +17,46 @@ int ih_login(const vector<User> &users, const string &user, const string &pass)
     return 3;
 }
 
-int ih_signin(vector<User> &users, const string &user, const string &pass, const string &vertex, char role)
+int ih_signin(WasteApp &wasteApp, const string &user, const string &pass, const string &vertex, char role)
 {
     string username, password, position;
+    vector<User> users = wasteApp.getUsers();
     enum userType type;
     for(const auto &u : users){
         if(u.getUsername() == user)
             return 1;
     }
 
-    ofstream ologinfile("../data/userlogins.txt",fstream::app);
-    ologinfile << "\n" << user << "\n" << pass << "\n" << vertex << "\n";
-    if (role == 'c'){
-        ologinfile << "Client";
-        type = CLIENT;
+    if(wasteApp.getGraphScale() == 1){
+        ofstream ologinfile("../data/GridGraphs/4x4/userlogins.txt",fstream::app);
+
+        ologinfile << "\n" << user << "\n" << pass << "\n" << vertex << "\n";
+        if (role == 'c'){
+            ologinfile << "Client";
+            type = CLIENT;
+        }
+        else{
+            ologinfile << "Worker";
+            type = WORKER;
+        }
     }
-    else{
-        ologinfile << "Worker";
-        type = WORKER;
+    else {
+        ofstream ologinfile("../data/Porto/userlogins.txt",fstream::app);
+
+        ologinfile << "\n" << user << "\n" << pass << "\n" << vertex << "\n";
+        if (role == 'c'){
+            ologinfile << "Client";
+            type = CLIENT;
+        }
+        else{
+            ologinfile << "Worker";
+            type = WORKER;
+        }
     }
 
     users.emplace_back(username, password, stoi(vertex), type);
+
+    wasteApp.setUsers(users);
 
     return 0;
 }

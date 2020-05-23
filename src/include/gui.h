@@ -5,6 +5,7 @@
 #include <vector>
 #include "inputHandler.h"
 #include "wasteApp.h"
+#include "fileHandler.h"
 
 using namespace std;
 

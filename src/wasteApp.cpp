@@ -262,13 +262,13 @@ void WasteApp::homeCollection(const User &w, enum type type) {
     if (housesToCollect.size() == 1)
     {
         cout << " No houses requested that collection!" << endl;
+        cout << " Type any key to go back to your menu.";
         cin >> a;
         return;
     }
-    // UPDATE FILE REQUESTS
+
     Vertex next = held_karp(w,housesToCollect);
     generatePath(next);
-    cin >> a;
 }
 
 void WasteApp::addSpot(Spot s) {
@@ -388,11 +388,15 @@ Vertex WasteApp::held_karp(const User &w, vector<Vertex> housesToCollect) {
     return centralV;
 }
 
-float WasteApp::getGraphScale() const {
-    return graphScale;
-}
-
 void WasteApp::setGraphScale(float g) {
     graphScale = g;
+}
+
+const vector<House> &WasteApp::getHouses() const {
+    return houses;
+}
+
+float WasteApp::getGraphScale() const {
+    return graphScale;
 }
 
