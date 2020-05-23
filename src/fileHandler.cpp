@@ -1,10 +1,10 @@
 #include <cmath>
 #include "fileHandler.h"
 
-void readUserData(WasteApp &wasteApp){
+void readUserData(WasteApp &wasteApp, string userfilename){
     string username, password, vertex, position;
     enum userType type;
-    ifstream userFile("../data/GridGraphs/4x4/userlogins.txt");
+    ifstream userFile(userfilename);
     while(getline(userFile, username)){
         getline(userFile, password);
         getline(userFile, vertex);
@@ -40,11 +40,11 @@ void readRequestData(WasteApp &wasteapp){
     }
 }
 
-void readSpotsData(WasteApp &wasteApp){
+void readSpotsData(WasteApp &wasteApp, string spotsfilename){
     string num_tag_string, tag, num_spots_string, vertex;
     int num_tags, num_spots;
     enum type tGlass = GLASS, tPaper = PAPER, tPlastic = PLASTIC, tOrganic = ORGANIC;
-    ifstream spotFile("../data/GridGraphs/4x4/tags.txt");
+    ifstream spotFile(spotsfilename);
     getline(spotFile, num_tag_string);
     num_tags = stoi(num_tag_string);
     while (num_tags != 0) {
