@@ -58,13 +58,15 @@ public:
 
     Spot closestSpot(const User &u, float q, enum type type);
 
-    vector<Vertex> homeCollection(const User &u, type type);
+    void homeCollection(const User &u, type type);
 
     void dijkstra(const int &vID);
 
-    vector<Vertex> held_karp(const User &w, vector<Vertex> housesToCollect);
+    Vertex held_karp(const User &w, vector<Vertex> housesToCollect);
 
-    vector<vector<Vertex>> subsets(const vector<Vertex>& set);
+    float g(Vertex &s, Vertex &v, vector<Vertex> &path);
+
+    void generatePath(Vertex next);
 };
 
 

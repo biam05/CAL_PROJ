@@ -77,6 +77,57 @@ void WasteApp::generateGraph(Vertex s) {
     gv->rearrange();
 }
 
+void WasteApp::generatePath(Vertex next) {
+    //Se estiver a usar ficheiros x e y, scale = 0.01; com ficheiros lat e lon, scale = 10000
+    float scale = 0.1;
+
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * scale, (yMax - yMin) * scale, false);
+    gv->createWindow((xMax-xMin) * scale, (yMax - yMin) * scale);
+
+    gv->defineEdgeCurved(false);
+    gv->defineVertexColor("black");
+
+    int id, x, y;
+
+    Vertex v;
+
+    for(auto & vertex : vertexes) {
+        id = vertex.getID();
+        if (id == next.getID()) v = vertex;
+        x = getXVertex(vertex.getX(), scale);
+        y = getYVertex(vertex.getY(), scale);
+        gv->addNode(id, x, y);
+        gv->setVertexSize(id, 1);
+    }
+    for (auto & edge : edges) {
+        gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
+    }
+    gv->rearrange();
+
+    Edge e;
+
+    gv->setVertexSize(next.getID(), 10);
+    gv->setVertexColor(next.getID(), "blue");
+
+    while (next.getPrevVert() != -1)
+    {
+        dijkstra(next.getPrevVert());
+        while(next.getPrevEdge() != -1) {
+            e = getEdge(next.getPrevEdge());
+            gv->setEdgeColor(e.getID(), "red");
+            gv->setEdgeThickness(e.getID(), 3);
+            next = getVertex(e.getVi());
+        }
+        gv->setVertexSize(next.getID(), 10);
+        gv->setVertexColor(next.getID(), "yellow");
+    }
+
+    gv->setVertexSize(next.getID(), 10);
+    gv->setVertexColor(next.getID(), "green");
+
+    gv->rearrange();
+}
+
 bool WasteApp::hasVertex(int id) {
     for (auto & vertex : vertexes) {
         if (vertex.getID() == id) return true;
@@ -164,9 +215,10 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
     return sp;
 }
 
-vector<Vertex> WasteApp::homeCollection(const User &w, enum type type) {
+void WasteApp::homeCollection(const User &w, enum type type) {
     vector<Vertex> path;
     vector<Vertex> housesToCollect;
+    string a;
     for (Vertex &v : vertexes)
     {
         if (v.getID() == w.getHouse().getVertex())
@@ -203,8 +255,16 @@ vector<Vertex> WasteApp::homeCollection(const User &w, enum type type) {
             }
         }
     }
-    path = held_karp(w,housesToCollect);
-    return path;
+    if (housesToCollect.size() == 1)
+    {
+        cout << " No houses requested that collection!" << endl;
+        cin >> a;
+        return;
+    }
+    // UPDATE FILE REQUESTS
+    Vertex next = held_karp(w,housesToCollect);
+    generatePath(next);
+    cin >> a;
 }
 
 void WasteApp::addSpot(Spot s) {
@@ -226,25 +286,6 @@ Edge WasteApp::getEdge(int id) {
     return Edge(1, -1, -1, -1);
 }
 
-vector<vector<Vertex>> WasteApp::subsets(const vector<Vertex> &set)
-{
-    vector<vector<Vertex>> subset;
-    vector<Vertex> empty;
-    subset.push_back(empty);
-
-    for (int i = 0; i < set.size(); i++)
-    {
-        vector<vector<Vertex>> subsetTemp = subset;
-
-        for (int j = 0; j < subsetTemp.size(); j++)
-            subsetTemp[j].push_back(set[i]);
-
-        for (int j = 0; j < subsetTemp.size(); j++)
-            subset.push_back(subsetTemp[j]);
-    }
-    return subset;
-}
-
 float minimum(const vector<float> &vec)
 {
     float minimum = 1000000;
@@ -256,59 +297,90 @@ float minimum(const vector<float> &vec)
     return minimum;
 }
 
-vector<Vertex> WasteApp::held_karp(const User &w, vector<Vertex> housesToCollect) {
-    vector<vector<float>> distance;
-    vector<Vertex> path;
+float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex> &path)
+{
+    float dist;
+    if (path.empty())
+    {
+        v.setPrevVert(path[0].getID());
+        dijkstra(s.getID());
+        dist = v.getDistance();
+    }
+    else if (path.size() == 1)
+    {
+        path[0].setPrevVert(s.getID());
+        dijkstra(s.getID());
+        dist = path[0].getDistance();
+        v.setPrevVert(path[0].getID());
+        dijkstra(path[0].getID());
+        dist += v.getDistance();
+    }
+    else
+    {
+        vector<float> dists;
+        for (int i = 0; i < path.size(); i++)
+        {
+            vector<Vertex> subset;
+            for (int j = 0; j < path.size(); j++)
+            {
+                if (i != j)
+                {
+                    subset.push_back(path[j]);
+                }
+            }
+            dist = g(s,path[i],subset);
+            dijkstra(path[i].getID());
+            dist += v.getDistance();
+            dists.push_back(dist);
+        }
+        vector<Vertex> subset;
+        dist = minimum(dists);
+        for (int i = 0; i < dists.size(); i++)
+        {
+            if (dists[i] == dist)
+            {
+                for (int j = 0; j < path.size(); j++)
+                {
+                    if (i != j)
+                    {
+                        subset.push_back(path[j]);
+                    }
+                }
+                g(s,path[i],subset);
+                v.setPrevVert(path[i].getID());
+                break;
+            }
+        }
+    }
+    return dist;
+}
+
+Vertex WasteApp::held_karp(const User &w, vector<Vertex> housesToCollect) {
+    float distance;
     float min_dist = 1000000;
     Vertex centralV;
     int v = w.getHouse().getVertex();
+    Vertex start;
     for (Vertex &s : vertexes)
     {
         if (s.getID() == v)
         {
-            path.push_back(s);
+            start = s;
             break;
         }
     }
-    dijkstra(v);
-    distance[0][0] = 0;
-    for (int i = 1; i < housesToCollect.size(); i++)
-    {
-        distance[0][i] = housesToCollect[i].getDistance();
-    }
-    vector<vector<Vertex>> allSubsets = subsets(housesToCollect);
-
-    for (int s = 1; s < housesToCollect.size() - 1; s++)
-    {
-        for (vector<Vertex> &subset : allSubsets)
-        {
-            if (subset.size() == s)
-            {
-                for (int k = 0; k < subset.size(); k++)
-                {
-                    vector<float> prev;
-                    for (int i = 0; i < distance.size(); i++)
-                    {
-                        if (i != k)
-                            prev.push_back(distance[s-1][i] + distance[i][k]); //??????? (╯°□°）╯︵ ┻━┻ (┬┬﹏┬┬)
-                    }
-                    distance[s][k] = minimum(prev);
-                }
-            }
-        }
-    }
-    dijkstra(path[path.size() - 1].getID());
     for (House &c : centrals) {
         for (Vertex &vert : vertexes) {
             if (c.getVertex() == vert.getID()) {
-                if (min_dist > vert.getDistance()) {
-                    min_dist = vert.getDistance();
+                distance = g(start,vert,housesToCollect);
+                if (min_dist > distance) {
+                    min_dist = distance;
                     centralV = vert;
                 }
             }
         }
     }
-    path.push_back(centralV);
-    return path;
+    g(start,centralV,housesToCollect);
+    return centralV;
 }
 

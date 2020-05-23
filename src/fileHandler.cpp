@@ -4,7 +4,7 @@
 void readUserData(WasteApp &wasteApp){
     string username, password, vertex, position;
     enum userType type;
-    ifstream userFile("../data/userlogins.txt");
+    ifstream userFile("../data/GridGraphs/4x4/userlogins.txt");
     while(getline(userFile, username)){
         getline(userFile, password);
         getline(userFile, vertex);
@@ -44,7 +44,7 @@ void readSpotsData(WasteApp &wasteApp){
     string num_tag_string, tag, num_spots_string, vertex;
     int num_tags, num_spots;
     enum type tGlass = GLASS, tPaper = PAPER, tPlastic = PLASTIC, tOrganic = ORGANIC;
-    ifstream spotFile("../data/Porto/t02_tags_porto.txt");
+    ifstream spotFile("../data/GridGraphs/4x4/tags.txt");
     getline(spotFile, num_tag_string);
     num_tags = stoi(num_tag_string);
     while (num_tags != 0) {
@@ -105,7 +105,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
     float x, y;
     string temp;
 
-    string filename = folder + "/nodes_x_y_porto.txt";
+    string filename = folder + "/nodes.txt";
     ifstream nodes (filename);
 
     if(nodes.is_open()) {
@@ -127,7 +127,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         cout << "Couldn't open nodes file!" << endl;
     }
 
-    filename = folder + "/edges_porto.txt";
+    filename = folder + "/edges.txt";
     ifstream edges (filename);
 
     if(edges.is_open()) {

@@ -311,19 +311,7 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
     else if (type == "Paper" || type == "paper")        wtype = PAPER;
     else                                                wtype = ORGANIC;
 
-    path = wasteApp.homeCollection(user, wtype);
-
-    if (path.size() == 2)
-    {
-        cout << " No Houses to have Waste Collected\n";
-        // To avoid going back to the menu, waits here for an input!
-        cin >> type;
-    }
-    else
-    {
-        cout << endl << " " << path.size();
-        wasteApp.generateGraph();
-    }
+    wasteApp.homeCollection(user, wtype);
 
     cout << " Collection Complete!";
 

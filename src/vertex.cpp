@@ -48,3 +48,10 @@ void Vertex::setPrevEdge(int e) {
     prevEdge = e;
 
 }
+int Vertex::getPrevVert() {
+    return prevVert;
+}
+
+void Vertex::setPrevVert(int v) {
+    prevVert = v;
+}

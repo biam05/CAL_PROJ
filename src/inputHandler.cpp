@@ -48,10 +48,10 @@ int ih_request(vector<User>&users, const string &user, const string &type, const
         if(u.getUsername() == user){
 
             vector<HouseRequest> r = u.getRequests();
-            if (type == "Organic")       r.push_back(HouseRequest(tOrganic, stoi(quantity)));
-            else if(type == "Glass")     r.push_back(HouseRequest(tGlass, stoi(quantity)));
-            else if(type == "Paper")     r.push_back(HouseRequest(tPaper, stoi(quantity)));
-            else if(type == "Plastic")   r.push_back(HouseRequest(tPlastic, stoi(quantity)));
+            if (type == "Organic")       r.push_back(HouseRequest(tOrganic, stof(quantity)));
+            else if(type == "Glass")     r.push_back(HouseRequest(tGlass, stof(quantity)));
+            else if(type == "Paper")     r.push_back(HouseRequest(tPaper, stof(quantity)));
+            else if(type == "Plastic")   r.push_back(HouseRequest(tPlastic, stof(quantity)));
             u.setRequests(r);
 
             ofstream ologinfile("../data/requests.txt",fstream::app);
