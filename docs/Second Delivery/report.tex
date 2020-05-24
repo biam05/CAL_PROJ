@@ -639,16 +639,43 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 %----------------------------------------------------------------------------------------
 \chapter[Algoritmos Efetivamente Implementados][Algoritmos Efetivamente Implementados]{Algoritmos Efetivamente Implementados} \label{\thechapter}
 
+\section{Algoritmo de \textit{Dijkstra}}
 
-
-
-
-\section{Análise de complexidade dos algoritmos efetivamente implementados}
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=1]{Dijkstra_pseudocode.jpg}}
+  \caption{Pseudocódigo do Algoritmo de \textit{Dijsktra}.}
+\end{figure}
 
 \subsection{Análise teórica (temporal e espacial)}
 
+\begin{itemize}
+	\item temporal -  O($(|V| + |E|)*log(|V|)$).
+	\item espacial - O($N^2$).
+\end{itemize}
+
 \subsection{Análise temporal empírica }
 
+{\Large COMPLETAR}
+
+\section{Algoritmo de \textit{Held-Karp}}
+
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=1]{Held-Karp Algorithm.PNG}}
+  \caption{Pseudocódigo do Algoritmo de \textit{Held-Karp}.}
+\end{figure}
+
+\subsection{Análise teórica (temporal e espacial)}
+
+\begin{itemize}
+	\item temporal -  O($2^N N^2$).
+	\item espacial - O($2^N N$).
+\end{itemize}
+
+\subsection{Análise temporal empírica }
+
+{\Large COMPLETAR}
+		
+		
 \newpage
 %----------------------------------------------------------------------------------------
 %	CONECTIVIDADE DOS GRAFOS UTILIZADOS
@@ -657,7 +684,7 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 
 \textsuperscript{[4]} \textsuperscript{[5]}
 
-
+{\Large COMPLETAR}
 
 
 
@@ -669,11 +696,7 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 %----------------------------------------------------------------------------------------
 \chapter[Conclusão Geral][Conclusão Geral]{Conclusão Geral} \label{\thechapter}
 
-
-
-
-
-
+Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente.
 
 \newpage
 %----------------------------------------------------------------------------------------
