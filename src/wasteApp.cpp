@@ -105,19 +105,18 @@ void WasteApp::generatePath(Vertex next) {
     gv->setVertexSize(next.getID(), 10);
     gv->setVertexColor(next.getID(), "blue");
 
-    while (next.getPrevVert() != -1)
+    while (next.getPrevHouse() != -1)
     {
-        dijkstra(next.getPrevVert());
+        dijkstra(next.getPrevHouse());
         // Não sei pôr as casas a amarelo, tentei isso mas não funcionou:
-        gv->setVertexSize(next.getPrevVert(), 10);
-        gv->setVertexColor(next.getPrevVert(), "yellow");
+        gv->setVertexSize(next.getPrevHouse(), 10);
+        gv->setVertexColor(next.getPrevHouse(), "yellow");
         while(next.getPrevEdge() != -1) {
             e = getEdge(next.getPrevEdge());
             gv->setEdgeColor(e.getID(), "red");
             gv->setEdgeThickness(e.getID(), 3);
             next = getVertex(e.getVi());
         }
-
     }
 
     gv->setVertexSize(next.getID(), 10);
@@ -306,16 +305,16 @@ float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex> &path)
     float dist;
     if (path.empty())
     {
-        v.setPrevVert(s.getID());
+        v.setPrevHouse(s.getID());
         dijkstra(s.getID());
         dist = v.getDistance();
     }
     else if (path.size() == 1)
     {
-        path[0].setPrevVert(s.getID());
+        path[0].setPrevHouse(s.getID());
         dijkstra(s.getID());
         dist = path[0].getDistance();
-        v.setPrevVert(path[0].getID());
+        v.setPrevHouse(path[0].getID());
         dijkstra(path[0].getID());
         dist += v.getDistance();
     }
@@ -351,7 +350,7 @@ float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex> &path)
                     }
                 }
                 g(s,path[i],subset);
-                v.setPrevVert(path[i].getID());
+                v.setPrevHouse(path[i].getID());
                 break;
             }
         }
