@@ -99,4 +99,6 @@ int gui_unknownUser(WasteApp &wasteApp);
 
 void gui_collectFromHouses(WasteApp &wasteApp,  User &user);
 
+void gui_conectividade(WasteApp &wasteApp);
+
 #endif //SRC_GUI_H

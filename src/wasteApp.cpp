@@ -399,3 +399,59 @@ float WasteApp::getGraphScale() const {
     return graphScale;
 }
 
+void WasteApp::visit(Vertex &v)
+{
+    if (!v.getVisited())
+    {
+        v.setVisited(true);
+        for (int &adj : v.getAdjacentIds())
+            for (Vertex &adjV : vertexes)
+                if (adjV.getID() == getEdge(adj).getVf())
+                    visit(adjV);
+        Vertex x = v;
+        x.clearAdjacentIds();
+        vertexesRevGraph.push_back(x);
+    }
+}
+
+void WasteApp::assign(Vertex &v, Vertex &root)
+{
+    if (v.getComponent() == -1) {
+        if (v.getID() == root.getID()) {
+            root.setComponent(maxComponent);
+            maxComponent++;
+        }
+        v.setComponent(root.getComponent());
+        for (int &e : v.getAdjacentIds()) {
+            for (Vertex &vert : vertexesRevGraph)
+                if (vert.getID() == getEdge(e).getVi())
+                    assign(vert,root);
+        }
+    }
+}
+
+int WasteApp::conectividade() {
+    for (Vertex &v : vertexes)
+    {
+        v.setVisited(false);
+    }
+    for (Vertex &v : vertexes)
+    {
+        visit(v);
+    }
+    for (Edge &e : edges)
+    {
+        edgesRevGraph.push_back(Edge(e.getWeight(),e.getID(),e.getVf(),e.getVi()));
+        for (Vertex &v : vertexesRevGraph)
+            if (e.getVf() == v.getID())
+            {
+                v.addAdjacent(e.getID());
+                break;
+            }
+    }
+    for (Vertex &v : vertexesRevGraph)
+    {
+        assign(v,v);
+    }
+    return maxComponent;
+}

@@ -55,3 +55,15 @@ int Vertex::getPrevHouse() {
 void Vertex::setPrevHouse(int v) {
     prevHouse = v;
 }
+
+void Vertex::clearAdjacentIds() {
+    adjacent_IDs.clear();
+}
+
+void Vertex::setComponent(int c) {
+    component = c;
+}
+
+int Vertex::getComponent() {
+    return component;
+}

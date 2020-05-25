@@ -31,6 +31,7 @@ void gui_mainMenu(WasteApp &wasteApp) {
 
     cout << " [1] Login\n";
     cout << " [2] Sign in\n";
+    cout << " [3] Conectividade do grafo\n";
     cout << " [0] Exit\n";
 
     cout << "\n Option: ";
@@ -46,6 +47,9 @@ void gui_mainMenu(WasteApp &wasteApp) {
             break;
         case 2: // --- Sign in
             gui_signin(wasteApp);
+            break;
+        case 3: // --- Sign in
+            gui_conectividade(wasteApp);
             break;
         case 0: // --- Exit
             cout << "Goodbye!";
@@ -326,4 +330,10 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
     updateRequests(wasteApp);
 
     cout << " Collection Complete!";
+}
+
+void gui_conectividade(WasteApp &wasteApp) {
+    string a;
+    cout << " Número de zonas conexas: " << wasteApp.conectividade() << endl;
+    cin >> a;
 }

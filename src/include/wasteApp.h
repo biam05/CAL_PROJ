@@ -18,11 +18,14 @@ class WasteApp {
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
+    vector<Vertex> vertexesRevGraph;
+    vector<Edge> edgesRevGraph;
     float xMin;
     float yMin;
     float xMax;
     float yMax;
     float graphScale;
+    int maxComponent = 0;
 
 public:
     WasteApp();
@@ -74,6 +77,12 @@ public:
     float g(Vertex &s, Vertex &v, vector<Vertex *> &path);
 
     void generatePath(Vertex &next);
+
+    int conectividade();
+
+    void visit(Vertex &v);
+
+    void assign(Vertex &v, Vertex &root);
 };
 
 

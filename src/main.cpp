@@ -23,18 +23,17 @@ int main() {
     cin >> ans;
     cin.ignore(1000, '\n');
 
-    if (system("CLS")) system("clear");
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    LOADING DATA...";
-
     // --- READING INFORMATION FROM FILES
     switch(ans){
-        case(1):
+        case 1:
+            if (system("CLS")) system("clear");
+            cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    LOADING DATA...";
             readUserData(wasteApp, "../data/GridGraphs/4x4/userlogins.txt");
             readSpotsData(wasteApp, "../data/GridGraphs/4x4/tags.txt");
             readGraphData(wasteApp, "../data/GridGraphs/4x4");
             wasteApp.setGraphScale(1);
             break;
-        case(2):
+        case 2:
             readUserData(wasteApp, "../data/Porto/userlogins.txt");
             readSpotsData(wasteApp, "../data/Porto/tags.txt");
             readGraphData(wasteApp, "../data/Porto");
