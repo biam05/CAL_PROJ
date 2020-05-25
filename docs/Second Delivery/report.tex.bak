@@ -649,11 +649,13 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 \subsection{Análise teórica (temporal e espacial)}
 
 \begin{itemize}
-	\item temporal -  O($(|V| + |E|)*log(|V|)$) vértices
-	\item espacial - 
+	\item temporal -  O($(|V| + |E|)*log(|V|)$).
+	\item espacial - O($N^2$).
 \end{itemize}
 
 \subsection{Análise temporal empírica }
+
+{\Large COMPLETAR}
 
 \section{Algoritmo de \textit{Held-Karp}}
 
@@ -664,8 +666,16 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 
 \subsection{Análise teórica (temporal e espacial)}
 
+\begin{itemize}
+	\item temporal -  O($2^N N^2$).
+	\item espacial - O($2^N N$).
+\end{itemize}
+
 \subsection{Análise temporal empírica }
 
+{\Large COMPLETAR}
+		
+		
 \newpage
 %----------------------------------------------------------------------------------------
 %	CONECTIVIDADE DOS GRAFOS UTILIZADOS
@@ -674,7 +684,7 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 
 \textsuperscript{[4]} \textsuperscript{[5]}
 
-
+{\Large COMPLETAR}
 
 
 
@@ -703,6 +713,7 @@ Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo noss
 	\item Interface com o Utilizador
 	\item Criação de Pontos de Interesse
 	\item Criação de Classes fundamentais no desenvolvimento do projeto
+	\item Ajuda na implementação dos Algoritmos
 	\item Atualizações no Relatório	
 	\end{itemize}
 \end{itemize}
@@ -716,6 +727,7 @@ Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo noss
 	\begin{itemize}
 	\item Implementação da interface do \textit{GraphViewer}
 	\item Criação de Classes fundamentais no desenvolvimento do projeto
+	\item Ajuda na implementação dos Algoritmos
 	\item Atualizações no Relatório
 	\end{itemize}
 \end{itemize}
