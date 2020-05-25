@@ -8,7 +8,7 @@ bolachas
 Client
 danielgsilva
 password
-8
+0
 Worker
 lilianaferreira
 calissupercool
@@ -24,5 +24,5 @@ henriquecardoso
 Client
 franciscora
 rebellocomdoisL
-0
+8
 Worker

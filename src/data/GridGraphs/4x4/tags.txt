@@ -30,8 +30,8 @@ spot=organic
 building=house
 7
 0
-4
 5
+6
 8
 12
 16

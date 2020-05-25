@@ -46,8 +46,8 @@ int Vertex::getPrevEdge() {
 
 void Vertex::setPrevEdge(int e) {
     prevEdge = e;
-
 }
+
 int Vertex::getPrevHouse() {
     return prevHouse;
 }
