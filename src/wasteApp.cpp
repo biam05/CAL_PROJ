@@ -165,6 +165,7 @@ void WasteApp::addAdjacent(int v, int e)
 
 void WasteApp::dijkstra(const int &vID)
 {
+
     MutablePriorityQueue<Vertex> mutablePriorityQueue;
     for (auto &v : vertexes) {
         if (v.getID() == vID) {
@@ -201,7 +202,9 @@ void WasteApp::dijkstra(const int &vID)
 }
 
 Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
+
     dijkstra(u.getHouse().getVertex());
+
     float min_dist = 1000000;
     Spot sp(type,-1,-1,-1);
     for (Spot &s : spots) {
@@ -265,7 +268,14 @@ void WasteApp::homeCollection(const User &w, enum type type) {
         return;
     }
 
+    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+
     Vertex next = held_karp(w,housesToCollect);
+
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+
+    cout << "Duration: " << chrono::duration_cast<chrono::microseconds>(end-begin).count() << "µs" << endl;
+
     generatePath(next);
 }
 

@@ -2,6 +2,7 @@
 #define SRC_WASTEAPP_H
 
 #include <vector>
+#include <chrono>
 
 #include "user.h"
 #include "spot.h"
