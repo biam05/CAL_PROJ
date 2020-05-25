@@ -32,6 +32,7 @@ void WasteApp::addEdge(Edge e) {
     edges.push_back(e);
 }
 
+//Shows path from the client's house (green) to the closest spot (blue)
 void WasteApp::generateGraph(Vertex s) {
 
     GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
@@ -75,6 +76,7 @@ void WasteApp::generateGraph(Vertex s) {
     gv->rearrange();
 }
 
+//Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
 void WasteApp::generatePath(Vertex &next) {
 
     GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
@@ -115,7 +117,6 @@ void WasteApp::generatePath(Vertex &next) {
         }
         gv->setVertexSize(next.getPrevHouse(), 10);
         gv->setVertexColor(next.getPrevHouse(), "yellow");
-        // Não sei pôr as casas a amarelo, tentei isso mas não funcionou:
         while(next.getPrevEdge() != -1) {
             e = getEdge(next.getPrevEdge());
             gv->setEdgeColor(e.getID(), "red");
@@ -163,6 +164,7 @@ void WasteApp::addAdjacent(int v, int e)
     }
 }
 
+//Dijkstra's algorithm beginning on vertex vID
 void WasteApp::dijkstra(const int &vID)
 {
 
@@ -201,6 +203,7 @@ void WasteApp::dijkstra(const int &vID)
     }
 }
 
+//Returns the closest spot of the type provided that can fit the quantity
 Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
 
     dijkstra(u.getHouse().getVertex());
@@ -228,6 +231,7 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
     return sp;
 }
 
+//Generates a path that passes through the biggest number of houses possible and ends in a central
 void WasteApp::homeCollection(const User &w, enum type type) {
     vector<Vertex> path;
     vector<Vertex *> housesToCollect;
@@ -268,13 +272,8 @@ void WasteApp::homeCollection(const User &w, enum type type) {
         return;
     }
 
-    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 
     Vertex next = held_karp(w,housesToCollect);
-
-    chrono::steady_clock::time_point end = chrono::steady_clock::now();
-
-    cout << "Duration: " << chrono::duration_cast<chrono::microseconds>(end-begin).count() << "µs" << endl;
 
     generatePath(next);
 }
