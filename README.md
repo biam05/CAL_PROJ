@@ -4,7 +4,7 @@
 
 ### Ficheiros de Input
 
-A informação é lida da pasta ```data```, sendo que esta contém duas subpastas - ```Porto``` e ```GridGraphs``` - onde estão presentes os documentos necessários para a produção do grafo no *GraphViewer*, sendo estes:
+A informação é lida da pasta ```data```, sendo que esta contém duas subpastas - ```Porto``` e ```GridGraphs``` (esta tem 3 subpastas: ````4x4````,  ````8x8```` e  ````16x16````, sendo que as duas últimas utilizam os ficheiros de tags da primeira) - onde estão presentes os documentos necessários para a produção do grafo no *GraphViewer*, sendo estes:
 
 + ```edges.txt``` - ficheiro com informação sobre as arestas;
 + ```nodes.txt``` - ficheiro com informação sobre os vértices;

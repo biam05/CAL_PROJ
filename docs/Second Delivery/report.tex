@@ -616,7 +616,7 @@ A classe \textbf{\textit{WasteApp}} é também responsável pela gestão de serv
 
 \subsection{Utilizadores}
 
-Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENTE}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
+Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENT}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
 
 \subsection{Lixo a ser Depositado pelo Utilizador}
 
@@ -650,15 +650,23 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 \subsection{Análise teórica (temporal e espacial)}
 
 \begin{itemize}
-	\item temporal -  O($(|V| + |E|)*log(|V|)$).
-	\item espacial - O($N^2$).
+	\item \textbf{Complexidade Temporal} -  O($(|V| + |E|)*log(|V|)$), sendo $V$ os vértices do grafo e $E$ as arestas
+	\item \textbf{Complexidade Espacial} - O($|V|$), sendo $V$ o número de vértices.
 \end{itemize}
+
+A \textbf{complexidade temporal} tem como valor O($(|V| + |E|)*log(|V|)$) dado que, tal como foi explicado na primeira parte do relatório, a cada vértice processado, pode ser necessário adicionar, remover ou mover vértices na fila de prioridade.
+Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um vetor na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
 
 \subsection{Análise temporal empírica }
 
-{\Large COMPLETAR}
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.6]{dijkstra_empirica.png}}
+  \caption{Complexidade temporal empírica do algoritmo de \textit{Dijsktra}.}
+\end{figure}
 
-\section{Algoritmo de \textit{Held-Karp}}
+Após vários testes utilizando a \textit{library} \textit{chrono}, conseguimos determinar uma média dos tempos de execução deste algoritmo para os mapas \textit{4x4}, \textit{8x8} e \textit{16x16}, sendo estes valores apresentados na tabela que se segue. No entanto, aquando da verificação destes, notamos que os valores não seriam os esperados tendo em conta a complexidade temporal deste algoritmo, uma vez que utilizamos estruturas de dados que possivelmente não seriam as mais corretas para o algoritmo em questão. Destas temos como exemplo vetores que provavelmente deveriam ter sido de \textit{pointers} e não dos \textit{vertexes} em si, o que acabaria por tornar o algoritmo bem mais eficiente. 
+
+\section{Algoritmo de \textit{Held-Karp} (Adaptação com auxílio do algoritmo de \textit{Dijkstra})}
 
 \begin{figure}[h!]
   \centerline{\includegraphics[scale=1]{Held-Karp Algorithm.PNG}}
@@ -668,13 +676,20 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 \subsection{Análise teórica (temporal e espacial)}
 
 \begin{itemize}
-	\item temporal -  O($2^N N^2$).
-	\item espacial - O($2^N N$).
+	\item \textbf{Complexidade Temporal} -  O($(2^N N^2)*((|V| + |E|)*log(|V|))$), sendo $N$ o número de casas pelas quais tem de passar, $V$ o número de vértices e $E$ o número de arestas;
+	\item \textbf{Complexidade Espacial} - O($|V|$), sendo $V$ o número de vértices.
 \end{itemize}
+
+Esta \textbf{complexidade temporal} deve-se ao facto de ter sido utilizado o algoritmo de \textit{Dijkstra} para calcular a distância entre cada par de casas, tornando o algoritmo de \textit{Held-Karp} menos eficiente temporalmente. No entanto, isto provoca que a \textbf{complexidade espacial} seja inferior à de \textit{Held-Karp} uma vez que não é necessário manter as distâncias numa matriz.
 
 \subsection{Análise temporal empírica }
 
-{\Large COMPLETAR}
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.6]{held_karp.png}}
+  \caption{Complexidade temporal empírica do algoritmo de \textit{Held Karp}.}
+\end{figure}
+
+Tal como fizemos com o algoritmo de \textit{Dijkstra}, realizamos vários testes com o auxílio da \textit{library} \textit{chrono}, determinando assim uma média de tempos de execução do algoritmo de \textit{Held-Karp} para os mapas \textit{4x4}, \textit{8x8} e \textit{16x16} e chegamos novamente à conclusão de que os resultados obtidos divergiam dos resultados esperados. Esta diferença deve-se, não só, ao uso de estruturas de dados que não são as apropriadas para o algoritmo em questão como também a utilização de um \textit{Dijkstra} durante esta para auxiliar no cálculo do caminho mais curto entre casas, levando a um aumento significativo dos tempos de execução.
 		
 		
 \newpage
@@ -683,13 +698,23 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 %----------------------------------------------------------------------------------------
 \chapter[Conectividade dos Grafos Utilizados][Conectividade dos Grafos Utilizados]{Conectividade dos Grafos Utilizados} \label{\thechapter}
 
-\textsuperscript{[4]} \textsuperscript{[5]}
+\section{Algoritmo de \textit{Kosaraju}}
 
-{\Large COMPLETAR}
+Para auxiliar na determinação das zonas fortemente conexas do grafo do Porto, implementamos o algoritmo de \textit{Kosaraju} \textsuperscript{[6]}. Este algoritmo passa por ordenar os vértices em pos-ordem após a inversão do grafo em questão. Numa segunda etapa, examinam-se os vértices na ordem estabelecida, no grafo original, realizando uma \textbf{busca em profundidade} e categorizando os vértices alcançados por zonas.
 
+Na execução deste algoritmo nos mapas \textit{4x4}, \textit{8x8} e \textit{16x16}, o algoritmo retorna o número de vértices como zonas fortemente conexas no grafo inteiro . Este retorno está de acordo com o esperado uma vez que um grafo dirigido é \textbf{fortemente conexo}\textsuperscript{[5]} quando todos os vértices são atingíveis a partir de qualquer vértice, o que não se verifica nestes mapas, dado que, por exemplo, se nos encontrarmos no nó com ID igual ao número de vértices - 1, este não poderá partir para outro ponto existente, logo nenhum ponto é atingível a partir deste.
 
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.3]{conectividade.png}}
+  \caption{Grafo \textit{4x4} dirigido.}
+\end{figure}
 
+Por outro lado, ao tentar aplicar este algoritmo no mapa do Porto, não foi retornado nenhum \textit{output} provavelmente pelo facto do mapa ser demasiado desconexo e demorar demasiado tempo a determinar. Deste modo, para conseguirmos testas o programa, tivemos de colocar os pontos de interesse com distâncias pequenas entre si de forma a arranjarmos zonas relativamente conexas. 
 
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=1]{porto_disconnected.png}}
+  \caption{Recolha de \textit{glass} pelo utilizador "danielgsilva" - deveria passar por 3 casas, no entanto como 2 delas  não são atingíveis a partir da casa do utilizador, este só passa em 1 e na central mais próxima.}
+\end{figure}
 
 \newpage
 %----------------------------------------------------------------------------------------
@@ -766,9 +791,11 @@ Grupo B, Turma 6, 2016. \textit{Ecoponto: Recolha De Lixo Seletiva (Tema 4) ‐ 
 [5] \textit{Data Structures and Algorithm Analysis in Java}, Second
 Edition, Mark Allen Weiss, Addison Wesley, 2006 
 
-Figura 1: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
+[6] Ime.usp.br. 2020. \textit{Algoritmo De Kosaraju-Sharir}. [online] Disponível em: \url{https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/kosaraju.html#sec:implementation>}.
 
-Figura 2: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+Figura 1 e Figura 10: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
+
+Figura 2 e Figura 12: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
 
 Figura 3: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
 
