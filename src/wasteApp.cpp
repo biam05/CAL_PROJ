@@ -420,7 +420,7 @@ void WasteApp::visit(Vertex &v)
                     visit(adjV);
         Vertex x = v;
         x.clearAdjacentIds();
-        vertexesRevGraph.push_back(x);
+        vertexesRev.push_back(x);
     }
 }
 
@@ -448,6 +448,9 @@ int WasteApp::conectividade() {
     for (Vertex &v : vertexes)
     {
         visit(v);
+        Vertex x = v;
+        x.clearAdjacentIds();
+        vertexesRevGraph.push_back(x);
     }
     for (Edge &e : edges)
     {
@@ -459,9 +462,11 @@ int WasteApp::conectividade() {
                 break;
             }
     }
-    for (Vertex &v : vertexesRevGraph)
+    while (!vertexesRev.empty())
     {
+        Vertex v = vertexesRev[0];
         assign(v,v);
+        vertexesRev.erase(vertexesRev.begin());
     }
     return maxComponent;
 }

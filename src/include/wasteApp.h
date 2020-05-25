@@ -21,6 +21,7 @@ class WasteApp {
     vector<House> centrals;
     vector<Vertex> vertexesRevGraph;
     vector<Edge> edgesRevGraph;
+    vector<Vertex> vertexesRev;
     float xMin;
     float yMin;
     float xMax;
