@@ -34,6 +34,8 @@ int main() {
             wasteApp.setGraphScale(1);
             break;
         case 2:
+            if (system("CLS")) system("clear");
+            cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    LOADING DATA...";
             readUserData(wasteApp, "../data/Porto/userlogins.txt");
             readSpotsData(wasteApp, "../data/Porto/tags.txt");
             readGraphData(wasteApp, "../data/Porto");
