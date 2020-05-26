@@ -59,7 +59,11 @@ public:
 
     Vertex getVertex (int id);
 
+    //Shows path from the client's house (green) to the closest spot (blue)
     void generateGraph(Vertex s);
+
+    //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
+    void generatePath(Vertex &next);
 
     Edge getEdge (int id);
 
@@ -73,13 +77,13 @@ public:
 
     const vector<House> &getHouses() const;
 
-    // closest spot main function (calls Dijkstra algorithm)
+    //Returns the closest spot of the type provided that can fit the quantity
     Spot closestSpot(const User &u, float q, enum type type);
 
-    // Dijkstra algorithm
+    //Dijkstra's algorithm beginning on vertex vID
     void dijkstra(const int &vID);
 
-    // home collection main function (calls Held-Karp)
+    //Generates a path that passes through the biggest number of houses possible and ends in a central
     void homeCollection(const User &u, type type);
 
     // Held-Karp algorithm
@@ -87,8 +91,6 @@ public:
 
     // function used in Held-Karp that calculates the minimum distance and creates the correct path
     float g(Vertex &s, Vertex &v, vector<Vertex *> &path);
-
-    void generatePath(Vertex &next);
 
     // Kosaraju algorithm
     int conectividade();
