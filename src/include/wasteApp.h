@@ -15,6 +15,7 @@
 using namespace std;
 
 class WasteApp {
+
     vector<User> users;
     vector<Vertex> vertexes;
     map<int, Vertex*> vertexMap;
@@ -22,15 +23,17 @@ class WasteApp {
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
+
     map<int, Vertex*> vertexesRevGraph;
     vector<Edge> edgesRevGraph;
     stack<Vertex*> vertexesRev;
+
+    // USED IN GRAPHVIEWR
     float xMin;
     float yMin;
     float xMax;
     float yMax;
     float graphScale;
-    int maxComponent = 0;
 
 public:
     WasteApp();
@@ -57,7 +60,11 @@ public:
 
     Vertex* getVertex (int id);
 
+    //Shows path from the client's house (green) to the closest spot (blue)
     void generateGraph(Vertex s);
+
+    //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
+    void generatePath(Vertex &next);
 
     Edge getEdge (int id);
 
@@ -71,10 +78,10 @@ public:
 
     const vector<House> &getHouses() const;
 
+    //Returns the closest spot of the type provided that can fit the quantity
     Spot closestSpot(const User &u, float q, enum type type);
 
-    void homeCollection(const User &u, type type);
-
+    //Dijkstra's algorithm beginning on vertex vID
     void dijkstra(const int &vID);
 
     Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
@@ -86,6 +93,7 @@ public:
     void fillOrder(Vertex *v, stack<Vertex*> &stack);
 
     void util(Vertex *v);
+
 
     int conectividade();
 };

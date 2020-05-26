@@ -11,36 +11,19 @@
 
 using namespace std;
 
-/** @defgroup FileHandler
- * @{
- *
- * Input Handlers
- */
-
-/*! \brief Function reads the data from the users
- *
- *  Saves all the information from the users
- *  @param
- */
+//Function that reads the data from the users and saves all the information from them
 void readUserData(WasteApp &wasteApp, string userfilename);
 
-/*! \brief Function reads the data from the spots
- *
- *  Saves all the information from the users
- *  @param
- */
+//Function that reads the data from the spots and saves all the information from them
 void readSpotsData(WasteApp &wasteApp, string spotsfilename);
 
+//Function that reads the date from the request's file and saves the information from them
 void readRequestData(WasteApp &wasteapp);
 
-/** \brief Function reads the data from map files and generates the graph
- *
- * Saves all the information about vertexes
- * @param wasteApp the app instance
- * @param folder the folder with the graph files
- */
+//Function reads the data from map files and generates the graph and saves all the information about vertexes
 void readGraphData(WasteApp &wasteApp, const string &folder);
 
+//Function that updates the request file with the new information
 void updateRequests(WasteApp &wasteApp);
 
 #endif //SRC_FILEHANDLER_H

@@ -21,6 +21,7 @@ public:
     float getMaxQuantity();
     int getVertex();
 
+    //Function that checks if the quantity of the spot added with the user's waste quantity isn't higher than it's max quantity
     bool fits(float q);
 };
 

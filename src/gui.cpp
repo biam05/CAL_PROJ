@@ -21,7 +21,7 @@ void gui_about(){
 }
 
 void gui_baseScreen(){
-    if (system("CLS")) system("clear");
+    if (system("CLS")) system("clear");   // Clean the Screen
     gui_header();
 }
 
@@ -36,19 +36,20 @@ void gui_mainMenu(WasteApp &wasteApp) {
 
     cout << "\n Option: ";
 
+    // Read the user option
     cin >> ans;
     cin.ignore(1000, '\n');
 
     gui_baseScreen();
 
     switch(ans) {
-        case 1: // --- Login
+        case 1: // --- Login Menu
             gui_login(wasteApp);
             break;
-        case 2: // --- Sign in
+        case 2: // --- Sign in Menu
             gui_signin(wasteApp);
             break;
-        case 3: // --- Sign in
+        case 3: // --- Connectivity study Menu
             gui_conectividade(wasteApp);
             break;
         case 0: // --- Exit
@@ -118,6 +119,7 @@ void gui_signin(WasteApp &wasteApp)
     }
 
     while(!isHouse){
+        // If the vertex given is not marked as a house in the tags file
         cout << " Vertex (check the tags.txt file and choose a vertex that has the tag 'building=house'): ";
         getline(cin, vertex);
 
@@ -129,7 +131,6 @@ void gui_signin(WasteApp &wasteApp)
         }
         if(!isHouse) cout << "\n That's not a house... try again!\n";
     }
-
 
     cout << " Do you intend to be a client or a worker (c/w)? ";
     cin >> opt;
@@ -147,18 +148,21 @@ int gui_unknownUser(WasteApp &wasteApp){
     char opt;
     int ret = 0;
     cout << " Unknown username!\n Would you like to create an account? (Y/N)\n ";
+
+    // Read the user option
     cin >> opt;
     cin.ignore(1000, '\n');
+
     switch(opt)
     {
         case 'Y':
-        case 'y':
+        case 'y': // --- Redirected to the sign in menu
         {
             gui_signin(wasteApp);
             break;
         }
         case 'N':
-        case 'n':
+        case 'n': // --- User tries to login again
             ret = 2;
             gui_baseScreen();
             break;
@@ -192,18 +196,19 @@ void gui_client(WasteApp &wasteApp, const string &username){
 
         cout << "\n Option: ";
 
+        // Read the user option
         cin >> ans;
         cin.ignore(1000, '\n');
 
         switch (ans) {
-            case 1: // Apply Dijkstra's Algorithm to find the shortest path to the desired waste deposit spot
+            case 1: // --- Apply Dijkstra's Algorithm to find the shortest path to the desired waste deposit spot
                 gui_nearestSpot(wasteApp, user);
                 //wasteApp.generateGraph();
                 break;
-            case 2: // Request a worker to collect a certain type of waste to your home
+            case 2: // --- Request a worker to collect a certain type of waste to your home
                 gui_homeCollection(wasteApp, username);
                 break;
-            case 0: // Exit
+            case 0: // --- Exit
                 cout << "\t\t\tGoodbye!";
                 return;
             default:
@@ -235,6 +240,7 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 
     s = wasteApp.closestSpot(user,stof(quantity),wtype);
 
+    // If no spot is found
 	if (s.getVertex() == -1)
 	{
 		cout << " Not found\n";
@@ -243,7 +249,10 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 	}
 	else
 	{
+
+    // Generate the graph with the path to the nearest spot
 		wasteApp.generateGraph(*wasteApp.getVertex(s.getVertex()));
+
 	}
 }
 
@@ -261,6 +270,7 @@ void gui_homeCollection(WasteApp &wasteApp, const string &username){
     cout << " What is the amount of waste you want to have collected? ";
     getline(cin, quantity);
 
+    // Creates the request and writes it in the request file
     ih_request(wasteApp.getUsers(), username, type, quantity);
 
     cout << " Request Complete!";
@@ -289,13 +299,14 @@ void gui_worker(WasteApp &wasteApp, const string &username){
 
         cout << "\n Option: ";
 
+        // Read the user option
         cin >> ans;
         cin.ignore(1000, '\n');
 
         gui_baseScreen();
 
         switch (ans) {
-            case 1: // Collect from Houses --- Held-Karp
+            case 1: // --- Collect from Houses( Held-Karp)
                 gui_collectFromHouses(wasteApp,user);
                 break;
             case 0: // --- Exit
@@ -325,8 +336,10 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
     else if (type == "Paper" || type == "paper")        wtype = PAPER;
     else                                                wtype = ORGANIC;
 
+    // Held Karp algorithm to find the shortest path
     wasteApp.homeCollection(user, wtype);
 
+    // Update the file so it doesn't have the requests that were completed already
     updateRequests(wasteApp);
 
     cout << " Collection Complete!";
