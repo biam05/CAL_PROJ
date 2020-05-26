@@ -13,21 +13,26 @@
 using namespace std;
 
 class WasteApp {
+
     vector<User> users;
     vector<Vertex> vertexes;
     vector<Edge> edges;
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
+
+    // USED IN KOSARAJU
     vector<Vertex> vertexesRevGraph;
     vector<Edge> edgesRevGraph;
     vector<Vertex> vertexesRev;
+    int maxComponent = 0;
+
+    // USED IN GRAPHVIEWR
     float xMin;
     float yMin;
     float xMax;
     float yMax;
     float graphScale;
-    int maxComponent = 0;
 
 public:
     WasteApp();
@@ -68,20 +73,27 @@ public:
 
     const vector<House> &getHouses() const;
 
+    // closest spot main function (calls Dijkstra algorithm)
     Spot closestSpot(const User &u, float q, enum type type);
 
-    void homeCollection(const User &u, type type);
-
+    // Dijkstra algorithm
     void dijkstra(const int &vID);
 
+    // home collection main function (calls Held-Karp)
+    void homeCollection(const User &u, type type);
+
+    // Held-Karp algorithm
     Vertex held_karp(const User &w, vector<Vertex *> housesToCollect);
 
+    // function used in Held-Karp that calculates the minimum distance and creates the correct path
     float g(Vertex &s, Vertex &v, vector<Vertex *> &path);
 
     void generatePath(Vertex &next);
 
+    // Kosaraju algorithm
     int conectividade();
 
+    // function that marks the given vertex as visited
     void visit(Vertex &v);
 
     void assign(Vertex &v, Vertex &root);

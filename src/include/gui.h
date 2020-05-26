@@ -9,96 +9,66 @@
 
 using namespace std;
 
-/** @defgroup GUI
- * @{
- *
- * GUI Functions
- */
 
-/*! \brief Function that starts the GUI
- *
- *  Calls the main GUI functions
- *
- *  @param users: vector with all the WasteApp users
- */
+
+//Function that starts the GUI and calls the main GUI functions
 void start_GUI(WasteApp &wasteApp);
 
-/*! \brief Function that displays the header
- */
+//Function that displays the header
 void gui_header();
 
-/*! \brief Function that displays the description of the application
- *
- *
- *
- */
+//Function that displays the description of the application
 void gui_about();
 
-/*! \brief Function that cleans the screen and displays the header
- */
+//Function that cleans the screen and displays the header
 void gui_baseScreen();
 
-/*! \brief Function that displays the main menu
+/* Function that displays the main menu
  *
  * The main menu has 3 options:
  * - Login: user login (user already has an account)
  * - Sign in: user creates an account
+ * - Conectividade: study the connectivity of the map selected
  * - Exit: exit program
- *
- * @param users: vector with all the WasteApp users
  */
 void gui_mainMenu(WasteApp &wasteApp);
 
-/*! \brief Function that asks the login data that is required
- *
- * @param users: vector with all the WasteApp users
- */
+//Function that asks the login data that is required
 void gui_login(WasteApp &wasteApp);
 
-/*! \brief Function that asks the sign in data that is required
- *
- * @param users: vector with all the WasteApp users
- */
+//unction that asks the sign in data that is required
 void gui_signin(WasteApp &wasteApp);
 
-/*! \brief Function that shows the client menu
+/* Function that shows the client menu
  *
  * The client menu has 3 options:
- * - ?: ???
- * - ?: ???
+ * - See the nearest spot
+ * - Make a request to have the waste collected at home
  * - Exit: exit program
- *
- * @param users: vector with all the WasteApp users
- * @param username: name of the user
  */
 void gui_client(WasteApp &wasteApp, const string &username);
 
+//Function that starts the screen where the user gives the information to find the nearest waste spot
 void gui_nearestSpot(WasteApp &wasteApp, User &user);
 
+//Function that starts the screen where the user gives the information ask for someone to request waste at their house
 void gui_homeCollection(WasteApp &wasteApp, const string &username);
 
-/*! \brief Function that shows the worker menu
+/*Function that shows the worker menu
  *
- * Thconst e work&er menu has 3 options:
- * - ?: ???
- * - ?: ???
+ * The worker menu has 2 options:
+ * - Request waste from houses
  * - Exit: exit program
- *
- * @param users: vector with all the WasteApp users
- * @param username: name of the user
  */
 void gui_worker(WasteApp &wasteApp, const string &username);
 
-/*! \brief Function that deals with an unknow user
- *
- * @param users: vector with all the WasteApp users
- *
- * @return 2 if the user want to try again, 0 if the user wants to create an account
- */
+//Function that deals with an unknown user
 int gui_unknownUser(WasteApp &wasteApp);
 
+//Function that starts the screen where the user gives the information to know which house's he has to collect waste from
 void gui_collectFromHouses(WasteApp &wasteApp,  User &user);
 
+//Function that starts the screen where the it's given information about the connectivity of the graph
 void gui_conectividade(WasteApp &wasteApp);
 
 #endif //SRC_GUI_H

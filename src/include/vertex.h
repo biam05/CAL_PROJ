@@ -6,14 +6,18 @@
 using namespace std;
 
 class Vertex {
+    //distance between the vertex and another one that is being studied
     float distance;
+    //boolean to know if the vertex was already visited
     bool visited;
+    //vector with the ID's of the edges that are connected to the vertex
     vector<int> adjacent_IDs;
     float x;
     float y;
     int ID;
     int prevEdge;
     int prevHouse;
+    //strongly connected component of the graph that the vertex belongs
     int component;
 
 public:
@@ -62,6 +66,8 @@ public:
     int getPrevHouse();
     int getComponent();
 
+    //Operator that checks if the distance from the vertex to another is lower than the distance from the given
+    //vertex to another
     bool operator<(Vertex & vertex) const;
 };
 
