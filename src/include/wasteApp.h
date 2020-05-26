@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <chrono>
+#include <map>
+#include <stack>
 
 #include "user.h"
 #include "spot.h"
@@ -16,16 +18,15 @@ class WasteApp {
 
     vector<User> users;
     vector<Vertex> vertexes;
+    map<int, Vertex*> vertexMap;
     vector<Edge> edges;
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
 
-    // USED IN KOSARAJU
-    vector<Vertex> vertexesRevGraph;
+    map<int, Vertex*> vertexesRevGraph;
     vector<Edge> edgesRevGraph;
-    vector<Vertex> vertexesRev;
-    int maxComponent = 0;
+    stack<Vertex*> vertexesRev;
 
     // USED IN GRAPHVIEWR
     float xMin;
@@ -45,7 +46,7 @@ public:
 
     void addUser(User u);
 
-    void addVertex(Vertex v);
+    void addVertex(Vertex* v);
 
     void addEdge(Edge e);
 
@@ -57,7 +58,7 @@ public:
 
     bool hasVertex(int id);
 
-    Vertex getVertex (int id);
+    Vertex* getVertex (int id);
 
     //Shows path from the client's house (green) to the closest spot (blue)
     void generateGraph(Vertex s);
@@ -83,22 +84,18 @@ public:
     //Dijkstra's algorithm beginning on vertex vID
     void dijkstra(const int &vID);
 
-    //Generates a path that passes through the biggest number of houses possible and ends in a central
-    void homeCollection(const User &u, type type);
+    Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
 
-    // Held-Karp algorithm
-    Vertex held_karp(const User &w, vector<Vertex *> housesToCollect);
+    float g(Vertex *s, Vertex *v, vector<Vertex *> &path);
 
-    // function used in Held-Karp that calculates the minimum distance and creates the correct path
-    float g(Vertex &s, Vertex &v, vector<Vertex *> &path);
+    void generatePath(Vertex* next);
 
-    // Kosaraju algorithm
+    void fillOrder(Vertex *v, stack<Vertex*> &stack);
+
+    void util(Vertex *v);
+
+
     int conectividade();
-
-    // function that marks the given vertex as visited
-    void visit(Vertex &v);
-
-    void assign(Vertex &v, Vertex &root);
 };
 
 

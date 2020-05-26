@@ -249,8 +249,10 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 	}
 	else
 	{
-	    // Generate the graph with the path to the nearest spot
-		wasteApp.generateGraph(wasteApp.getVertex(s.getVertex()));
+
+    // Generate the graph with the path to the nearest spot
+		wasteApp.generateGraph(*wasteApp.getVertex(s.getVertex()));
+
 	}
 }
 
@@ -345,6 +347,6 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
 
 void gui_conectividade(WasteApp &wasteApp) {
     string a;
-    cout << " Número de zonas conexas: " << wasteApp.conectividade() << endl;
+    cout << " Numero de zonas fortemente conexas: " << wasteApp.conectividade() << endl;
     cin >> a;
 }
