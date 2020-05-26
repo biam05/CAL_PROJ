@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <chrono>
+#include <map>
 
 #include "user.h"
 #include "spot.h"
@@ -15,6 +16,7 @@ using namespace std;
 class WasteApp {
     vector<User> users;
     vector<Vertex> vertexes;
+    map<int, Vertex*> vertexMap;
     vector<Edge> edges;
     vector<Spot> spots;
     vector<House> houses;
@@ -40,7 +42,7 @@ public:
 
     void addUser(User u);
 
-    void addVertex(Vertex v);
+    void addVertex(Vertex* v);
 
     void addEdge(Edge e);
 
@@ -52,7 +54,7 @@ public:
 
     bool hasVertex(int id);
 
-    Vertex getVertex (int id);
+    Vertex* getVertex (int id);
 
     void generateGraph(Vertex s);
 
@@ -74,11 +76,11 @@ public:
 
     void dijkstra(const int &vID);
 
-    Vertex held_karp(const User &w, vector<Vertex *> housesToCollect);
+    Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
 
-    float g(Vertex &s, Vertex &v, vector<Vertex *> &path);
+    float g(Vertex* s, Vertex* v, vector<Vertex *> &path);
 
-    void generatePath(Vertex &next);
+    void generatePath(Vertex* next);
 
     int conectividade();
 

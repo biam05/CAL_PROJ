@@ -243,7 +243,7 @@ void gui_nearestSpot(WasteApp &wasteApp, User &user){
 	}
 	else
 	{
-		wasteApp.generateGraph(wasteApp.getVertex(s.getVertex()));
+		wasteApp.generateGraph(*wasteApp.getVertex(s.getVertex()));
 	}
 }
 

@@ -19,13 +19,14 @@ void WasteApp::addUser(User u) {
     users.push_back(u);
 }
 
-void WasteApp::addVertex(Vertex v) {
-    if (v.getX() < xMin || xMin == -1) xMin = v.getX();
-    if (v.getX() > xMax || xMax == -1) xMax = v.getX();
-    if (v.getY() < yMin || yMin == -1) yMin = v.getY();
-    if (v.getY() > yMax || yMax == -1) yMax = v.getY();
+void WasteApp::addVertex(Vertex* v) {
+    if (v->getX() < xMin || xMin == -1) xMin = v->getX();
+    if (v->getX() > xMax || xMax == -1) xMax = v->getX();
+    if (v->getY() < yMin || yMin == -1) yMin = v->getY();
+    if (v->getY() > yMax || yMax == -1) yMax = v->getY();
 
-    vertexes.push_back(v);
+    vertexes.push_back(*v);
+    vertexMap.emplace(v->getID(), v);
 }
 
 void WasteApp::addEdge(Edge e) {
@@ -35,49 +36,50 @@ void WasteApp::addEdge(Edge e) {
 //Shows path from the client's house (green) to the closest spot (blue)
 void WasteApp::generateGraph(Vertex s) {
 
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
-    gv->createWindow((xMax-xMin) * graphScale, (yMax - yMin) * graphScale);
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale + 20, (yMax - yMin) * graphScale +20, false);
+    gv->createWindow((xMax-xMin) * graphScale +20, (yMax - yMin) * graphScale +20);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
 
     int id, x, y;
 
-    Vertex v;
+    Vertex* v = getVertex(s.getID());
 
-    for(auto & vertex : vertexes) {
-        id = vertex.getID();
-        if (id == s.getID()) v = vertex;
-        x = getXVertex(vertex.getX(), graphScale);
-        y = getYVertex(vertex.getY(), graphScale);
+
+
+    for(auto & vertex : vertexMap) {
+        id = vertex.first;
+        x = getXVertex(vertex.second->getX(), graphScale);
+        y = getYVertex(vertex.second->getY(), graphScale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
     for (auto & edge : edges) {
-        gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
+        gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::DIRECTED);
     }
     gv->rearrange();
 
     Edge e;
 
-    gv->setVertexSize(v.getID(), 10);
-    gv->setVertexColor(v.getID(), "blue");
+    gv->setVertexSize(v->getID(), 10);
+    gv->setVertexColor(v->getID(), "blue");
 
-    while(v.getPrevEdge() != -1) {
-        e = getEdge(v.getPrevEdge());
+    while(v->getPrevEdge() != -1) {
+        e = getEdge(v->getPrevEdge());
         gv->setEdgeColor(e.getID(), "red");
         gv->setEdgeThickness(e.getID(), 3);
         v = getVertex(e.getVi());
     }
 
-    gv->setVertexSize(v.getID(), 10);
-    gv->setVertexColor(v.getID(), "green");
+    gv->setVertexSize(v->getID(), 10);
+    gv->setVertexColor(v->getID(), "green");
 
     gv->rearrange();
 }
 
 //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
-void WasteApp::generatePath(Vertex &next) {
+void WasteApp::generatePath(Vertex* next) {
 
     GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
     gv->createWindow((xMax-xMin) * graphScale, (yMax - yMin) * graphScale);
@@ -87,10 +89,10 @@ void WasteApp::generatePath(Vertex &next) {
 
     int id, x, y;
 
-    for(auto & vertex : vertexes) {
-        id = vertex.getID();
-        x = getXVertex(vertex.getX(), graphScale);
-        y = getYVertex(vertex.getY(), graphScale);
+    for(auto & vertex : vertexMap) {
+        id = vertex.first;
+        x = getXVertex(vertex.second->getX(), graphScale);
+        y = getYVertex(vertex.second->getY(), graphScale);
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
@@ -101,101 +103,83 @@ void WasteApp::generatePath(Vertex &next) {
 
     Edge e;
 
-    gv->setVertexSize(next.getID(), 10);
-    gv->setVertexColor(next.getID(), "blue");
+    gv->setVertexSize(next->getID(), 10);
+    gv->setVertexColor(next->getID(), "blue");
 
-    while (next.getPrevHouse() != -1)
+    while (next->getPrevHouse() != -1)
     {
-        dijkstra(next.getPrevHouse());
-        for (Vertex &v : vertexes)
-        {
-            if (v.getID() == next.getID())
-            {
-                next = v;
-                break;
-            }
-        }
-        gv->setVertexSize(next.getPrevHouse(), 10);
-        gv->setVertexColor(next.getPrevHouse(), "yellow");
-        while(next.getPrevEdge() != -1) {
-            e = getEdge(next.getPrevEdge());
+        dijkstra(next->getPrevHouse());
+        gv->setVertexSize(next->getPrevHouse(), 10);
+        gv->setVertexColor(next->getPrevHouse(), "yellow");
+        while(next->getPrevEdge() != -1) {
+            e = getEdge(next->getPrevEdge());
             gv->setEdgeColor(e.getID(), "red");
             gv->setEdgeThickness(e.getID(), 3);
             next = getVertex(e.getVi());
         }
     }
 
-    gv->setVertexSize(next.getID(), 10);
-    gv->setVertexColor(next.getID(), "green");
+    gv->setVertexSize(next->getID(), 10);
+    gv->setVertexColor(next->getID(), "green");
 
     gv->rearrange();
 }
 
 bool WasteApp::hasVertex(int id) {
-    for (auto & vertex : vertexes) {
-        if (vertex.getID() == id) return true;
-    }
-    return false;
+//    for (auto & vertex : vertexes) {
+//        if (vertex.getID() == id) return true;
+//    }
+//    return false;
+    return vertexMap.find(id) != vertexMap.end();
 }
 
-Vertex WasteApp::getVertex(int id) {
-    for (auto & vertex : vertexes) {
-        if (vertex.getID() == id) return vertex;
-    }
-    return Vertex();
+Vertex* WasteApp::getVertex(int id) {
+//    for (auto & vertex : vertexes) {
+//        if (vertex.getID() == id) return vertex;
+//    }
+    return vertexMap.at(id);
 }
 
 int WasteApp::getXVertex(float x, float s) {
-    return (x - xMin) * s;
+    return (x - xMin) * s +10;
 }
 
 int WasteApp::getYVertex(float y, float s) {
-    return (yMax - y) * s;
+    return (yMax - y) * s +10;
 }
 
 void WasteApp::addAdjacent(int v, int e)
 {
-    for (Vertex &vert : vertexes)
-    {
-        if (vert.getID() == v)
-        {
-            vert.addAdjacent(e);
-        }
-    }
+    getVertex(v)->addAdjacent(e);
 }
 
 //Dijkstra's algorithm beginning on vertex vID
 void WasteApp::dijkstra(const int &vID)
 {
-
     MutablePriorityQueue<Vertex> mutablePriorityQueue;
-    for (auto &v : vertexes) {
-        if (v.getID() == vID) {
-            v.setVisited(true);
-            v.setDistance(0);
-            mutablePriorityQueue.insert(&v);
-            v.setPrevEdge(-1);
-        }
-        else {
-            v.setVisited(false);
-            v.setDistance(1000000);
-            v.setPrevEdge(-1);
-        }
+    for (auto &v : vertexMap) {
+        v.second->setVisited(false);
+        v.second->setDistance(1000000);
+        v.second->setPrevEdge(-1);
     }
+
+    Vertex* vI = getVertex(vID);
+    vI->setVisited(true);
+    vI->setDistance(0);
+    vI->setPrevEdge(-1);
+    mutablePriorityQueue.insert(vI);
+
     while (!mutablePriorityQueue.empty()) {
-        Vertex v = *mutablePriorityQueue.extractMin();
-        for (int &eid : v.getAdjacentIds()) {
+        Vertex* v = mutablePriorityQueue.extractMin();
+        for (int &eid : v->getAdjacentIds()) {
             for (Edge &e : edges) {
                 if (e.getID() == eid) {
-                    for (Vertex &vert : vertexes) {
-                        if (vert.getID() == e.getVf()) {
-                            if (!vert.getVisited() || vert.getDistance() > v.getDistance() + e.getWeight()) {
-                                vert.setDistance(v.getDistance() + e.getWeight());
-                                vert.setVisited(true);
-                                vert.setPrevEdge(e.getID());
-                                mutablePriorityQueue.insert(&vert);
-                            }
-                        }
+                    Vertex* vf = getVertex(e.getVf());
+                    if (!vf->getVisited() || vf->getDistance() > (v->getDistance() + e.getWeight())) {
+                            vf->setDistance(v->getDistance() + e.getWeight());
+                            vf->setVisited(true);
+                            vf->setPrevEdge(e.getID());
+                            mutablePriorityQueue.insert(vf);
                     }
                 }
             }
@@ -211,14 +195,11 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
     float min_dist = 1000000;
     Spot sp(type,-1,-1,-1);
     for (Spot &s : spots) {
-        for (Vertex &v : vertexes) {
-            if (s.getVertex() == v.getID()) {
-                if (s.fits(q) && s.getType() == type) {
-                    if (min_dist > v.getDistance()) {
-                        min_dist = v.getDistance();
-                        sp = s;
-                    }
-                }
+        Vertex* v = getVertex(s.getVertex());
+        if (s.fits(q) && s.getType() == type) {
+            if (min_dist > v->getDistance()) {
+                min_dist = v->getDistance();
+                sp = s;
             }
         }
     }
@@ -241,26 +222,22 @@ void WasteApp::homeCollection(const User &w, enum type type) {
         for (HouseRequest hr : user.getRequests())
         {
             if (hr.getType() == type) {
-                for (Vertex &vert : vertexes)
-                    if (vert.getID() == user.getHouse().getVertex())
+                Vertex* v = getVertex(user.getHouse().getVertex());
+                dijkstra(w.getHouse().getVertex());
+                if (v->getDistance() != 1000000)
+                {
+                    vector<HouseRequest> reqs = user.getRequests();
+                    for (auto req = reqs.begin(); req != reqs.end(); req++)
                     {
-                        dijkstra(w.getHouse().getVertex());
-                        if (vert.getDistance() != 1000000)
+                        if (req->getType() == type)
                         {
-                            vector<HouseRequest> reqs = user.getRequests();
-                            for (auto req = reqs.begin(); req != reqs.end(); req++)
-                            {
-                                if ((*req).getType() == type)
-                                {
-                                    reqs.erase(req);
-                                    req--;
-                                }
-                            }
-                            user.setRequests(reqs);
-                            housesToCollect.push_back(&vert);
+                            reqs.erase(req);
+                            req--;
                         }
                     }
-                break;
+                    user.setRequests(reqs);
+                    housesToCollect.push_back(v);
+                }
             }
         }
     }
@@ -273,7 +250,7 @@ void WasteApp::homeCollection(const User &w, enum type type) {
     }
 
 
-    Vertex next = held_karp(w,housesToCollect);
+    Vertex* next = held_karp(w, housesToCollect);
 
     generatePath(next);
 }
@@ -308,23 +285,23 @@ float minimum(const vector<float> &vec)
     return minimum;
 }
 
-float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex *> &path)
+float WasteApp::g(Vertex* s, Vertex* v, vector<Vertex *> &path)
 {
     float dist;
     if (path.empty())
     {
-        v.setPrevHouse(s.getID());
-        dijkstra(s.getID());
-        dist = v.getDistance();
+        v->setPrevHouse(s->getID());
+        dijkstra(s->getID());
+        dist = v->getDistance();
     }
     else if (path.size() == 1)
     {
-        path[0]->setPrevHouse(s.getID());
-        dijkstra(s.getID());
+        path[0]->setPrevHouse(s->getID());
+        dijkstra(s->getID());
         dist = path[0]->getDistance();
-        v.setPrevHouse(path[0]->getID());
+        v->setPrevHouse(path[0]->getID());
         dijkstra(path[0]->getID());
-        dist += v.getDistance();
+        dist += v->getDistance();
     }
     else
     {
@@ -339,9 +316,9 @@ float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex *> &path)
                     subset.push_back(path[j]);
                 }
             }
-            dist = g(s,*path[i],subset);
+            dist = g(s,path[i],subset);
             dijkstra(path[i]->getID());
-            dist += v.getDistance();
+            dist += v->getDistance();
             dists.push_back(dist);
         }
         vector<Vertex *> subset;
@@ -357,8 +334,8 @@ float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex *> &path)
                         subset.push_back(path[j]);
                     }
                 }
-                g(s,*path[i],subset);
-                v.setPrevHouse(path[i]->getID());
+                g(s,path[i],subset);
+                v->setPrevHouse(path[i]->getID());
                 break;
             }
         }
@@ -366,31 +343,21 @@ float WasteApp::g(Vertex &s, Vertex &v, vector<Vertex *> &path)
     return dist;
 }
 
-Vertex WasteApp::held_karp(const User &w, vector<Vertex *> housesToCollect) {
+Vertex* WasteApp::held_karp(const User &w, vector<Vertex *> housesToCollect) {
     float distance;
     float min_dist = 1000000;
-    Vertex centralV;
-    int v = w.getHouse().getVertex();
-    Vertex start;
-    for (Vertex &s : vertexes)
-    {
-        if (s.getID() == v)
-        {
-            start = s;
-            break;
-        }
-    }
+    Vertex* centralV;
+    Vertex* start = getVertex(w.getHouse().getVertex());
+
     for (House &c : centrals) {
-        for (Vertex &vert : vertexes) {
-            if (c.getVertex() == vert.getID()) {
-                distance = g(start,vert,housesToCollect);
-                if (min_dist > distance) {
-                    min_dist = distance;
-                    centralV = vert;
-                }
-            }
+        Vertex* vert = getVertex(c.getVertex());
+        distance = g(start,vert,housesToCollect);
+        if (min_dist > distance) {
+            min_dist = distance;
+            centralV = vert;
         }
     }
+
     g(start,centralV,housesToCollect);
 
     return centralV;
