@@ -78,7 +78,7 @@ public:
 
     Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
 
-    float g(Vertex* s, Vertex* v, vector<Vertex *> &path);
+    float g(Vertex*& s, Vertex*& v, vector<Vertex *> &path);
 
     void generatePath(Vertex* next);
 

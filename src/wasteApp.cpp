@@ -238,6 +238,7 @@ void WasteApp::homeCollection(const User &w, enum type type) {
                     user.setRequests(reqs);
                     housesToCollect.push_back(v);
                 }
+                break;
             }
         }
     }
@@ -285,7 +286,7 @@ float minimum(const vector<float> &vec)
     return minimum;
 }
 
-float WasteApp::g(Vertex* s, Vertex* v, vector<Vertex *> &path)
+float WasteApp::g(Vertex*& s, Vertex*&v, vector<Vertex *> &path)
 {
     float dist;
     if (path.empty())
