@@ -286,7 +286,7 @@ float minimum(const vector<float> &vec)
     return minimum;
 }
 
-float WasteApp::g(Vertex*& s, Vertex*&v, vector<Vertex *> &path)
+float WasteApp::g(Vertex* s, Vertex* v, vector<Vertex *> &path)
 {
     float dist;
     if (path.empty())
@@ -376,64 +376,82 @@ float WasteApp::getGraphScale() const {
     return graphScale;
 }
 
-void WasteApp::visit(Vertex &v)
-{
-    if (!v.getVisited())
+void WasteApp::fillOrder(Vertex *v, stack<Vertex*> &stack){
+    v->setVisited(true);
+    for(int i = 0; i != v->getAdjacentIds().size(); i++)
     {
-        v.setVisited(true);
-        for (int &adj : v.getAdjacentIds())
-            for (Vertex &adjV : vertexes)
-                if (adjV.getID() == getEdge(adj).getVf())
-                    visit(adjV);
-        Vertex x = v;
-        x.clearAdjacentIds();
-        vertexesRev.push_back(x);
+        if(!getVertex(getEdge(v->getAdjacentIds()[i]).getVf())->getVisited())
+            fillOrder(getVertex(getEdge(v->getAdjacentIds()[i]).getVf()), vertexesRev);
     }
-}
 
-void WasteApp::assign(Vertex &v, Vertex &root)
-{
-    if (v.getComponent() == -1) {
-        if (v.getID() == root.getID()) {
-            root.setComponent(maxComponent);
-            maxComponent++;
-        }
-        v.setComponent(root.getComponent());
-        for (int &e : v.getAdjacentIds()) {
-            for (Vertex &vert : vertexesRevGraph)
-                if (vert.getID() == getEdge(e).getVi())
-                    assign(vert,root);
-        }
-    }
+    vertexesRev.push(v);
 }
 
 int WasteApp::conectividade() {
-    for (Vertex &v : vertexes)
-    {
-        v.setVisited(false);
+    int ret = 0;
+
+    for (auto &v : vertexMap) {
+        v.second->setVisited(false);
     }
-    for (Vertex &v : vertexes)
-    {
-        visit(v);
-        Vertex x = v;
-        x.clearAdjacentIds();
-        vertexesRevGraph.push_back(x);
+
+    for (auto &v : vertexMap){
+        if(!v.second->getVisited()){
+            fillOrder(v.second, vertexesRev);
+        }
     }
-    for (Edge &e : edges)
+
+    Vertex* tmp;
+
+    for (auto &v : vertexMap) {
+        tmp = new Vertex();
+        tmp = v.second;
+        tmp->clearAdjacentIds();
+        vertexesRevGraph.emplace(tmp->getID(), tmp);
+    }
+
+    for(auto &e : edges){
+
+        Edge edge = Edge(e.getWeight(), e.getID(), e.getVf(), e.getVi());
+        edgesRevGraph.push_back(edge);
+        for(auto &vert : vertexesRevGraph){
+            if (edge.getVi() == vert.second->getID())
+                vert.second->addAdjacent(edge.getID());
+        }
+
+    }
+
+    for (auto &v : vertexMap) {
+        v.second->setVisited(false);
+    }
+
+    while(!vertexesRev.empty()){
+        Vertex * v = vertexesRev.top();
+        vertexesRev.pop();
+
+        if(!v->getVisited()){
+            util(v);
+            ret++;
+            //cout << endl;
+        }
+    }
+    return ret;
+}
+
+void WasteApp::util(Vertex *v) {
+    v->setVisited(true);
+    //cout << v->getID() << " ";
+    for(int i = 0; i != v->getAdjacentIds().size(); i++)
     {
-        edgesRevGraph.push_back(Edge(e.getWeight(),e.getID(),e.getVf(),e.getVi()));
-        for (Vertex &v : vertexesRevGraph)
-            if (e.getVf() == v.getID())
-            {
-                v.addAdjacent(e.getID());
-                break;
+        for(auto &e : edgesRevGraph){
+            if(e.getID() == v->getAdjacentIds()[i]){
+                for(auto &vert : vertexesRevGraph){
+                    if(vert.second->getID() == e.getVf() && !vert.second->getVisited())
+                        util(vert.second);
+                }
             }
+
+        }
+
     }
-    while (!vertexesRev.empty())
-    {
-        Vertex v = vertexesRev[0];
-        assign(v,v);
-        vertexesRev.erase(vertexesRev.begin());
-    }
-    return maxComponent;
+
 }

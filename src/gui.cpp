@@ -334,6 +334,6 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
 
 void gui_conectividade(WasteApp &wasteApp) {
     string a;
-    cout << " Número de zonas conexas: " << wasteApp.conectividade() << endl;
+    cout << " Numero de zonas fortemente conexas: " << wasteApp.conectividade() << endl;
     cin >> a;
 }

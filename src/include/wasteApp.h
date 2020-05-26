@@ -4,6 +4,7 @@
 #include <vector>
 #include <chrono>
 #include <map>
+#include <stack>
 
 #include "user.h"
 #include "spot.h"
@@ -21,9 +22,9 @@ class WasteApp {
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
-    vector<Vertex> vertexesRevGraph;
+    map<int, Vertex*> vertexesRevGraph;
     vector<Edge> edgesRevGraph;
-    vector<Vertex> vertexesRev;
+    stack<Vertex*> vertexesRev;
     float xMin;
     float yMin;
     float xMax;
@@ -78,15 +79,15 @@ public:
 
     Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
 
-    float g(Vertex*& s, Vertex*& v, vector<Vertex *> &path);
+    float g(Vertex *s, Vertex *v, vector<Vertex *> &path);
 
     void generatePath(Vertex* next);
 
+    void fillOrder(Vertex *v, stack<Vertex*> &stack);
+
+    void util(Vertex *v);
+
     int conectividade();
-
-    void visit(Vertex &v);
-
-    void assign(Vertex &v, Vertex &root);
 };
 
 

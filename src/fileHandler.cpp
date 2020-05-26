@@ -107,7 +107,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
 
     string filename = folder + "/nodes.txt";
     ifstream nodes (filename);
-
+    //ifstream nodes ("../data/nodes.txt");
     if(nodes.is_open()) {
         getline(nodes, temp);
         n = stoi(temp);
@@ -130,6 +130,8 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
     filename = folder + "/edges.txt";
     ifstream edges (filename);
 
+    //ifstream edges("../data/edges.txt");
+
     if(edges.is_open()) {
         getline(edges, temp);
         n = stoi(temp);
@@ -147,7 +149,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         }
         edges.close();
     } else {
-        cout << "Couldn't open edges file!" << endl;
+        cout << "Couldn't open edges.txt file!" << endl;
     }
 }
 
