@@ -348,5 +348,6 @@ void gui_collectFromHouses(WasteApp &wasteApp,  User &user){
 void gui_conectividade(WasteApp &wasteApp) {
     string a;
     cout << " Numero de zonas fortemente conexas: " << wasteApp.conectividade() << endl;
+    cout << " Type any key to end the program.";
     cin >> a;
 }

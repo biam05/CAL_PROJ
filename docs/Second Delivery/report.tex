@@ -562,11 +562,7 @@ A informação relativamente aos pontos de interesse é guardada num grafo, send
 		\item um \textbf{ponto azul} - o ponto de recolha do resíduo escolhido ainda com capacidade mais próximo da habitação;
 		\item \textbf{caminho vermelho} - o caminho que o utilizador teria de tomar para chegar ao ponto determinado. 
 	\end{itemize}
-	
-	\begin{figure}[h!]
-  		\centerline{\includegraphics[scale=0.7]{wasteapp_4x4henrique123organic.png}}
-  		\caption{Grafo gerado no \textit{GraphViewer} quando o utilizador é \textit{henrique123}, escolhe o mapa 4x4 e dá como \textit{input} "Organic" e "3".}
-	\end{figure}
+
 	
 	\item Se o utilizador for um \textbf{trabalhador} e quiser saber qual o percurso que terá de tomar para recolher determinados resíduos às casas dos utilizadores que realizaram o pedido, este terá de digitar o resíduo que pretende depositar. Após a introdução dos dados, é apresentado \textit{GraphViewer}:
 	\begin{itemize}
@@ -577,9 +573,24 @@ A informação relativamente aos pontos de interesse é guardada num grafo, send
 		\item \textbf{pontos amarelos} - casas das pessoas que pretendem que os resíduos sejam recolhidos à sua porta		
 	\end{itemize}
 	
+	\begin{figure}[h!]
+  		\centerline{\includegraphics[scale=0.4]{wasteapp_4x4henrique123organic.png}}
+  		\caption{Grafo gerado no \textit{GraphViewer} quando o utilizador é \textit{henrique123}, escolhe o mapa 4x4 e dá como \textit{input} "Organic" e "3".}
+	\end{figure}
+	
+	\begin{figure}[h!]
+  		\centerline{\includegraphics[scale=0.4]{wasteapp_portohenrique123organic.png}}
+  		\caption{Grafo gerado no \textit{GraphViewer} quando o utilizador é \textit{henrique123}, escolhe o mapa Porto e dá como \textit{input} "Organic" e "3".}
+	\end{figure}
+	
 \begin{figure}[h!]
-  	\centerline{\includegraphics[scale=0.7]{wasteapp_4x4danielgsilvaglass.png}}
+  	\centerline{\includegraphics[scale=0.4]{wasteapp_4x4danielgsilvaglass.png}}
   	\caption{Grafo gerado no \textit{GraphViewer} quando o utilizador é \textit{danielgsilva}, escolhe o mapa 4x4 e dá como \textit{input} "Glass".}
+\end{figure}
+
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.4]{porto_disconnected.png}}
+  \caption{Grafo gerado no \textit{GraphViewer} quando o utilizador é \textit{danielgsilva}, escolhe o mapa Porto e dá como \textit{input} "Glass".}
 \end{figure}
 	
 \end{itemize}
@@ -594,7 +605,7 @@ A informação relativamente aos pontos de interesse é guardada num grafo, send
 
 \subsection{Grafo}
 
-A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{\textit{map} que tem como pares o ID de um vértice e um apontador para o vértice} e um \textbf{\textit{map} que tem como pares o ID de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
+A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{\textit{map} que tem como pares o ID (\textit{chave}) de um vértice e um apontador para o vértice} e um \textbf{\textit{map} que tem como pares o ID (\textit{chave}) de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
 
 \subsection{Aresta}
 
@@ -616,11 +627,11 @@ A classe \textbf{\textit{WasteApp}} é também responsável pela gestão de serv
 
 \subsection{Utilizadores}
 
-Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENT}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
+Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENT}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, o \textbf{tipo} de utilizador que é e um vetor de \textbf{pedidos}, onde estão guardas as informações para quando um trabalhador quiser recolher resíduos ao domicílio.
 
 \subsection{Lixo a ser Depositado pelo Utilizador}
 
-Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{Request}}, definida em \textit{request.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade} e o \textbf{utilizador} que pretende fazê-lo, de modo a ser possível calcular o caminho mais curto deste até a um ponto de recolha
+Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{HouseRequest}}, definida em \textit{houseRequest.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade}.
 
 \subsection{Casa}
 
@@ -805,9 +816,9 @@ Edition, Mark Allen Weiss, Addison Wesley, 2006
 
 [6] Ime.usp.br. 2020. \textit{Algoritmo De Kosaraju-Sharir}. [online] Disponível em: \url{https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/kosaraju.html#sec:implementation>}.
 
-Figura 1 e Figura 10: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
+Figura 1 e Figura 12: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
 
-Figura 2 e Figura 13: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+Figura 2 e Figura 15: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
 
 Figura 3: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
 

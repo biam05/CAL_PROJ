@@ -594,7 +594,7 @@ A informação relativamente aos pontos de interesse é guardada num grafo, send
 
 \subsection{Grafo}
 
-A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{mapa que tem como pares o ID de um vértice e um apontador para o vértice} e um \textbf{mapa que tem como pares o ID de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
+A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{\textit{map} que tem como pares o ID (\textit{chave}) de um vértice e um apontador para o vértice} e um \textbf{\textit{map} que tem como pares o ID (\textit{chave}) de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
 
 \subsection{Aresta}
 
@@ -616,11 +616,11 @@ A classe \textbf{\textit{WasteApp}} é também responsável pela gestão de serv
 
 \subsection{Utilizadores}
 
-Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENT}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, e o \textbf{tipo} de utilizador que é.
+Os utilizadores da aplicação poderão ser de dois tipos: \textit{\textbf{CLIENT}} ou \textbf{\textit{WORKER}}, estando estes definidos numa enumeração de nome \textit{userType}. Esta classe é constituída pelo \textit{\textbf{username}} que o utilizador tem na aplicação, a sua \textit{\textbf{password}}, uma \textbf{casa}, que será a posição a ter em conta caso este queira ir para o local de recolha mais próximo ou para requisitar a função de recolha de lixo ao domicílio da aplicação, o \textbf{tipo} de utilizador que é e um vetor de \textbf{pedidos}, onde estão guardas as informações para quando um trabalhador quiser recolher resíduos ao domicílio.
 
 \subsection{Lixo a ser Depositado pelo Utilizador}
 
-Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{Request}}, definida em \textit{request.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade} e o \textbf{utilizador} que pretende fazê-lo, de modo a ser possível calcular o caminho mais curto deste até a um ponto de recolha
+Quando um cliente pretende saber em que local poderá depositar os seus resíduos, é gerado um pedido q é guardado na classe \textbf{\textit{HouseRequest}}, definida em \textit{houseRequest.h}. Esta estrutura de dados é constituída por um \textbf{tipo de lixo} que irá ser depositado, uma \textbf{quantidade}.
 
 \subsection{Casa}
 
@@ -655,7 +655,7 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 \end{itemize}
 
 A \textbf{complexidade temporal} tem como valor O($(|V| + |E|)*log(|V|)$) dado que, tal como foi explicado na primeira parte do relatório, a cada vértice processado, pode ser necessário adicionar, remover ou mover vértices na fila de prioridade.
-Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um vetor na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
+Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um \textit{map} na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
 
 \subsection{Análise temporal empírica }
 
@@ -734,7 +734,7 @@ Após os testes nos mapas mais pequenos, testamos no mapa fornecido da cidade do
 %----------------------------------------------------------------------------------------
 \chapter[Conclusão Geral][Conclusão Geral]{Conclusão Geral} \label{\thechapter}
 
-Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente.
+Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente e a influência das estruturas de dados utilizadas nos mesmos.
 
 \newpage
 %----------------------------------------------------------------------------------------
