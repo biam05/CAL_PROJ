@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <chrono>
+#include <map>
+#include <stack>
 
 #include "user.h"
 #include "spot.h"
@@ -15,17 +17,15 @@ using namespace std;
 class WasteApp {
 
     vector<User> users;
-    vector<Vertex> vertexes;
-    vector<Edge> edges;
+    map<int, Vertex*> vertexMap;
+    map<int, Edge*> edgeMap;
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
 
-    // USED IN KOSARAJU
-    vector<Vertex> vertexesRevGraph;
-    vector<Edge> edgesRevGraph;
-    vector<Vertex> vertexesRev;
-    int maxComponent = 0;
+    map<int, Vertex*> vertexesRevGraph;
+    map<int, Edge*> edgesRevGraphMap;
+    stack<Vertex*> vertexesRev;
 
     // USED IN GRAPHVIEWR
     float xMin;
@@ -45,9 +45,9 @@ public:
 
     void addUser(User u);
 
-    void addVertex(Vertex v);
+    void addVertex(Vertex* v);
 
-    void addEdge(Edge e);
+    void addEdge(Edge* e);
 
     void addSpot(Spot s);
 
@@ -57,15 +57,19 @@ public:
 
     bool hasVertex(int id);
 
-    Vertex getVertex (int id);
+    Vertex* getVertex (int id);
+
+    Vertex* getVertexR (int id);
+
+    Edge* getEdge (int id);
+
+    Edge* getEdgeR (int id);
 
     //Shows path from the client's house (green) to the closest spot (blue)
     void generateGraph(Vertex s);
 
     //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
     void generatePath(Vertex &next);
-
-    Edge getEdge (int id);
 
     int getXVertex(float x, float s);
 
@@ -83,22 +87,19 @@ public:
     //Dijkstra's algorithm beginning on vertex vID
     void dijkstra(const int &vID);
 
-    //Generates a path that passes through the biggest number of houses possible and ends in a central
-    void homeCollection(const User &u, type type);
+    Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
 
-    // Held-Karp algorithm
-    Vertex held_karp(const User &w, vector<Vertex *> housesToCollect);
+    float g(Vertex *s, Vertex *v, vector<Vertex *> &path);
 
-    // function used in Held-Karp that calculates the minimum distance and creates the correct path
-    float g(Vertex &s, Vertex &v, vector<Vertex *> &path);
+    void generatePath(Vertex* next);
 
-    // Kosaraju algorithm
+    void fillOrder(Vertex *v, stack<Vertex*> &stack);
+
+    void util(Vertex *v);
+
+    void homeCollection(const User &w, enum type type);
+
     int conectividade();
-
-    // function that marks the given vertex as visited
-    void visit(Vertex &v);
-
-    void assign(Vertex &v, Vertex &root);
 };
 
 

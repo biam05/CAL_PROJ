@@ -143,7 +143,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
 
     // Open the file with the information about the nodes
     ifstream nodes (filename);
-
+    //ifstream nodes ("../data/nodes.txt");
     if(nodes.is_open()) {
 
         // Get the number of all the nodes that exist in the file
@@ -155,9 +155,12 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
             c1 = temp.find(',', 0);
             id = stoi(temp.substr(1, c1 - 1));                  // ID of the node
             c2 = temp.find(',', c1 + 1);
-            x = stof(temp.substr(c1 + 1, c2 - c1 - 1));         // X coordinate of the node
-            y = stof(temp.substr(c2 + 1, temp.length() - 1));   // Y coordinate of the node
-            wasteApp.addVertex(Vertex(id, x, y));
+
+
+            x = stof(temp.substr(c1 + 1, c2 - c1 - 1));
+            y = stof(temp.substr(c2 + 1, temp.length() - 1));   // X coordinate of the node
+            wasteApp.addVertex(new Vertex(id, x, y));           // Y coordinate of the node
+
         }
         nodes.close();
     } else {
@@ -169,6 +172,8 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
     // Open the file with the information about the edges
     ifstream edges (filename);
 
+    //ifstream edges("../data/edges.txt");
+
     if(edges.is_open()) {
 
         // Get the number of all the edges that exist in the file
@@ -178,12 +183,12 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         for(int i = 0; i < n; i++) {
             getline(edges, temp);
             c1 = temp.find(',', 0);
-            v1 = stoi(temp.substr(1, c1-1));                    // Beginning vertex of the edge
-            v2 = stoi(temp.substr(c1 + 1, temp.length()-1));    // Ending vertex of the edge
-            if (wasteApp.hasVertex(v1) && wasteApp.hasVertex(v2)) {          // If WasteApp has those vertexes
 
-                // Add an edge that has a weight calculated by the distance between the 2 vertexes
-                wasteApp.addEdge(Edge(sqrt(pow((wasteApp.getVertex(v1).getX() - wasteApp.getVertex(v2).getX()),2) + pow((wasteApp.getVertex(v1).getY() - wasteApp.getVertex(v2).getY()),2)), i, v1, v2));
+            v1 = stoi(temp.substr(1, c1-1));                              // Beginning vertex of the edge
+            v2 = stoi(temp.substr(c1 + 1, temp.length()-1));              // Ending vertex of the edge
+            if (wasteApp.hasVertex(v1) && wasteApp.hasVertex(v2)) {
+              // Add an edge that has a weight calculated by the distance between the 2 vertexes
+                wasteApp.addEdge(new Edge(sqrt(pow((wasteApp.getVertex(v1)->getX() - wasteApp.getVertex(v2)->getX()),2) + pow((wasteApp.getVertex(v1)->getY() - wasteApp.getVertex(v2)->getY()),2)), i, v1, v2));
 
                 // Add the edge as one of the edges that are connected to the beginning vertex
                 wasteApp.addAdjacent(v1,i);
@@ -192,7 +197,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
         }
         edges.close();
     } else {
-        cout << "Couldn't open edges file!" << endl;
+        cout << "Couldn't open edges.txt file!" << endl;
     }
 }
 
