@@ -80,8 +80,8 @@ void WasteApp::generateGraph(Vertex s) {
 //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
 void WasteApp::generatePath(Vertex* next) {
 
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale, (yMax - yMin) * graphScale, false);
-    gv->createWindow((xMax-xMin) * graphScale, (yMax - yMin) * graphScale);
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale +20, (yMax - yMin) * graphScale +20, false);
+    gv->createWindow((xMax-xMin) * graphScale +20, (yMax - yMin) * graphScale +20);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
@@ -125,10 +125,6 @@ void WasteApp::generatePath(Vertex* next) {
 }
 
 bool WasteApp::hasVertex(int id) {
-//    for (auto & vertex : vertexes) {
-//        if (vertex.getID() == id) return true;
-//    }
-//    return false;
     return vertexMap.find(id) != vertexMap.end();
 }
 
@@ -194,7 +190,6 @@ void WasteApp::dijkstra(const int &vID)
 
 //Returns the closest spot of the type provided that can fit the quantity
 Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
-
     dijkstra(u.getHouse().getVertex());
 
     float min_dist = 1000000;
@@ -254,7 +249,6 @@ void WasteApp::homeCollection(const User &w, enum type type) {
         cin >> a;
         return;
     }
-
 
     Vertex* next = held_karp(w, housesToCollect);
 

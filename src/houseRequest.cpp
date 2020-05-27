@@ -6,14 +6,6 @@ enum type HouseRequest::getType() const {
     return type;
 }
 
-void HouseRequest::setType(enum type type) {
-    HouseRequest::type = type;
-}
-
 float HouseRequest::getQuantity() const {
     return quantity;
-}
-
-void HouseRequest::setQuantity(float quantity) {
-    HouseRequest::quantity = quantity;
 }

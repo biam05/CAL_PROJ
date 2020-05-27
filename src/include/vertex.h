@@ -17,8 +17,6 @@ class Vertex {
     int ID;
     int prevEdge;
     int prevHouse;
-    //strongly connected component of the graph that the vertex belongs
-    int component;
 
 public:
     int queueIndex = 0; 		// required by MutablePriorityQueue
@@ -31,14 +29,12 @@ public:
         y = -1;
         prevEdge = -1;
         prevHouse = -1;
-        component = -1;
     }
     Vertex (int ID, float x, float y) : ID(ID), x(x), y(y) {
         distance = 0;
         visited = false;
         prevEdge = -1;
         prevHouse = -1;
-        component = -1;
     };
 
     void setDistance (float d);
@@ -48,8 +44,6 @@ public:
     void setPrevEdge(int e);
 
     void setPrevHouse(int v);
-
-    void setComponent(int c);
 
     vector<int> getAdjacentIds();
 
@@ -64,7 +58,6 @@ public:
     float getY();
     int getPrevEdge();
     int getPrevHouse();
-    int getComponent();
 
     //Operator that checks if the distance from the vertex to another is lower than the distance from the given
     //vertex to another

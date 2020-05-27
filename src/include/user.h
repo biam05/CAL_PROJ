@@ -6,9 +6,6 @@
 #include "house.h"
 #include "houseRequest.h"
 
-// Might include this -> spot vector
-// #include "spot.h"
-
 using namespace std;
 
 enum userType {CLIENT, WORKER};
@@ -28,10 +25,6 @@ public:
     userType getType() const;
     const House &getHouse() const;
     const vector<HouseRequest> &getRequests() const;
-
-    void setUsername(const string &username);
-    void setPassword(const string &password);
-    void setType(userType type);
     void setRequests(const vector<HouseRequest> &requests);
 };
 

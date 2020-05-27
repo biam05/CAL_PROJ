@@ -2,7 +2,6 @@
 #define SRC_WASTEAPP_H
 
 #include <vector>
-#include <chrono>
 #include <map>
 #include <stack>
 
@@ -69,7 +68,7 @@ public:
     void generateGraph(Vertex s);
 
     //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
-    void generatePath(Vertex &next);
+    void generatePath(Vertex* next);
 
     int getXVertex(float x, float s);
 
@@ -90,8 +89,6 @@ public:
     Vertex* held_karp(const User &w, vector<Vertex *> housesToCollect);
 
     float g(Vertex *s, Vertex *v, vector<Vertex *> &path);
-
-    void generatePath(Vertex* next);
 
     void fillOrder(Vertex *v, stack<Vertex*> &stack);
 

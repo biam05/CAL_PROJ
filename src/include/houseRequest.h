@@ -12,11 +12,7 @@ public:
 
     enum type getType() const;
 
-    void setType(enum type type);
-
     float getQuantity() const;
-
-    void setQuantity(float quantity);
 };
 
 

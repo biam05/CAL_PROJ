@@ -12,10 +12,6 @@ float Spot::getQuantity() {
     return quantity;
 }
 
-float Spot::getMaxQuantity() {
-    return max_quantity;
-}
-
 int Spot::getVertex() {
     return vertex;
 }
