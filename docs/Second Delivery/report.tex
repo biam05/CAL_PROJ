@@ -521,15 +521,15 @@ A aplicação \textit{WasteApp} desenvolvida pelo nosso grupo de trabalho tem co
 Inicialmente, o utilizador terá de selecionar que mapa pretende ler e os ficheiros que terão de ser analisados. Existem duas opções: mapa \textbf{4x4} (utilizado para testar os algoritmos implementados) e o mapa \textbf{Porto}. Cada um destes está guardado dentro da pasta \textit{data} e tem um ficheiros de nós, \textit{nodes.txt}, de arestas \textit{edges.txt} e de utilizadores da aplicação, \textit{userlogins.txt}. O ficheiro dos pedidos de cada cliente está guardado na pasta \textit{data} e é comum aos dois mapas. 
 
 \begin{figure}[h!]
-  \centerline{\includegraphics[scale=0.8]{wasteapp_1stmenu.png}}
+  \centerline{\includegraphics[scale=0.7]{wasteapp_1stmenu.png}}
   \caption{Primeiro Menu da aplicação \textit{WasteApp}.}
 \end{figure}
 
-Posteriormente, o utilizador terá selecionar se pretende fazer \textit{login} na sua conta ou criar uma conta nova. Estas opções são necessárias uma vez que o utilizador poderá ser um utilizador "normal" que tem como objetivo saber qual o ponto de recolha mais próximo de sua casa ou um utilizador que pretende ir a casa dos restantes recolher os resíduos, logo terão de ser apresentados menus diferentes com funcionalidades igualmente diferentes.
+Posteriormente, o utilizador terá selecionar se pretende fazer \textit{\textbf{login}} na sua conta, \textbf{criar uma conta nova} ou estudar a\textbf{ conectividade} do mapa escolhido. As duas primeiras opções são necessárias uma vez que o utilizador poderá ser um utilizador "normal" que tem como objetivo saber qual o ponto de recolha mais próximo de sua casa ou um utilizador que pretende ir a casa dos restantes recolher os resíduos, logo terão de ser apresentados menus diferentes com funcionalidades igualmente diferentes. Em relação ao menu da conectividade, este apresente um ecrã com o \textbf{número se zonas fortemente conexas} do mapa escolhido.
 
 \begin{figure}[h!]
-  \centerline{\includegraphics[scale=0.8]{wasteapp_2ndmenu.png}}
-  \caption{Segundo Menu: \textit{Login} ou Sign In.}
+  \centerline{\includegraphics[scale=0.7]{wasteapp_2ndmenu.png}}
+  \caption{Segundo Menu: \textit{Login}, Sign In ou Estudo da Conectividade.}
 \end{figure}
 
 Ao selecionar a opção de \textbf{\textit{login}}, o utilizador terá de escrever o seu \textit{username} e a sua \textit{password}. Poderão acontecer três situações distintas:
@@ -541,14 +541,14 @@ Ao selecionar a opção de \textbf{\textit{login}}, o utilizador terá de escrev
 \end{itemize}
 
 \begin{figure}[h!]
-  \centerline{\includegraphics[scale=0.8]{wasteapp_login.png}}
+  \centerline{\includegraphics[scale=0.7]{wasteapp_login.png}}
   \caption{Exemplo de um \textit{Login}.}
 \end{figure}
 
 Por outro lado, se o utilizador selecionar a opção de \textit{\textbf{sign in}}, este terá de dar algumas das suas credenciais: o \textbf{\textit{username}} que pretende utilizar na aplicação, uma \textbf{\textit{password}}, um \textbf{vértice} que será a sua morada e se pretende ser um \textbf{trabalhador ou cliente}
 
 \begin{figure}[h!]
-  \centerline{\includegraphics[scale=0.8]{wasteapp_signin.png}}
+  \centerline{\includegraphics[scale=0.7]{wasteapp_signin.png}}
   \caption{Exemplo de um \textit{Sign In}.}
 \end{figure}
 
@@ -594,7 +594,7 @@ A informação relativamente aos pontos de interesse é guardada num grafo, send
 
 \subsection{Grafo}
 
-A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{vetor de vértices} e um \textbf{vetor de arestas}, sendo os dois últimos os utilizados na representação do grafo. O vetor é necessário para se poder realizar uma iteração sobre todo o conjunto de vértices do grafo. Possui diversos métodos para a manipulação deste, algoritmos de pesquisa e ainda um método que possibilita a visualização do grafo.
+A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{\textit{map} que tem como pares o ID de um vértice e um apontador para o vértice} e um \textbf{\textit{map} que tem como pares o ID de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
 
 \subsection{Aresta}
 
@@ -602,7 +602,7 @@ As arestas do grafo são representadas pela classe \textbf{\textit{Edge}}, defin
 
 \subsection{Vértice}
 
-Os vértices utilizados na representação do grafo são representados pela classe \textbf{\textit{Vertex}}, definida em \textit{vertex.h}. Esta estrutura de dados possui uma \textit{distância} ao utilizador (utilizado para determinar o percurso mais curto), um \textbf{vetor} com todos os IDs das arestas que estão ligadas a este vértice, uma \textbf{coordenada horizontal}, uma \textbf{coordenada vertical} e um \textbf{ID} que o identifica.
+Os vértices utilizados na representação do grafo são representados pela classe \textbf{\textit{Vertex}}, definida em \textit{vertex.h}. Esta estrutura de dados possui uma \textbf{distância} ao utilizador (que é calculada no algoritmo de \textit{Dijkstra}), um \textbf{vetor} com todos os IDs das arestas que estão ligadas a este vértice, uma \textbf{coordenada horizontal}, uma \textbf{coordenada vertical}, um \textbf{ID} que o identifica, um booleano que identifica se o vértice já foi \textbf{visitado} ou não, um número inteiro que corresponde ao ID \textbf{casa visitada} antes de chegar a este e um número inteiro que corresponde ao ID da \textbf{aresta} que se percorreu para chegar a este vértice.
 
 \section{Desenho dos Mapas e Itinerários}
 
@@ -655,16 +655,23 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 \end{itemize}
 
 A \textbf{complexidade temporal} tem como valor O($(|V| + |E|)*log(|V|)$) dado que, tal como foi explicado na primeira parte do relatório, a cada vértice processado, pode ser necessário adicionar, remover ou mover vértices na fila de prioridade.
-Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um vetor na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
+Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um \textit{map} na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
 
 \subsection{Análise temporal empírica }
 
+Após vários testes utilizando a \textit{library} \textit{chrono}, conseguimos determinar uma média dos tempos de execução deste algoritmo para os mapas \textit{4x4}, \textit{8x8} e \textit{16x16}, sendo estes valores apresentados na tabela que se segue. 
+
+Numa fase inicial, implementamos o algoritmo com o auxílio de vetores, no entando, quando começamos a analisar empiricamente a complexidade temporal, verificamos que este algoritmo seria muito mais lento do que estava previsto, uma vez que os vetores não seriam a estrutura de dados ideal para se utilizar. Assim, de forma a aumentar a eficiência da aplicação, utilizamos \textbf{mapas} que têm como pares os IDs dos vértices e os apontadores para estes. De seguida, apresentam-se os gráficos com os valores obtidos em cada implementação.
+
 \begin{figure}[h!]
   \centerline{\includegraphics[scale=0.6]{dijkstra_empirica.png}}
-  \caption{Complexidade temporal empírica do algoritmo de \textit{Dijsktra}.}
+  \caption{Complexidade temporal empírica do algoritmo de \textit{Dijsktra} utilizando vetores.}
 \end{figure}
 
-Após vários testes utilizando a \textit{library} \textit{chrono}, conseguimos determinar uma média dos tempos de execução deste algoritmo para os mapas \textit{4x4}, \textit{8x8} e \textit{16x16}, sendo estes valores apresentados na tabela que se segue. No entanto, aquando da verificação destes, notamos que os valores não seriam os esperados tendo em conta a complexidade temporal deste algoritmo, uma vez que utilizamos estruturas de dados que possivelmente não seriam as mais corretas para o algoritmo em questão. Destas temos como exemplo vetores que provavelmente deveriam ter sido de \textit{pointers} e não dos \textit{vertexes} em si, o que acabaria por tornar o algoritmo bem mais eficiente. 
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.6]{dijkstra_empirica_mapas.png}}
+  \caption{Complexidade temporal empírica do algoritmo de \textit{Dijsktra} utilizando mapas.}
+\end{figure}
 
 \section{Algoritmo de \textit{Held-Karp} (Adaptação com auxílio do algoritmo de \textit{Dijkstra})}
 
@@ -684,13 +691,18 @@ Esta \textbf{complexidade temporal} deve-se ao facto de ter sido utilizado o alg
 
 \subsection{Análise temporal empírica }
 
+Tal como fizemos com o algoritmo de \textit{Dijkstra}, realizamos vários testes com o auxílio da \textit{library} \textit{chrono}, determinando assim uma média de tempos de execução do algoritmo de \textit{Held-Karp} para os mapas \textit{4x4}, \textit{8x8} e \textit{16x16} e realizamos novamente um estudo do desempenho do algoritmo utilizando vetores e utilizando mapas, verificando-se no final que os mapas, novamente, tornam o algoritmo muito mais eficiente.
+		
+		
 \begin{figure}[h!]
   \centerline{\includegraphics[scale=0.6]{held_karp.png}}
-  \caption{Complexidade temporal empírica do algoritmo de \textit{Held Karp}.}
+  \caption{Complexidade temporal empírica do algoritmo de \textit{Held Karp} utilizando vetores.}
 \end{figure}
 
-Tal como fizemos com o algoritmo de \textit{Dijkstra}, realizamos vários testes com o auxílio da \textit{library} \textit{chrono}, determinando assim uma média de tempos de execução do algoritmo de \textit{Held-Karp} para os mapas \textit{4x4}, \textit{8x8} e \textit{16x16} e chegamos novamente à conclusão de que os resultados obtidos divergiam dos resultados esperados. Esta diferença deve-se, não só, ao uso de estruturas de dados que não são as apropriadas para o algoritmo em questão como também a utilização de um \textit{Dijkstra} durante esta para auxiliar no cálculo do caminho mais curto entre casas, levando a um aumento significativo dos tempos de execução.
-		
+\begin{figure}[h!]
+  \centerline{\includegraphics[scale=0.6]{held_karp_mapas.png}}
+  \caption{Complexidade temporal empírica do algoritmo de \textit{Held Karp} utilizando mapas.}
+\end{figure}
 		
 \newpage
 %----------------------------------------------------------------------------------------
@@ -700,19 +712,19 @@ Tal como fizemos com o algoritmo de \textit{Dijkstra}, realizamos vários testes
 
 \section{Algoritmo de \textit{Kosaraju}}
 
-Para auxiliar na determinação das zonas fortemente conexas do grafo do Porto, implementamos o algoritmo de \textit{Kosaraju} \textsuperscript{[6]}. Este algoritmo passa por ordenar os vértices em pos-ordem após a inversão do grafo em questão. Numa segunda etapa, examinam-se os vértices na ordem estabelecida, no grafo original, realizando uma \textbf{busca em profundidade} e categorizando os vértices alcançados por zonas.
+Para auxiliar na determinação das zonas fortemente conexas do grafo do Porto, implementamos o algoritmo de \textit{Kosaraju} \textsuperscript{[6]}. Este algoritmo passa por ordenar os vértices em pos-ordem após a inversão do grafo em questão. Numa segunda etapa, examinam-se os vértices na ordem estabelecida, no grafo original, realizando uma \textbf{pesquisa em profundidade} e categorizando os vértices alcançados por zonas.
 
 Na execução deste algoritmo nos mapas \textit{4x4}, \textit{8x8} e \textit{16x16}, o algoritmo retorna o número de vértices como zonas fortemente conexas no grafo inteiro . Este retorno está de acordo com o esperado uma vez que um grafo dirigido é \textbf{fortemente conexo}\textsuperscript{[5]} quando todos os vértices são atingíveis a partir de qualquer vértice, o que não se verifica nestes mapas, dado que, por exemplo, se nos encontrarmos no nó com ID igual ao número de vértices - 1, este não poderá partir para outro ponto existente, logo nenhum ponto é atingível a partir deste.
 
 \begin{figure}[h!]
-  \centerline{\includegraphics[scale=0.3]{conectividade.png}}
+  \centerline{\includegraphics[scale=0.4]{conectividade.png}}
   \caption{Grafo \textit{4x4} dirigido.}
 \end{figure}
 
-Por outro lado, ao tentar aplicar este algoritmo no mapa do Porto, não foi retornado nenhum \textit{output} provavelmente pelo facto do mapa ser demasiado desconexo e demorar demasiado tempo a determinar. Deste modo, para conseguirmos testas o programa, tivemos de colocar os pontos de interesse com distâncias pequenas entre si de forma a arranjarmos zonas relativamente conexas. 
+Após os testes nos mapas mais pequenos, testamos no mapa fornecido da cidade do Porto (mapa pouco conexo) e determinamos que este possui \textbf{7132} zonas fortemente conexas.
 
 \begin{figure}[h!]
-  \centerline{\includegraphics[scale=1]{porto_disconnected.png}}
+  \centerline{\includegraphics[scale=0.7]{porto_disconnected.png}}
   \caption{Recolha de \textit{glass} pelo utilizador "danielgsilva" - deveria passar por 3 casas, no entanto como 2 delas  não são atingíveis a partir da casa do utilizador, este só passa em 1 e na central mais próxima.}
 \end{figure}
 
@@ -722,7 +734,7 @@ Por outro lado, ao tentar aplicar este algoritmo no mapa do Porto, não foi reto
 %----------------------------------------------------------------------------------------
 \chapter[Conclusão Geral][Conclusão Geral]{Conclusão Geral} \label{\thechapter}
 
-Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente.
+Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente e a influência das estruturas de dados utilizadas nos mesmos.
 
 \newpage
 %----------------------------------------------------------------------------------------
@@ -795,7 +807,7 @@ Edition, Mark Allen Weiss, Addison Wesley, 2006
 
 Figura 1 e Figura 10: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
 
-Figura 2 e Figura 12: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+Figura 2 e Figura 13: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
 
 Figura 3: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
 

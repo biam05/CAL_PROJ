@@ -34,9 +34,9 @@ void WasteApp::addEdge(Edge* e) {
 
 //Shows path from the client's house (green) to the closest spot (blue)
 void WasteApp::generateGraph(Vertex s) {
-
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale + 20, (yMax - yMin) * graphScale +20, false);
-    gv->createWindow((xMax-xMin) * graphScale +20, (yMax - yMin) * graphScale +20);
+    //Create and configure the GraphViewer window
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale + 20, (yMax - yMin) * graphScale + 20, false);
+    gv->createWindow((xMax-xMin) * graphScale + 20, (yMax - yMin) * graphScale + 20);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
@@ -46,7 +46,7 @@ void WasteApp::generateGraph(Vertex s) {
     Vertex* v = getVertex(s.getID());
 
 
-
+    //Add vertexes to the GraphViewer graph
     for(auto & vertex : vertexMap) {
         id = vertex.first;
         x = getXVertex(vertex.second->getX(), graphScale);
@@ -54,6 +54,7 @@ void WasteApp::generateGraph(Vertex s) {
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
+    //Add edges to the GraphViewer graph
     for (auto & edge : edgeMap) {
         gv->addEdge(edge.second->getID(), edge.second->getVi(), edge.second->getVf(), EdgeType::UNDIRECTED);
     }
@@ -61,9 +62,11 @@ void WasteApp::generateGraph(Vertex s) {
 
     Edge* e;
 
+    //Set the final vertex to blue
     gv->setVertexSize(v->getID(), 10);
     gv->setVertexColor(v->getID(), "blue");
 
+    //Set the edges on the path to red
     while(v->getPrevEdge() != -1) {
         e = getEdge(v->getPrevEdge());
         gv->setEdgeColor(e->getID(), "red");
@@ -71,6 +74,7 @@ void WasteApp::generateGraph(Vertex s) {
         v = getVertex(e->getVi());
     }
 
+    //Set the starting vertex to green
     gv->setVertexSize(v->getID(), 10);
     gv->setVertexColor(v->getID(), "green");
 
@@ -78,16 +82,17 @@ void WasteApp::generateGraph(Vertex s) {
 }
 
 //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
-void WasteApp::generatePath(Vertex* next) {
-
-    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale +20, (yMax - yMin) * graphScale +20, false);
-    gv->createWindow((xMax-xMin) * graphScale +20, (yMax - yMin) * graphScale +20);
+void WasteApp::generatePath(Vertex *next) {
+    //Create and configure the GraphViewer window
+    GraphViewer *gv = new GraphViewer((xMax-xMin) * graphScale + 20, (yMax - yMin) * graphScale + 20, false);
+    gv->createWindow((xMax-xMin) * graphScale + 20, (yMax - yMin) * graphScale + 20);
 
     gv->defineEdgeCurved(false);
     gv->defineVertexColor("black");
 
     int id, x, y;
 
+    //Add vertexes to the GraphViewer graph
     for(auto & vertex : vertexMap) {
         id = vertex.first;
         x = getXVertex(vertex.second->getX(), graphScale);
@@ -95,6 +100,7 @@ void WasteApp::generatePath(Vertex* next) {
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
+    //Add edges to the GraphViewer graph
     for (auto & edge : edgeMap) {
         gv->addEdge(edge.second->getID(), edge.second->getVi(), edge.second->getVf(), EdgeType::UNDIRECTED);
     }
@@ -102,14 +108,20 @@ void WasteApp::generatePath(Vertex* next) {
 
     Edge* e;
 
+    //Set the final vertex to blue
     gv->setVertexSize(next->getID(), 10);
     gv->setVertexColor(next->getID(), "blue");
 
+    //For each house, do Dijkstra to get the distance to get the path to the next house
     while (next->getPrevHouse() != -1)
     {
         dijkstra(next->getPrevHouse());
+
+        //Set the house vertex to yellow
         gv->setVertexSize(next->getPrevHouse(), 10);
         gv->setVertexColor(next->getPrevHouse(), "yellow");
+
+        //Set the edges on the path to red
         while(next->getPrevEdge() != -1) {
             e = getEdge(next->getPrevEdge());
             gv->setEdgeColor(e->getID(), "red");
@@ -118,6 +130,7 @@ void WasteApp::generatePath(Vertex* next) {
         }
     }
 
+    //Set the starting vertex to green
     gv->setVertexSize(next->getID(), 10);
     gv->setVertexColor(next->getID(), "green");
 
@@ -161,6 +174,8 @@ void WasteApp::addAdjacent(int v, int e)
 void WasteApp::dijkstra(const int &vID)
 {
     MutablePriorityQueue<Vertex> mutablePriorityQueue;
+    //Pre-processing: set every vertex's distance to 1000000, visited to false and prevEdge to -1 except the starting
+    //vertex, whose distance is set to 0, visited to true and prevEdge to -1 and is inserted into the PriorityQueue
     for (auto &v : vertexMap) {
         v.second->setVisited(false);
         v.second->setDistance(1000000);
@@ -173,6 +188,9 @@ void WasteApp::dijkstra(const int &vID)
     vI->setPrevEdge(-1);
     mutablePriorityQueue.insert(vI);
 
+    //While the mpq isn't empty, we remove the minimum element and calculate the distance (and add to the mpq if lower
+    //than the previously calculated one) of each of the adjacent vertexes, setting visited to true and prevEdge to the
+    //id of the edge that led to it
     while (!mutablePriorityQueue.empty()) {
         Vertex* v = mutablePriorityQueue.extractMin();
         for (int &eid : v->getAdjacentIds()) {
@@ -190,10 +208,14 @@ void WasteApp::dijkstra(const int &vID)
 
 //Returns the closest spot of the type provided that can fit the quantity
 Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
+    //Apply Dijkstra's algorithm to set distances
     dijkstra(u.getHouse().getVertex());
 
     float min_dist = 1000000;
     Spot sp(type,-1,-1,-1);
+
+    //For each vertex with a spot that can fit the quantity of the type provided, check if its distance is less than the
+    //previous minimum distance
     for (Spot &s : spots) {
         Vertex* v = getVertex(s.getVertex());
         if (s.fits(q) && s.getType() == type) {
@@ -203,6 +225,8 @@ Spot WasteApp::closestSpot(const User &u, float q, enum type type) {
             }
         }
     }
+
+    //Update the quantity on that spot
     for (Spot &s : spots) {
         if (sp.getVertex() == s.getVertex() && sp.getType() == s.getType()) {
             s.setQuantity(s.getQuantity() + q);
@@ -217,10 +241,12 @@ void WasteApp::homeCollection(const User &w, enum type type) {
     vector<Vertex> path;
     vector<Vertex *> housesToCollect;
     string a;
-    for (User &user : users)
-    {
-        for (HouseRequest hr : user.getRequests())
-        {
+
+    //Check for each user if they have a request for the type to be collected and their house is accessible from the
+    //worker's house, in which case their house's vertex is added to the housesToCollect vector and the request is
+    //deleted.
+    for (User &user : users) {
+        for (HouseRequest hr : user.getRequests()) {
             if (hr.getType() == type) {
                 Vertex* v = getVertex(user.getHouse().getVertex());
                 dijkstra(w.getHouse().getVertex());
@@ -244,15 +270,16 @@ void WasteApp::homeCollection(const User &w, enum type type) {
     }
     if (housesToCollect.empty())
     {
-        cout << " No houses requested that collection!" << endl;
+        cout << " No accessible houses requested that collection!" << endl;
         cout << " Type any key to go back to your menu.";
         cin >> a;
         return;
     }
 
-    Vertex* next = held_karp(w, housesToCollect);
-
-    generatePath(next);
+    //Apply Held-Karp algorithm to discover the minimum path that passes in all housesToCollect vertexes and generate
+    //GraphViewer window, starting with the central (last) vertex
+    Vertex* central = held_karp(w, housesToCollect);
+    generatePath(central);
 }
 
 void WasteApp::addSpot(Spot s) {
@@ -281,12 +308,15 @@ float minimum(const vector<float> &vec)
 float WasteApp::g(Vertex* s, Vertex* v, vector<Vertex *> &path)
 {
     float dist;
+    //If path is empty, just calculate the direct distance between s and v
     if (path.empty())
     {
         v->setPrevHouse(s->getID());
         dijkstra(s->getID());
         dist = v->getDistance();
     }
+    //If path has only one house, calculate the direct distance between s and the house and sum the direct distance
+    //between the house and v
     else if (path.size() == 1)
     {
         path[0]->setPrevHouse(s->getID());
@@ -296,6 +326,8 @@ float WasteApp::g(Vertex* s, Vertex* v, vector<Vertex *> &path)
         dijkstra(path[0]->getID());
         dist += v->getDistance();
     }
+    //If path has two or more elements, call recursively for every subset (excluding one element at a time) and then add
+    //the distance from the removed vertex and set the one with the minimum distance
     else
     {
         vector<float> dists;
@@ -342,6 +374,7 @@ Vertex* WasteApp::held_karp(const User &w, vector<Vertex *> housesToCollect) {
     Vertex* centralV;
     Vertex* start = getVertex(w.getHouse().getVertex());
 
+    //For each of the centrals, calculate the distance from the last spot of the shortest path and see if it's minimum
     for (House &c : centrals) {
         Vertex* vert = getVertex(c.getVertex());
         distance = g(start,vert,housesToCollect);
@@ -351,6 +384,7 @@ Vertex* WasteApp::held_karp(const User &w, vector<Vertex *> housesToCollect) {
         }
     }
 
+    //Recalculate the minimum path, so that the last prevHouse fields set are the shortest path ones
     g(start,centralV,housesToCollect);
 
     return centralV;
@@ -368,6 +402,7 @@ float WasteApp::getGraphScale() const {
     return graphScale;
 }
 
+//Push the vertexes into the stack in postorder
 void WasteApp::fillOrder(Vertex *v, stack<Vertex*> &stack){
     v->setVisited(true);
     for(int i = 0; i != v->getAdjacentIds().size(); i++)
@@ -379,6 +414,7 @@ void WasteApp::fillOrder(Vertex *v, stack<Vertex*> &stack){
     vertexesRev.push(v);
 }
 
+//Kosaraju's algorithm
 int WasteApp::conectividade() {
     int ret = 0;
 
@@ -386,6 +422,7 @@ int WasteApp::conectividade() {
         v.second->setVisited(false);
     }
 
+    //Fill the stack in postorder
     for (auto &v : vertexMap){
         if(!v.second->getVisited()){
             fillOrder(v.second, vertexesRev);
@@ -394,6 +431,7 @@ int WasteApp::conectividade() {
 
     Vertex* tmp;
 
+    //Add each vertex to the reverse graph
     for (auto &v : vertexMap) {
         tmp = new Vertex();
         tmp = v.second;
@@ -401,6 +439,7 @@ int WasteApp::conectividade() {
         vertexesRevGraph.emplace(tmp->getID(), tmp);
     }
 
+    //Add each edge to the reverse graph and to the vertexes' adjacent ids
     for(auto &e : edgeMap){
         Edge* edge = new Edge(e.second->getWeight(), e.second->getID(), e.second->getVf(), e.second->getVi());
         edgesRevGraphMap.emplace(edge->getID(), edge);
@@ -412,6 +451,7 @@ int WasteApp::conectividade() {
         v.second->setVisited(false);
     }
 
+    //In the order that they're placed in the stack, process each vertex to find the strongly connected regions
     while(!vertexesRev.empty()){
         Vertex* v = vertexesRev.top();
         vertexesRev.pop();
@@ -424,6 +464,7 @@ int WasteApp::conectividade() {
     return ret;
 }
 
+//Find each vertex's strongly connected region recursively
 void WasteApp::util(Vertex *v) {
     v->setVisited(true);
     for(int i = 0; i != v->getAdjacentIds().size(); i++) {
