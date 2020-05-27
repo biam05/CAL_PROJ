@@ -17,15 +17,14 @@ using namespace std;
 class WasteApp {
 
     vector<User> users;
-    vector<Vertex> vertexes;
     map<int, Vertex*> vertexMap;
-    vector<Edge> edges;
+    map<int, Edge*> edgeMap;
     vector<Spot> spots;
     vector<House> houses;
     vector<House> centrals;
 
     map<int, Vertex*> vertexesRevGraph;
-    vector<Edge> edgesRevGraph;
+    map<int, Edge*> edgesRevGraphMap;
     stack<Vertex*> vertexesRev;
 
     // USED IN GRAPHVIEWR
@@ -48,7 +47,7 @@ public:
 
     void addVertex(Vertex* v);
 
-    void addEdge(Edge e);
+    void addEdge(Edge* e);
 
     void addSpot(Spot s);
 
@@ -60,13 +59,17 @@ public:
 
     Vertex* getVertex (int id);
 
+    Vertex* getVertexR (int id);
+
+    Edge* getEdge (int id);
+
+    Edge* getEdgeR (int id);
+
     //Shows path from the client's house (green) to the closest spot (blue)
     void generateGraph(Vertex s);
 
     //Shows path from the worker's house (green) to the central (blue) passing through the houses (yellow)
     void generatePath(Vertex &next);
-
-    Edge getEdge (int id);
 
     int getXVertex(float x, float s);
 

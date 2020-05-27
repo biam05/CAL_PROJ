@@ -188,7 +188,7 @@ void readGraphData(WasteApp &wasteApp, const string &folder) {
             v2 = stoi(temp.substr(c1 + 1, temp.length()-1));              // Ending vertex of the edge
             if (wasteApp.hasVertex(v1) && wasteApp.hasVertex(v2)) {
               // Add an edge that has a weight calculated by the distance between the 2 vertexes
-                wasteApp.addEdge(Edge(sqrt(pow((wasteApp.getVertex(v1)->getX() - wasteApp.getVertex(v2)->getX()),2) + pow((wasteApp.getVertex(v1)->getY() - wasteApp.getVertex(v2)->getY()),2)), i, v1, v2));
+                wasteApp.addEdge(new Edge(sqrt(pow((wasteApp.getVertex(v1)->getX() - wasteApp.getVertex(v2)->getX()),2) + pow((wasteApp.getVertex(v1)->getY() - wasteApp.getVertex(v2)->getY()),2)), i, v1, v2));
 
                 // Add the edge as one of the edges that are connected to the beginning vertex
                 wasteApp.addAdjacent(v1,i);
