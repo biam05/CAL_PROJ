@@ -94,6 +94,7 @@ public:
 
     void util(Vertex *v);
 
+    void homeCollection(const User &w, enum type type);
 
     int conectividade();
 };
