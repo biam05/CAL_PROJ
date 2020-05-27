@@ -25,12 +25,11 @@ void WasteApp::addVertex(Vertex* v) {
     if (v->getY() < yMin || yMin == -1) yMin = v->getY();
     if (v->getY() > yMax || yMax == -1) yMax = v->getY();
 
-    vertexes.push_back(*v);
     vertexMap.emplace(v->getID(), v);
 }
 
-void WasteApp::addEdge(Edge e) {
-    edges.push_back(e);
+void WasteApp::addEdge(Edge* e) {
+    edgeMap.emplace(e->getID(), e);
 }
 
 //Shows path from the client's house (green) to the closest spot (blue)
@@ -55,21 +54,21 @@ void WasteApp::generateGraph(Vertex s) {
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
-    for (auto & edge : edges) {
-        gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::DIRECTED);
+    for (auto & edge : edgeMap) {
+        gv->addEdge(edge.second->getID(), edge.second->getVi(), edge.second->getVf(), EdgeType::UNDIRECTED);
     }
     gv->rearrange();
 
-    Edge e;
+    Edge* e;
 
     gv->setVertexSize(v->getID(), 10);
     gv->setVertexColor(v->getID(), "blue");
 
     while(v->getPrevEdge() != -1) {
         e = getEdge(v->getPrevEdge());
-        gv->setEdgeColor(e.getID(), "red");
-        gv->setEdgeThickness(e.getID(), 3);
-        v = getVertex(e.getVi());
+        gv->setEdgeColor(e->getID(), "red");
+        gv->setEdgeThickness(e->getID(), 3);
+        v = getVertex(e->getVi());
     }
 
     gv->setVertexSize(v->getID(), 10);
@@ -96,12 +95,12 @@ void WasteApp::generatePath(Vertex* next) {
         gv->addNode(id, x, y);
         gv->setVertexSize(id, 1);
     }
-    for (auto & edge : edges) {
-        gv->addEdge(edge.getID(), edge.getVi(), edge.getVf(), EdgeType::UNDIRECTED);
+    for (auto & edge : edgeMap) {
+        gv->addEdge(edge.second->getID(), edge.second->getVi(), edge.second->getVf(), EdgeType::UNDIRECTED);
     }
     gv->rearrange();
 
-    Edge e;
+    Edge* e;
 
     gv->setVertexSize(next->getID(), 10);
     gv->setVertexColor(next->getID(), "blue");
@@ -113,9 +112,9 @@ void WasteApp::generatePath(Vertex* next) {
         gv->setVertexColor(next->getPrevHouse(), "yellow");
         while(next->getPrevEdge() != -1) {
             e = getEdge(next->getPrevEdge());
-            gv->setEdgeColor(e.getID(), "red");
-            gv->setEdgeThickness(e.getID(), 3);
-            next = getVertex(e.getVi());
+            gv->setEdgeColor(e->getID(), "red");
+            gv->setEdgeThickness(e->getID(), 3);
+            next = getVertex(e->getVi());
         }
     }
 
@@ -134,10 +133,19 @@ bool WasteApp::hasVertex(int id) {
 }
 
 Vertex* WasteApp::getVertex(int id) {
-//    for (auto & vertex : vertexes) {
-//        if (vertex.getID() == id) return vertex;
-//    }
     return vertexMap.at(id);
+}
+
+Vertex* WasteApp::getVertexR(int id) {
+    return vertexesRevGraph.at(id);
+}
+
+Edge* WasteApp::getEdge(int id) {
+    return edgeMap.at(id);
+}
+
+Edge* WasteApp::getEdgeR(int id) {
+    return edgesRevGraphMap.at(id);
 }
 
 int WasteApp::getXVertex(float x, float s) {
@@ -172,16 +180,13 @@ void WasteApp::dijkstra(const int &vID)
     while (!mutablePriorityQueue.empty()) {
         Vertex* v = mutablePriorityQueue.extractMin();
         for (int &eid : v->getAdjacentIds()) {
-            for (Edge &e : edges) {
-                if (e.getID() == eid) {
-                    Vertex* vf = getVertex(e.getVf());
-                    if (!vf->getVisited() || vf->getDistance() > (v->getDistance() + e.getWeight())) {
-                            vf->setDistance(v->getDistance() + e.getWeight());
-                            vf->setVisited(true);
-                            vf->setPrevEdge(e.getID());
-                            mutablePriorityQueue.insert(vf);
-                    }
-                }
+            Edge* e = getEdge(eid);
+            Vertex* vf = getVertex(e->getVf());
+            if (!vf->getVisited() || vf->getDistance() > (v->getDistance() + e->getWeight())) {
+                    vf->setDistance(v->getDistance() + e->getWeight());
+                    vf->setVisited(true);
+                    vf->setPrevEdge(e->getID());
+                    mutablePriorityQueue.insert(vf);
             }
         }
     }
@@ -266,13 +271,6 @@ void WasteApp::addHouse(House h) {
 
 void WasteApp::addCentral(House c) {
     centrals.push_back(c);
-}
-
-Edge WasteApp::getEdge(int id) {
-    for (Edge e : edges) {
-        if (id == e.getID()) return e;
-    }
-    return Edge(1, -1, -1, -1);
 }
 
 float minimum(const vector<float> &vec)
@@ -380,8 +378,8 @@ void WasteApp::fillOrder(Vertex *v, stack<Vertex*> &stack){
     v->setVisited(true);
     for(int i = 0; i != v->getAdjacentIds().size(); i++)
     {
-        if(!getVertex(getEdge(v->getAdjacentIds()[i]).getVf())->getVisited())
-            fillOrder(getVertex(getEdge(v->getAdjacentIds()[i]).getVf()), vertexesRev);
+        if(!getVertex(getEdge(v->getAdjacentIds()[i])->getVf())->getVisited())
+            fillOrder(getVertex(getEdge(v->getAdjacentIds()[i])->getVf()), vertexesRev);
     }
 
     vertexesRev.push(v);
@@ -409,15 +407,11 @@ int WasteApp::conectividade() {
         vertexesRevGraph.emplace(tmp->getID(), tmp);
     }
 
-    for(auto &e : edges){
-
-        Edge edge = Edge(e.getWeight(), e.getID(), e.getVf(), e.getVi());
-        edgesRevGraph.push_back(edge);
-        for(auto &vert : vertexesRevGraph){
-            if (edge.getVi() == vert.second->getID())
-                vert.second->addAdjacent(edge.getID());
-        }
-
+    for(auto &e : edgeMap){
+        Edge* edge = new Edge(e.second->getWeight(), e.second->getID(), e.second->getVf(), e.second->getVi());
+        edgesRevGraphMap.emplace(edge->getID(), edge);
+        Vertex* vert = getVertexR(edge->getVi());
+        vert->addAdjacent(edge->getID());
     }
 
     for (auto &v : vertexMap) {
@@ -425,13 +419,12 @@ int WasteApp::conectividade() {
     }
 
     while(!vertexesRev.empty()){
-        Vertex * v = vertexesRev.top();
+        Vertex* v = vertexesRev.top();
         vertexesRev.pop();
 
         if(!v->getVisited()){
             util(v);
             ret++;
-            //cout << endl;
         }
     }
     return ret;
@@ -439,19 +432,9 @@ int WasteApp::conectividade() {
 
 void WasteApp::util(Vertex *v) {
     v->setVisited(true);
-    //cout << v->getID() << " ";
-    for(int i = 0; i != v->getAdjacentIds().size(); i++)
-    {
-        for(auto &e : edgesRevGraph){
-            if(e.getID() == v->getAdjacentIds()[i]){
-                for(auto &vert : vertexesRevGraph){
-                    if(vert.second->getID() == e.getVf() && !vert.second->getVisited())
-                        util(vert.second);
-                }
-            }
-
-        }
-
+    for(int i = 0; i != v->getAdjacentIds().size(); i++) {
+        Edge* e = getEdgeR(v->getAdjacentIds()[i]);
+        Vertex* vert = getVertexR(e->getVf());
+        if(!vert->getVisited()) util(vert);
     }
-
 }
