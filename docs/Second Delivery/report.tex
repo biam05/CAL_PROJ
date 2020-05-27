@@ -594,7 +594,7 @@ A informação relativamente aos pontos de interesse é guardada num grafo, send
 
 \subsection{Grafo}
 
-A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{mapa que tem como pares o ID de um vértice e um apontador para o vértice} e um \textbf{mapa que tem como pares o ID de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
+A representação do grafo foi feita com base na classe \textbf{\textit{WasteApp}}, definida em \textit{wasteapp.h}.  Esta estrutura é constituída por um \textbf{vetor de utilizadores}, um \textbf{\textit{map} que tem como pares o ID de um vértice e um apontador para o vértice} e um \textbf{\textit{map} que tem como pares o ID de uma aresta e um apontador para uma aresta}, sendo os dois últimos os utilizados na representação do grafo e nos algoritmos implementados. Inicialmente, utilizamos vetores, no entanto estes pioravam significativamente a \textit{performance} do nosso programa, por isso acabamos por implementar mapas. A classe \textit{WasteApp} possui diversos métodos para a manipulação do grafo, algoritmos de pesquisa e métodos que possibilitas a visualização do grafo.
 
 \subsection{Aresta}
 
@@ -655,7 +655,7 @@ A classe \textbf{\textit{Spot}}, definida em \textit{spot.h}, é constituída po
 \end{itemize}
 
 A \textbf{complexidade temporal} tem como valor O($(|V| + |E|)*log(|V|)$) dado que, tal como foi explicado na primeira parte do relatório, a cada vértice processado, pode ser necessário adicionar, remover ou mover vértices na fila de prioridade.
-Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um vetor na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
+Por outro lado, a \textbf{complexidade espacial} tem como valor O($|V|$) uma vez que foi utilizado um \textit{map} na implementação da \textit{priority queue}, levando assim a uma \textbf{complexidade espacial linear}.
 
 \subsection{Análise temporal empírica }
 
@@ -734,7 +734,7 @@ Após os testes nos mapas mais pequenos, testamos no mapa fornecido da cidade do
 %----------------------------------------------------------------------------------------
 \chapter[Conclusão Geral][Conclusão Geral]{Conclusão Geral} \label{\thechapter}
 
-Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente.
+Em suma, consideramos que a aplicação \textit{WasteApp} implementada pelo nosso grupo de trabalho foi um projeto bastante benéfico no sentido de nos ajudar a perceber de forma mais concreta como funcionam os algoritmos para determinar os caminhos mais curtos da maneira mais eficiente e a influência das estruturas de dados utilizadas nos mesmos.
 
 \newpage
 %----------------------------------------------------------------------------------------
@@ -807,7 +807,7 @@ Edition, Mark Allen Weiss, Addison Wesley, 2006
 
 Figura 1 e Figura 10: Rossetti, R., Ferreira, L., Cardoso, H. L. e Andrade, F., 2020. \textit{Algoritmos Em Grafos: Caminho Mais Curto (Parte I)}.
 
-Figura 2 e Figura 12: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
+Figura 2 e Figura 13: Wikipedia Contributors (2019). \textit{Held–Karp algorithm}. [online] Wikipedia. Disponível em: \url{https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm}.
 
 Figura 3: GitHub. (2020). \textit{STEMS-group/GraphViewer}. [online] Disponível em: \url{https://github.com/STEMS-group/GraphViewer}.
 
